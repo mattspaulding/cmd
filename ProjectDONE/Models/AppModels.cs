@@ -16,14 +16,17 @@ namespace ProjectDONE.Models.AppModels
         public IOwner Owner { get; set; }
         public string Title { get; set; }
         public string PublicDescription { get; set; }
-        public IMedia[] Media { get; set; }
+       
         //TODO: Change to Geographical area type of some kind
         //More research is needed.
         public long Latitude { get; set; }
         public long Longitude { get; set; }
         public IDemographics Demographics { get; set; }
         public string PrivateDescription { get; set; }
-        public IDialog[] Dialog { get; set; }
+        public virtual IBid AcceptedBid { get; set; }
+        public virtual IList<IMedia> Media { get; set; }
+        public virtual IList<IDialog> Dialog { get; set; }
+        public virtual IList<IBid> Bids { get; set; }
 
     }
 
@@ -74,11 +77,18 @@ namespace ProjectDONE.Models.AppModels
     public class Bid : BaseAppModel, IBid
     {
         public decimal Amount { get; set; }
-        public Job Job { get; set; }
-        public Owner Owner { get; set; }
-        public IDialog[] Dialog { get; set; }
+        public virtual IOwner Owner { get; set; }
+        public virtual IList<IDialog> Dialog { get; set; }
+        public virtual IJob Job { get; set; }
+        public virtual BidStatus Status { get; set; }
     }
 
+    public enum BidStatus
+    {
+        Pending,
+        Accepted,
+        Declined
+    }
     //Interfaces
 
     public interface IBaseAppModel
@@ -102,11 +112,13 @@ namespace ProjectDONE.Models.AppModels
         IDemographics Demographics { get; set; }
         long Latitude { get; set; }
         long Longitude { get; set; }
-        IMedia[] Media { get; set; }
+        IList<IMedia> Media { get; set; }
         string PrivateDescription { get; set; }
         string PublicDescription { get; set; }
         string Title { get; set; }
-        IDialog[] Dialog { get; set; }
+        IList<IDialog> Dialog { get; set; }
+        IList<IBid> Bids { get; set; }
+        IBid AcceptedBid { get; set; }
     }
 
     public interface IMedia : IBaseAppModel
@@ -127,8 +139,9 @@ namespace ProjectDONE.Models.AppModels
     public interface IBid : IBaseAppModel
     {
         decimal Amount { get; set; }
-        Job Job { get; set; }
-        Owner Owner { get; set; }
+        IJob Job { get; set; }
+        IOwner Owner { get; set; }
+        BidStatus Status { get; set; }
     }
 
     public interface IDialog : IBaseAppModel

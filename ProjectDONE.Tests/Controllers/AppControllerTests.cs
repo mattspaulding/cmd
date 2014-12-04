@@ -181,30 +181,71 @@ namespace ProjectDONE.Tests.Controllers
         }
 
         //As a User, I am able to accept a bid
+        //TODO: This needs to test for "As the user who posted the job, I am able to accept the bid"
         [TestMethod]
         public void AcceptBid()
         {
-            //var mock_job = new Job { ID = 1 , AcceptedBid = null};
-            //var mock_bid = new Bid { ID = 1 , Job = mock_job, Status = BidStatus.Pending};
+            IJob mock_job = new Job { ID = 1, AcceptedBid = null };
+            IBid mock_bid_accepted = new Bid { ID = 1, Job = mock_job, Status = BidStatus.Pending };
+            IBid mock_bid_declined_1 = new Bid { ID = 2, Job = mock_job, Status = BidStatus.Pending };
+            IBid mock_bid_declined_2 = new Bid { ID = 3, Job = mock_job, Status = BidStatus.Pending };
+            mock_job.Bids = new List<IBid> { mock_bid_accepted, mock_bid_declined_1, mock_bid_declined_2 };
 
-            //var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
-            //var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+            var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
+            var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
 
-            //var bidRepo = mock_IBidRepo.Object;
-            //var jobRepo = mock_IJobRepo.Object;
+            mock_IJobRepo.Setup<IJob>(jr=>jr.GetSingle(mock_job.ID)).Returns(mock_job);
+            mock_IBidRepo.Setup<IBid>(br => br.GetSingle(mock_bid_accepted.ID)).Returns(mock_bid_accepted);
+            mock_IBidRepo.Setup<IList<IBid>>(br => br.GetByJob(mock_job.ID,default_skip,int.MaxValue))
+                .Returns(new List<IBid>(){
+                    mock_bid_accepted,
+                    mock_bid_declined_1,
+                    mock_bid_declined_2
+                });
 
-            //var controller = new AppController(jobRepo, bidRepo);
+            //TODO:Test update Batching instead.
+            mock_IJobRepo.Setup(jr => jr.Update(mock_job));
+            mock_IBidRepo.Setup(br => br.Update(mock_bid_accepted));
+            mock_IBidRepo.Setup(br => br.Update(mock_bid_declined_1));
+            mock_IBidRepo.Setup(br => br.Update(mock_bid_declined_2));
 
-            //controller.AcceptBid(mock_job.ID, mock_bid.ID);
+            var bidRepo = mock_IBidRepo.Object;
+            var jobRepo = mock_IJobRepo.Object;
 
-            //mock_IJobRepo.Verify(
-            //    jr => jr.UpdateJob(new Job { ID=1, AcceptedBid = mock_job})
-            //    ,Times.Once);
+            var controller = new AppController(jobRepo, bidRepo);
 
-            //mock_IBidRepo.Verify(
-            //    br => br.UpdateBid(
-            //        new Bid { ID= 1, Job = mock_job, Status = BidStatus.Accepted})
-            //    ,Times.Once);
+            controller.AcceptBid(mock_job.ID, mock_bid_accepted.ID);
+
+            mock_IJobRepo.Verify(
+                jr=>jr.GetSingle(mock_job.ID)
+                ,Times.Once
+                );
+
+            mock_IBidRepo.Verify(
+                br=>br.GetByJob(mock_job.ID,default_skip,int.MaxValue)
+                ,Times.Once
+                );
+
+            mock_job.AcceptedBid = mock_bid_accepted;
+            mock_bid_accepted.Status = BidStatus.Accepted;
+            mock_bid_declined_1.Status = BidStatus.Declined;
+            mock_bid_declined_2.Status = BidStatus.Declined;
+
+            mock_IJobRepo.Verify(
+                jr => jr.Update(mock_job)
+                , Times.Once);
+
+            mock_IBidRepo.Verify(
+                br => br.Update(mock_bid_accepted)
+                , Times.Once);
+
+            mock_IBidRepo.Verify(
+                br => br.Update(mock_bid_declined_1)
+                , Times.Once);
+
+            mock_IBidRepo.Verify(
+                br => br.Update(mock_bid_declined_2)
+                , Times.Once);
 
         }
 

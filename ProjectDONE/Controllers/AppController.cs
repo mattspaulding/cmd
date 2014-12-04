@@ -86,5 +86,25 @@ namespace ProjectDONE.Controllers.Api
             var results = _IBidRepo.GetByJob(id,default_skip,default_take);
             return Json(results);
         }
+        [HttpPost]
+        [Route("Jobs/{jobId}/Bids/{bidId}/Accept")]
+        public void AcceptBid(long jobId, long bidId)
+        {
+            var job = _IJobRepo.GetSingle(jobId);
+            var bids = (List<IBid>)_IBidRepo.GetByJob(jobId,default_skip,int.MaxValue);
+
+            job.AcceptedBid = bids.FirstOrDefault(b => b.ID == bidId);
+            job.AcceptedBid.Status = BidStatus.Accepted;
+
+            _IBidRepo.Update(job.AcceptedBid);
+            _IJobRepo.Update(job);
+
+            foreach (var bid in bids.Where(b => b.ID != bidId))
+            {
+                bid.Status = BidStatus.Declined;
+                _IBidRepo.Update(bid);
+            }
+            
+        }
     }
 }
