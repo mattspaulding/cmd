@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+//TODO: Setup Nav. Properties
 namespace ProjectDONE.Models.AppModels
 {
     public class BaseAppModel : IBaseAppModel
@@ -23,12 +23,13 @@ namespace ProjectDONE.Models.AppModels
         public long Longitude { get; set; }
         public IDemographics Demographics { get; set; }
         public string PrivateDescription { get; set; }
-        public IDialog Dialog { get; set; }
+        public IDialog[] Dialog { get; set; }
+
     }
 
     public class Dialog
     {
-        //TODO: Implemnte Question/ Answer
+        //TODO: Implement Question/ Answer
     }
 
     public class Demographics : IDemographics
@@ -48,7 +49,7 @@ namespace ProjectDONE.Models.AppModels
         //TODO: Implment as necessery
     }
 
-    public class Email :BaseAppModel
+    public class Email : BaseAppModel
     {
         //TODO: Implement as necessery
     }
@@ -66,14 +67,16 @@ namespace ProjectDONE.Models.AppModels
         public string Name { get; set; }
         public bool IsCorporateEntity { get; set; }
         public Media[] Media { get; set; }
-       
+
     }
 
+    // Add Media[] for bids
     public class Bid : BaseAppModel, IBid
     {
         public decimal Amount { get; set; }
         public Job Job { get; set; }
         public Owner Owner { get; set; }
+        public IDialog[] Dialog { get; set; }
     }
 
     //Interfaces
@@ -103,7 +106,7 @@ namespace ProjectDONE.Models.AppModels
         string PrivateDescription { get; set; }
         string PublicDescription { get; set; }
         string Title { get; set; }
-        IDialog Dialog { get; set; }
+        IDialog[] Dialog { get; set; }
     }
 
     public interface IMedia : IBaseAppModel

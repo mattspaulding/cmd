@@ -14,6 +14,8 @@ namespace ProjectDONE.Tests.Controllers
     [TestClass]
     public class AppControllerTests
     {
+        const int default_take = 10;
+        const int default_skip = 0;
         //As a User I expect to be able to post jobs.
         [TestMethod]
         public void CreateJob()
@@ -38,8 +40,7 @@ namespace ProjectDONE.Tests.Controllers
             //TODO: verify routes as well
             //This should be a HTTP GET at /api/App/Owner/5/Jobs
 
-            int default_take = 10;
-            int default_skip = 0;
+           
             var mock_return_jobs = new List<IJob> { new Job { ID = 1 }, new Job { ID = 2 }, new Job { ID = 3 } };
             var mock_job_owner = new Owner { ID = 5 };
             var mock_IJobRepo = Mock.Of<IFactory_IJobRepo>(
@@ -110,23 +111,101 @@ namespace ProjectDONE.Tests.Controllers
 
         //As a User, I am able to get a list of all jobs I have bids on along with my bid
         [TestMethod]
-        public void GetMyBidOnJobs()
+        public void GetMy_BidOn_Jobs()
         {
-            Assert.IsTrue(false);
+            var mock_Owner = new Owner { ID = 5 };
+            var mock_Job = new Job { ID = 1 };
+            var mock_Bid = new Bid { ID = 1, Job = mock_Job, Owner = mock_Owner };
+            
+            var bids = new List<IBid> { mock_Bid };
+            var mock_IBidRepo = Mock
+                .Of<IFactory_IBidRepo>(
+                    br => br.GetByOwner(mock_Owner.ID, default_skip, default_take) == bids
+                );
+            var controller = new AppController(null, mock_IBidRepo);
+            var result = controller.GetBidsByOwner(mock_Owner.ID);
+
+            Mock.Get<IFactory_IBidRepo>(mock_IBidRepo)
+              .Verify(jr => jr.GetByOwner(mock_Owner.ID,default_skip,default_take),
+              Times.Once);
+
+            Assert.IsInstanceOfType(result, typeof(System.Web.Mvc.JsonResult), "Return value is not a JsonResult");
+            var result_json = ((System.Web.Mvc.JsonResult)result).Data as List<IBid>;
+            Assert.IsNotNull(result_json);
+            Assert.AreEqual(result_json, bids);
+        }
+
+        //As a User, I am able to see all the bids on my posted job
+        [TestMethod]
+        public void GetAllBidsByJob()
+        {
+            var mock_job = new Job { ID = 1 };
+            var mock_bid_1 = new Bid { ID = 1, Job = mock_job };
+            var mock_bid_2 = new Bid { ID = 2, Job = mock_job };
+            var mock_bid_3 = new Bid { ID = 3, Job = mock_job };
+            var bids = new List<IBid> { mock_bid_1, mock_bid_2, mock_bid_3 };
+
+            var mock_IBidRepo = Mock.Of<IFactory_IBidRepo>(
+                    br => br.GetByJob(mock_job.ID, default_skip,default_take) == bids
+                );
+
+            var controller = new AppController(null, mock_IBidRepo);
+            var result = controller.GetBidsByJob(mock_job.ID);
+
+            Mock.Get<IFactory_IBidRepo>(mock_IBidRepo)
+            .Verify(br => br.GetByJob(mock_job.ID, default_skip, default_take),
+            Times.Once);
+
+            Assert.IsInstanceOfType(result, typeof(System.Web.Mvc.JsonResult), "Return value is not a JsonResult");
+            var result_json = ((System.Web.Mvc.JsonResult)result).Data as List<IBid>;
+            Assert.IsNotNull(result_json);
+            Assert.AreEqual(result_json, bids);
+
         }
 
         //As a User, I am able to withdrawl my unaccepted bid
         [TestMethod]
-        public void WithdrawBid()
+        public void WithdrawlBid()
         {
-            Assert.IsTrue(false);
+            var mock_owner = new Owner { ID = 5 };
+            var mock_Bid = new Bid { ID = 1, Owner = mock_owner };
+            var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+            mock_IBidRepo.Setup(br => br.Remove(mock_Bid));
+            var bidRepo = mock_IBidRepo.Object;
+
+            var controller = new AppController(null, bidRepo);
+            controller.WithdrawlBid(mock_Bid);
+
+            mock_IBidRepo.Verify(br => br.Remove(mock_Bid), Times.Once());
+
         }
 
         //As a User, I am able to accept a bid
         [TestMethod]
         public void AcceptBid()
         {
-            Assert.IsTrue(false);
+            //var mock_job = new Job { ID = 1 , AcceptedBid = null};
+            //var mock_bid = new Bid { ID = 1 , Job = mock_job, Status = BidStatus.Pending};
+
+            //var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
+            //var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+
+            //var bidRepo = mock_IBidRepo.Object;
+            //var jobRepo = mock_IJobRepo.Object;
+
+            //var controller = new AppController(jobRepo, bidRepo);
+
+            //controller.AcceptBid(mock_job.ID, mock_bid.ID);
+
+            //mock_IJobRepo.Verify(
+            //    jr => jr.UpdateJob(new Job { ID=1, AcceptedBid = mock_job})
+            //    ,Times.Once);
+
+            //mock_IBidRepo.Verify(
+            //    br => br.UpdateBid(
+            //        new Bid { ID= 1, Job = mock_job, Status = BidStatus.Accepted})
+            //    ,Times.Once);
+
         }
 
         //As a User, I am able to confirm a Job (happens after a bid has been accepted)

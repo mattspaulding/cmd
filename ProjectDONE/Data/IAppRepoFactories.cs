@@ -20,7 +20,8 @@ namespace ProjectDONE.Data
 
     public interface IFactory_IBidRepo : IAppRepoFactory<IBid>
     {
-        IList<IBid> GetByJob(long jobId);
+        IList<IBid> GetByJob(long jobId, int skip, int take);
+        IList<IBid> GetByOwner(long id, int skip, int take);
     }
 
 }

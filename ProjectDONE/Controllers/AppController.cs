@@ -15,10 +15,11 @@ namespace ProjectDONE.Controllers.Api
     [Route("Api/App")]
     public class AppController : Controller
     {
+        const int default_skip = 0;
+        const int default_take = 10;
         private IFactory_IJobRepo _IJobRepo;
         private IFactory_IBidRepo _IBidRepo;
-        private int default_skip = 0;
-        private int default_take = 10;
+        
 
         public AppController() // :this(new JobRepo())
         {
@@ -32,24 +33,24 @@ namespace ProjectDONE.Controllers.Api
             _IBidRepo = BidRepo;
         }
         [HttpPost]
-        [Route("Job")]
+        [Route("Job/")]
         public void AddJob(Job job)
         {
             _IJobRepo.Add(job);
         }
 
         [HttpGet]
-        [Route("Owner/{id}/Jobs")]
+        [Route("Owner/{id}/Jobs/")]
         public ActionResult GetJobsByOwner(long id)
         {
             var results =
                 _IJobRepo
-                .GetByOwner(id, this.default_skip, this.default_take);
+                .GetByOwner(id, default_skip, default_take);
                 
             return Json(results);
         }
         [HttpGet]
-        [Route("/Jobs/{id}")]
+        [Route("/Jobs/{id}/")]
         public ActionResult GetJobById(long id)
         {
             var result =
@@ -57,11 +58,33 @@ namespace ProjectDONE.Controllers.Api
                 .GetSingle(id);
             return Json(result);
         }
+
         [HttpPost]
         [Route("Bids/")]
         public void CreateBid(Bid bid)
         {
             _IBidRepo.Add(bid);
+        }
+
+        [HttpGet]
+        [Route("Owner/{id}/Bids/")]
+        public ActionResult GetBidsByOwner(long id)
+        {
+            var results = _IBidRepo.GetByOwner(id,default_skip,default_take);
+            return Json(results);
+        }
+        [HttpDelete]
+        [Route("Bids/")]
+        public void WithdrawlBid(Bid bid)
+        {
+            _IBidRepo.Remove(bid);
+        }
+        [HttpGet]
+        [Route("Jobs/{id}/Bids/")]
+        public ActionResult GetBidsByJob(long id)
+        {
+            var results = _IBidRepo.GetByJob(id,default_skip,default_take);
+            return Json(results);
         }
     }
 }
