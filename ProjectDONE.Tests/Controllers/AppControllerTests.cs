@@ -64,6 +64,7 @@ namespace ProjectDONE.Tests.Controllers
         }
 
         //As a User, I am able to view a single job
+        //TODO: This needs to test that the job is returned without Private details
         [TestMethod]
         public void GetJobById()
         {
@@ -214,7 +215,7 @@ namespace ProjectDONE.Tests.Controllers
 
             var controller = new AppController(jobRepo, bidRepo);
 
-            controller.AcceptBid(mock_job.ID, mock_bid_accepted.ID);
+            controller.AcceptBid((Bid)mock_bid_accepted);
 
             mock_IJobRepo.Verify(
                 jr=>jr.GetSingle(mock_job.ID)
@@ -256,7 +257,7 @@ namespace ProjectDONE.Tests.Controllers
             Assert.IsTrue(false);
         }
 
-        //As a User, I am able to get a jobs private details of Jobs I have confirmed
+        //As the User that posted the accpted bid, I am able to get a jobs private details of Jobs I have confirmed
         [TestMethod]
         public void JobDetails()
         {

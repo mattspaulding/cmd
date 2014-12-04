@@ -32,6 +32,7 @@ namespace ProjectDONE.Controllers.Api
             _IJobRepo = JobRepo;
             _IBidRepo = BidRepo;
         }
+
         [HttpPost]
         [Route("Job/")]
         public void AddJob(Job job)
@@ -49,6 +50,7 @@ namespace ProjectDONE.Controllers.Api
                 
             return Json(results);
         }
+
         [HttpGet]
         [Route("/Jobs/{id}/")]
         public ActionResult GetJobById(long id)
@@ -73,12 +75,14 @@ namespace ProjectDONE.Controllers.Api
             var results = _IBidRepo.GetByOwner(id,default_skip,default_take);
             return Json(results);
         }
+
         [HttpDelete]
         [Route("Bids/")]
         public void WithdrawlBid(Bid bid)
         {
             _IBidRepo.Remove(bid);
         }
+
         [HttpGet]
         [Route("Jobs/{id}/Bids/")]
         public ActionResult GetBidsByJob(long id)
@@ -86,25 +90,25 @@ namespace ProjectDONE.Controllers.Api
             var results = _IBidRepo.GetByJob(id,default_skip,default_take);
             return Json(results);
         }
-        [HttpPost]
-        [Route("Jobs/{jobId}/Bids/{bidId}/Accept")]
-        public void AcceptBid(long jobId, long bidId)
-        {
-            var job = _IJobRepo.GetSingle(jobId);
-            var bids = (List<IBid>)_IBidRepo.GetByJob(jobId,default_skip,int.MaxValue);
 
-            job.AcceptedBid = bids.FirstOrDefault(b => b.ID == bidId);
+        [HttpPost]
+        [Route("Jobs/AcceptBid")]
+        public void AcceptBid(Bid bid)
+        {
+            var bids = (List<IBid>)_IBidRepo.GetByJob(bid.Job.ID,default_skip,int.MaxValue);
+            var job = _IJobRepo.GetSingle(bid.Job.ID);
+
+            job.AcceptedBid = bid;
             job.AcceptedBid.Status = BidStatus.Accepted;
 
             _IBidRepo.Update(job.AcceptedBid);
             _IJobRepo.Update(job);
 
-            foreach (var bid in bids.Where(b => b.ID != bidId))
+            foreach (var b in bids.Where(b => b.ID != job.AcceptedBid.ID))
             {
-                bid.Status = BidStatus.Declined;
-                _IBidRepo.Update(bid);
+                b.Status = BidStatus.Declined;
+                _IBidRepo.Update(b);
             }
-            
         }
     }
 }
