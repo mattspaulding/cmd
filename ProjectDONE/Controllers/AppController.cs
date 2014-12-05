@@ -93,7 +93,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Jobs/AcceptBid")]
-        public void AcceptBid(Bid bid)
+        public void AcceptBid(IBid bid)
         {
             var bids = (List<IBid>)_IBidRepo.GetByJob(bid.Job.ID,default_skip,int.MaxValue);
             var job = _IJobRepo.GetSingle(bid.Job.ID);
