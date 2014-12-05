@@ -110,5 +110,14 @@ namespace ProjectDONE.Controllers.Api
                 _IBidRepo.Update(b);
             }
         }
+
+        [HttpPost]
+        [Route("Bids/ConfirmBid")]
+        public void ConfirmBid(IBid Bid)
+        {
+            var job = _IJobRepo.GetSingle(Bid.Job.ID);
+            job.Confirmed = true;
+            _IJobRepo.Update(job);
+        }
     }
 }

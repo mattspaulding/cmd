@@ -286,18 +286,28 @@ namespace ProjectDONE.Tests.Controllers
         [TestMethod]
         public void ConfirmJob()
         {
-            var mock_job = new Job { ID = 1 };
-            var mock_bid = new Bid { ID = 5, Job = mock_job };
+            var mock_job = new Mock<IJob>();
+            var mock_bid = new Mock<IBid>();
 
-            mock_job.AcceptedBid = mock_bid;
+            mock_job.SetupProperty(j => j.ID, 1);
+            mock_job.SetupProperty(j => j.AcceptedBid, mock_bid.Object);
+            mock_job.SetupProperty(j => j.Confirmed, false);
+
+            mock_bid.SetupProperty(b => b.ID, 1);
+            mock_bid.SetupProperty(b => b.Job, mock_job.Object);
+            mock_bid.SetupProperty(b => b.Status, BidStatus.Accepted);
 
             var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
-
+            mock_IJobRepo.Setup(jr => jr.Update(mock_job.Object));
+            mock_IJobRepo.Setup(jr => jr.GetSingle(mock_job.Object.ID)).Returns(mock_job.Object);
 
             var jobRepo = mock_IJobRepo.Object;
             var controller = new AppController(jobRepo, null);
+            controller.ConfirmBid(mock_bid.Object);
 
-            mock_IJobRepo.Verify(jr => jr.Update(mock_job));
+            Assert.IsTrue(mock_job.Object.Confirmed);
+            mock_IJobRepo.Verify(jr => jr.GetSingle(mock_job.Object.ID), Times.Once);
+            mock_IJobRepo.Verify(jr => jr.Update(mock_job.Object),Times.Once);
         }
 
         //As the User that posted the accpted bid, I am able to get a jobs private details of Jobs I have confirmed

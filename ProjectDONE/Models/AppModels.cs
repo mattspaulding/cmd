@@ -16,7 +16,7 @@ namespace ProjectDONE.Models.AppModels
         public IOwner Owner { get; set; }
         public string Title { get; set; }
         public string PublicDescription { get; set; }
-       
+        public bool Confirmed { get; set; }
         //TODO: Change to Geographical area type of some kind
         //More research is needed.
         public long Latitude { get; set; }
@@ -119,6 +119,7 @@ namespace ProjectDONE.Models.AppModels
         IList<IDialog> Dialog { get; set; }
         IList<IBid> Bids { get; set; }
         IBid AcceptedBid { get; set; }
+        bool Confirmed { get; set; }
     }
 
     public interface IMedia : IBaseAppModel
