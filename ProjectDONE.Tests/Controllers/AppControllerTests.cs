@@ -13,6 +13,7 @@ using System.Security.Principal;
 
 namespace ProjectDONE.Tests.Controllers
 {
+    //TODO: Test Save on all functions
     //TODO: Test Security
     //TODO: Add Error Handling testing
     [TestClass]
@@ -26,7 +27,7 @@ namespace ProjectDONE.Tests.Controllers
         {
             var mock_job = new Job { ID = 5 };
 
-            var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
+            var mock_IJobRepo = new Mock<IJobRepo>();
             mock_IJobRepo.Setup(jr => jr.Add(mock_job));
 
             var job_repo = mock_IJobRepo.Object;
@@ -47,7 +48,7 @@ namespace ProjectDONE.Tests.Controllers
            
             var mock_return_jobs = new List<IJob> { new Job { ID = 1 }, new Job { ID = 2 }, new Job { ID = 3 } };
             var mock_job_owner = new Owner { ID = 5 };
-            var mock_IJobRepo = Mock.Of<IFactory_IJobRepo>(
+            var mock_IJobRepo = Mock.Of<IJobRepo>(
                 jb =>
                 jb.GetByOwner(mock_job_owner.ID, default_skip, default_take)
                 == mock_return_jobs
@@ -56,7 +57,7 @@ namespace ProjectDONE.Tests.Controllers
             AppController controller = new AppController(mock_IJobRepo, null);
             var result = controller.GetJobsByOwner(mock_job_owner.ID);
 
-            Mock.Get<IFactory_IJobRepo>(mock_IJobRepo)
+            Mock.Get<IJobRepo>(mock_IJobRepo)
                 .Verify(jr => jr.GetByOwner(mock_job_owner.ID, default_skip, default_take),
                 Times.Once);
 
@@ -74,14 +75,14 @@ namespace ProjectDONE.Tests.Controllers
         {
             IJob mock_job = new Job { ID = 1 };
 
-            var mock_IJobRepo = Mock.Of<IFactory_IJobRepo>(
+            var mock_IJobRepo = Mock.Of<IJobRepo>(
                 jr => jr.GetSingle(mock_job.ID) == mock_job
                 );
 
             var controller = new AppController(mock_IJobRepo, null);
             var result = controller.GetJobById(mock_job.ID);
 
-            Mock.Get<IFactory_IJobRepo>(mock_IJobRepo)
+            Mock.Get<IJobRepo>(mock_IJobRepo)
                .Verify(jr => jr.GetSingle(mock_job.ID),
                Times.Once);
 
@@ -105,7 +106,7 @@ namespace ProjectDONE.Tests.Controllers
 
             var mock_Job = new Job { ID = 1 };
             var mock_Bid = new Bid { ID = 1, Job = mock_Job };
-            var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+            var mock_IBidRepo = new Mock<IBidRepo>();
             mock_IBidRepo.Setup(br => br.Add(mock_Bid));
             var bidRepo = mock_IBidRepo.Object;
             AppController controller = new AppController(null, bidRepo);
@@ -124,13 +125,13 @@ namespace ProjectDONE.Tests.Controllers
             
             var bids = new List<IBid> { mock_Bid };
             var mock_IBidRepo = Mock
-                .Of<IFactory_IBidRepo>(
+                .Of<IBidRepo>(
                     br => br.GetByOwner(mock_Owner.ID, default_skip, default_take) == bids
                 );
             var controller = new AppController(null, mock_IBidRepo);
             var result = controller.GetBidsByOwner(mock_Owner.ID);
 
-            Mock.Get<IFactory_IBidRepo>(mock_IBidRepo)
+            Mock.Get<IBidRepo>(mock_IBidRepo)
               .Verify(jr => jr.GetByOwner(mock_Owner.ID,default_skip,default_take),
               Times.Once);
 
@@ -150,14 +151,14 @@ namespace ProjectDONE.Tests.Controllers
             var mock_bid_3 = new Bid { ID = 3, Job = mock_job };
             var bids = new List<IBid> { mock_bid_1, mock_bid_2, mock_bid_3 };
 
-            var mock_IBidRepo = Mock.Of<IFactory_IBidRepo>(
+            var mock_IBidRepo = Mock.Of<IBidRepo>(
                     br => br.GetByJob(mock_job.ID, default_skip,default_take) == bids
                 );
 
             var controller = new AppController(null, mock_IBidRepo);
             var result = controller.GetBidsByJob(mock_job.ID);
 
-            Mock.Get<IFactory_IBidRepo>(mock_IBidRepo)
+            Mock.Get<IBidRepo>(mock_IBidRepo)
             .Verify(br => br.GetByJob(mock_job.ID, default_skip, default_take),
             Times.Once);
 
@@ -175,7 +176,7 @@ namespace ProjectDONE.Tests.Controllers
         {
             var mock_owner = new Owner { ID = 5 };
             var mock_Bid = new Bid { ID = 1, Owner = mock_owner };
-            var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+            var mock_IBidRepo = new Mock<IBidRepo>();
             mock_IBidRepo.Setup(br => br.Remove(mock_Bid));
             var bidRepo = mock_IBidRepo.Object;
 
@@ -226,8 +227,8 @@ namespace ProjectDONE.Tests.Controllers
             
             
 
-            var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
-            var mock_IBidRepo = new Mock<IFactory_IBidRepo>();
+            var mock_IJobRepo = new Mock<IJobRepo>();
+            var mock_IBidRepo = new Mock<IBidRepo>();
 
             mock_IJobRepo.Setup<IJob>
                 (jr=>jr.GetSingle(job.ID))
@@ -302,7 +303,7 @@ namespace ProjectDONE.Tests.Controllers
             mock_bid.SetupProperty(b => b.Job, mock_job.Object);
             mock_bid.SetupProperty(b => b.Status, BidStatus.Accepted);
 
-            var mock_IJobRepo = new Mock<IFactory_IJobRepo>();
+            var mock_IJobRepo = new Mock<IJobRepo>();
             mock_IJobRepo.Setup(jr => jr.Update(mock_job.Object));
             mock_IJobRepo.Setup(jr => jr.GetSingle(mock_job.Object.ID)).Returns(mock_job.Object);
 

@@ -201,6 +201,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\DBContexts.cs" />
     <Compile Include="Data\IAppRepoFactories.cs" />
+    <Compile Include="Data\Repos\ConcreteFactories.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -275,7 +276,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\Repos\" />
     <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>

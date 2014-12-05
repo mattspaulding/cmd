@@ -1,33 +1,35 @@
 ﻿using ProjectDONE.Models.AppModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectDONE.Data
 {
-    public interface IAppRepoFactory<T> where T : IBaseAppModel 
+    public interface IAppRepo<T> where T : IBaseAppModel 
     {
-        IList<T> Get(int? skip, int? take);
-        T GetSingle(long id);
+        IQueryable<T> Get();
         void Add(T item);
         void Remove(T item);
         void RemoveAll(IList<T> items);
         void Update(T item);
+        bool Save();
+
     }
 
-    public interface IFactory_IJobRepo : IAppRepoFactory<IJob>
+    public interface IJobRepo : IAppRepo<IJob>
     {
-        IList<IJob> GetByOwner(long ownerID, int? skip, int? take);
+        //IList<IJob> GetByOwner(long ownerID, int skip, int take);
         
     }
 
-    public interface IFactory_IBidRepo : IAppRepoFactory<IBid>
+    public interface IBidRepo : IAppRepo<IBid>
     {
-        IList<IBid> GetByJob(long jobId, int skip, int take);
-        IList<IBid> GetByOwner(long id, int skip, int take);
+       // IList<IBid> GetByJob(long jobId, int skip, int take);
+       // IList<IBid> GetByOwner(long id, int skip, int take);
 
     }
 
-    public interface IFactory_IOwnerRepo : IAppRepoFactory<IOwner>
+    public interface IOwnerRepo : IAppRepo<IOwner>
     {
 
     }
