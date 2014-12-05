@@ -15,18 +15,18 @@ using System.Net;
 
 namespace ProjectDONE.Controllers.Api
 {
-    [Route("Api/App")]
+   
     public class AppController : Controller
     {
         const int default_skip = 0;
         const int default_take = 10;
-        private IJobRepo _IJobRepo;
-        private IBidRepo _IBidRepo;
-        
+        private JobRepo _IJobRepo;
+        private BidRepo _IBidRepo;
+        //Variance issues, removing generic since i cancled the unit tests
 
         public AppController()  :this(new JobRepo(), new BidRepo()){}
 
-        public AppController(IJobRepo JobRepo, IBidRepo BidRepo)
+        public AppController(JobRepo JobRepo, BidRepo BidRepo)
         {
             _IJobRepo = JobRepo;
             _IBidRepo = BidRepo;
@@ -34,7 +34,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Job/")]
-        public void AddJob(IJob job)
+        public void AddJob(Job job)
         {
             _IJobRepo.Add(job);
             _IJobRepo.Save();
@@ -59,7 +59,7 @@ namespace ProjectDONE.Controllers.Api
         }
 
         [HttpGet]
-        [Route("/Jobs/{id}/")]
+        [Route("Jobs/{id}/")]
         public ActionResult GetJobById(long id)
         {
             var result =
@@ -72,7 +72,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Bids/")]
-        public void CreateBid(IBid bid)
+        public void CreateBid(Bid bid)
         {
             _IBidRepo.Add(bid);
             _IBidRepo.Save();
@@ -93,7 +93,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpDelete]
         [Route("Bids/")]
-        public void WithdrawlBid(IBid bid)
+        public void WithdrawlBid(Bid bid)
         {
             _IBidRepo.Remove(bid);
             _IBidRepo.Save();
@@ -115,7 +115,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Jobs/AcceptBid")]
-        public void AcceptBid(IBid bid)
+        public void AcceptBid(Bid bid)
         {
             var bids = _IBidRepo.Get().Where(b => b.Job.ID == bid.Job.ID);
             var job = _IJobRepo.Get().Where(j=>j.ID == bid.Job.ID).FirstOrDefault();
@@ -144,7 +144,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Bids/ConfirmBid")]
-        public void ConfirmBid(IBid Bid)
+        public void ConfirmBid(Bid Bid)
         {
             var job = _IJobRepo.Get().Where(j=>j.ID == Bid.Job.ID).FirstOrDefault();
             if (job == null)

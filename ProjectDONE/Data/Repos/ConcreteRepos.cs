@@ -7,7 +7,7 @@ using ProjectDONE.Models.AppModels;
 namespace ProjectDONE.Data.Repos
 {
     //TODO: Refactor to return IQuerable rather than concrete Lists
-    public class BaseRepo<T> : IAppRepo<T> where T : class, IBaseAppModel
+    public class BaseRepo<T> : IAppRepo<T> where T : BaseAppModel
     {
         private ApplicationDbContext _context = null;
         public ApplicationDbContext Context
@@ -45,19 +45,17 @@ namespace ProjectDONE.Data.Repos
             return Context.SaveChanges() > 0;
         }
     }
-    //TODO: GetByOwner can be refactored out once we swtich to IQueryable returns
-    public class JobRepo : BaseRepo<IJob>, IJobRepo
+
+    public class JobRepo : BaseRepo<Job>
     {
-       
     }
 
-    //TODO: GetBy... Can be refactored out once we switch to IQuerable returns
-    public class BidRepo : BaseRepo<IBid>, IBidRepo
+    public class BidRepo : BaseRepo<Bid>
     {
         
     }
 
-    public class Factory_OwnerRepo : BaseRepo<IOwner>, IOwnerRepo
+    public class OwnerRepo : BaseRepo<Owner>
     {
 
     }

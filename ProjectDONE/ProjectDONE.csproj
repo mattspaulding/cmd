@@ -200,8 +200,8 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\DBContexts.cs" />
-    <Compile Include="Data\IAppRepoFactories.cs" />
-    <Compile Include="Data\Repos\ConcreteFactories.cs" />
+    <Compile Include="Data\IAppRepo.cs" />
+    <Compile Include="Data\Repos\ConcreteRepos.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
