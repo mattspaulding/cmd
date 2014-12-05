@@ -61,3 +61,5 @@ C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.Owin.xml
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Creation.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache

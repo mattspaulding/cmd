@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProjectDONE.Models.AppModels;
+using Microsoft.AspNet.Identity;
 
 //Services are defined by feature
 //Rather than functional area
@@ -35,7 +36,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Job/")]
-        public void AddJob(Job job)
+        public void AddJob(IJob job)
         {
             _IJobRepo.Add(job);
         }
@@ -63,7 +64,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpPost]
         [Route("Bids/")]
-        public void CreateBid(Bid bid)
+        public void CreateBid(IBid bid)
         {
             _IBidRepo.Add(bid);
         }
@@ -78,7 +79,7 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpDelete]
         [Route("Bids/")]
-        public void WithdrawlBid(Bid bid)
+        public void WithdrawlBid(IBid bid)
         {
             _IBidRepo.Remove(bid);
         }
@@ -116,8 +117,10 @@ namespace ProjectDONE.Controllers.Api
         public void ConfirmBid(IBid Bid)
         {
             var job = _IJobRepo.GetSingle(Bid.Job.ID);
-            job.Confirmed = true;
+            job.Status = Jobstatus.Confirmed;
             _IJobRepo.Update(job);
         }
+
+      
     }
 }

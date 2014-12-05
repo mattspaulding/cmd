@@ -3,6 +3,22 @@ using System.Collections.Generic;
 //TODO: Setup Nav. Properties
 namespace ProjectDONE.Models.AppModels
 {
+    public enum BidStatus
+    {
+        Pending,
+        Accepted,
+        Declined
+    }
+
+    public enum Jobstatus
+    {
+        Pending,
+        Confirmed,
+        Finished,
+        Satisfied,
+        Unsatisfied
+
+    }
     public class BaseAppModel : IBaseAppModel
     {
         public DateTime CreatedOn { get; set; }
@@ -16,7 +32,6 @@ namespace ProjectDONE.Models.AppModels
         public IOwner Owner { get; set; }
         public string Title { get; set; }
         public string PublicDescription { get; set; }
-        public bool Confirmed { get; set; }
         //TODO: Change to Geographical area type of some kind
         //More research is needed.
         public long Latitude { get; set; }
@@ -27,7 +42,7 @@ namespace ProjectDONE.Models.AppModels
         public virtual IList<IMedia> Media { get; set; }
         public virtual IList<IDialog> Dialog { get; set; }
         public virtual IList<IBid> Bids { get; set; }
-
+        public virtual Jobstatus Status { get; set; }
     }
 
     public class Dialog
@@ -37,9 +52,9 @@ namespace ProjectDONE.Models.AppModels
 
     public class Demographics : IDemographics
     {
-        public Address[] Addresses { get; set; }
-        public PhoneNumber[] PhoneNumbers { get; set; }
-        public Email[] EmailAddresses { get; set; }
+        public virtual IList<Address> Addresses { get; set; }
+        public virtual IList<PhoneNumber> PhoneNumbers { get; set; }
+        public virtual IList<Email> EmailAddresses { get; set; }
     }
 
     public class Address : BaseAppModel
@@ -69,8 +84,9 @@ namespace ProjectDONE.Models.AppModels
     {
         public string Name { get; set; }
         public bool IsCorporateEntity { get; set; }
-        public Media[] Media { get; set; }
-
+        public virtual IList<Media> Media { get; set; }
+        public virtual IList<Job> Jobs { get; set; }
+        public virtual IList<Bid> Bids { get; set; }
     }
 
     // Add Media[] for bids
@@ -83,12 +99,7 @@ namespace ProjectDONE.Models.AppModels
         public virtual BidStatus Status { get; set; }
     }
 
-    public enum BidStatus
-    {
-        Pending,
-        Accepted,
-        Declined
-    }
+
     //Interfaces
 
     public interface IBaseAppModel
@@ -101,9 +112,9 @@ namespace ProjectDONE.Models.AppModels
 
     public interface IDemographics
     {
-        Address[] Addresses { get; set; }
-        Email[] EmailAddresses { get; set; }
-        PhoneNumber[] PhoneNumbers { get; set; }
+        IList<Address> Addresses { get; set; }
+        IList<Email> EmailAddresses { get; set; }
+        IList<PhoneNumber> PhoneNumbers { get; set; }
     }
 
     public interface IJob : IBaseAppModel
@@ -119,7 +130,8 @@ namespace ProjectDONE.Models.AppModels
         IList<IDialog> Dialog { get; set; }
         IList<IBid> Bids { get; set; }
         IBid AcceptedBid { get; set; }
-        bool Confirmed { get; set; }
+        Jobstatus Status { get; set; }
+
     }
 
     public interface IMedia : IBaseAppModel
@@ -133,8 +145,10 @@ namespace ProjectDONE.Models.AppModels
     public interface IOwner : IBaseAppModel
     {
         bool IsCorporateEntity { get; set; }
-        Media[] Media { get; set; }
+        IList<Media> Media { get; set; }
         string Name { get; set; }
+        IList<Job> Jobs { get; set; }
+        IList<Bid> Bids { get; set; }
     }
 
     public interface IBid : IBaseAppModel

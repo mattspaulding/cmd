@@ -27,4 +27,9 @@ namespace ProjectDONE.Data
 
     }
 
+    public interface IFactory_IOwnerRepo : IAppRepoFactory<IOwner>
+    {
+
+    }
+
 }

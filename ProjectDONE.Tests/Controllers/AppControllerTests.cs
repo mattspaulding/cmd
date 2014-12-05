@@ -8,9 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Results;
+using System.Web;
+using System.Security.Principal;
 
 namespace ProjectDONE.Tests.Controllers
 {
+    //TODO: Test Security
+    //TODO: Add Error Handling testing
     [TestClass]
     public class AppControllerTests
     {
@@ -165,6 +169,7 @@ namespace ProjectDONE.Tests.Controllers
         }
 
         //As a User, I am able to withdrawl my unaccepted bid
+        //TODO: Needs property checking also needs to ensure bid is no longer associated with job       
         [TestMethod]
         public void WithdrawlBid()
         {
@@ -291,7 +296,7 @@ namespace ProjectDONE.Tests.Controllers
 
             mock_job.SetupProperty(j => j.ID, 1);
             mock_job.SetupProperty(j => j.AcceptedBid, mock_bid.Object);
-            mock_job.SetupProperty(j => j.Confirmed, false);
+            mock_job.SetupProperty(j => j.Status, Jobstatus.Pending);
 
             mock_bid.SetupProperty(b => b.ID, 1);
             mock_bid.SetupProperty(b => b.Job, mock_job.Object);
@@ -305,7 +310,7 @@ namespace ProjectDONE.Tests.Controllers
             var controller = new AppController(jobRepo, null);
             controller.ConfirmBid(mock_bid.Object);
 
-            Assert.IsTrue(mock_job.Object.Confirmed);
+            Assert.AreEqual(mock_job.Object.Status,Jobstatus.Confirmed);
             mock_IJobRepo.Verify(jr => jr.GetSingle(mock_job.Object.ID), Times.Once);
             mock_IJobRepo.Verify(jr => jr.Update(mock_job.Object),Times.Once);
         }
@@ -317,11 +322,12 @@ namespace ProjectDONE.Tests.Controllers
             Assert.IsTrue(false);
         }
 
-        //As a User who confirmed a job, I am able to claim that it is finished
+        //As a User who is the owner of the Accepted Bid on a confirmed job, I am able to claim that the job is finished.
         [TestMethod]
         public void ClaimFinishJob()
         {
-            Assert.IsTrue(false);
+            
+
         }
 
         //As a User who posted a job that another user has claimed to be finished, I am able to Verify the job was done satisfactorily

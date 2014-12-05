@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using ProjectDONE.Providers;
 using ProjectDONE.Models;
+using ProjectDONE.Data;
 
 namespace ProjectDONE
 {
