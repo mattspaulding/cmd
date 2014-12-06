@@ -3,20 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using ProjectDONE.Models.AppModels;
 using Microsoft.AspNet.Identity;
 using ProjectDONE.Data.Repos;
 using System.Net;
+using System.Web.Http;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 //Services are defined by feature
 //Rather than functional area
 //Should make managmenet easier
 
-namespace ProjectDONE.Controllers.Api
+namespace ProjectDONE.Controllers
 {
-   
-    public class AppController : Controller
+   [RoutePrefix("api/app")]
+    public class AppController : ApiController
     {
         const int default_skip = 0;
         const int default_take = 10;
@@ -33,41 +35,39 @@ namespace ProjectDONE.Controllers.Api
         }
 
         [HttpPost]
-        [Route("Job/")]
-        public void AddJob(Job job)
+        [Route("Job")]
+        public long AddJob(Job job)
         {
+            job.CreatedOn = DateTime.Now;
             _IJobRepo.Add(job);
             _IJobRepo.Save();
+
+            return job.ID;
         }
 
         //TODO: pass in paging data
         [HttpGet]
-        [Route("Owner/{id}/Jobs/")]
-        public ActionResult GetJobsByOwner(long id, int? skip, int? take)
+        [Route("Owner/{id}/Jobs")]
+        public IQueryable<Job> GetJobsByOwner(int id)
         {
             var query =
                 from job in _IJobRepo.Get()
                 where job.Owner.ID == id
                 select job;
 
-            var results = query
-                            .Skip(skip ?? default_skip)
-                            .Take(take ?? default_take)
-                            .ToList();
-             
-            return Json(results);
+            return query;
         }
 
         [HttpGet]
         [Route("Jobs/{id}/")]
-        public ActionResult GetJobById(long id)
+        public IQueryable<Job> GetJobById(long id)
         {
             var result =
                 _IJobRepo
                 .Get()
                 .Where(j => j.ID == id);
-                
-            return Json(result);
+
+            return result;
         }
 
         [HttpPost]
@@ -80,15 +80,15 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpGet]
         [Route("Owner/{id}/Bids/")]
-        public ActionResult GetBidsByOwner(long id, int? skip, int? take)
+        public IQueryable<Bid> GetBidsByOwner(long id, int? skip, int? take)
         {
             var query = from bid in _IBidRepo.Get()
                         where bid.Owner.ID == id
                         select bid;
                           
 
-            var results = query.Skip(skip??default_skip).Take(take??default_take).ToList();
-            return Json(results);
+            
+            return query;
         }
 
         [HttpDelete]
@@ -102,15 +102,13 @@ namespace ProjectDONE.Controllers.Api
 
         [HttpGet]
         [Route("Jobs/{id}/Bids/")]
-        public ActionResult GetBidsByJob(long id, int? skip, int? take)
+        public IQueryable<Bid> GetBidsByJob(long id, int? skip, int? take)
         {
             var query = from bid in _IBidRepo.Get()
                           where bid.ID == id
                           select bid;
-            var results = query.Skip(skip ?? default_skip)
-                                .Take(take ?? default_take)
-                                .ToList();
-            return Json(results);
+           
+            return query;
         }
 
         [HttpPost]
@@ -122,8 +120,8 @@ namespace ProjectDONE.Controllers.Api
 
             if (job == null)
             {
-                Response.StatusCode = (int)HttpStatusCode.NotFound;
-                Response.StatusDescription = "No job found with the ID of " + bid.Job.ID;
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.Content = new StringContent("No job found with the ID of " + bid.Job.ID);
                 return;
             }
 
@@ -149,8 +147,8 @@ namespace ProjectDONE.Controllers.Api
             var job = _IJobRepo.Get().Where(j=>j.ID == Bid.Job.ID).FirstOrDefault();
             if (job == null)
             {
-                Response.StatusCode = (int)HttpStatusCode.NotFound;
-                Response.StatusDescription = "No job found with the ID of " + Bid.Job.ID;
+                var Response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                Response.Content = new StringContent("No job found with the ID of " + Bid.Job.ID);
                 return;
             }
             job.Status = Jobstatus.Confirmed;

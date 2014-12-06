@@ -63,3 +63,4 @@ C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Creation.resources
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.AddKeys.resources

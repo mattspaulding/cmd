@@ -46,12 +46,12 @@ namespace ProjectDONE.Models.AppModels
         public virtual Jobstatus Status { get; set; }
     }
 
-    public class Dialog
+    public class Dialog : BaseAppModel
     {
         //TODO: Implement Question/ Answer
     }
 
-    public class Demographics
+    public class Demographics : BaseAppModel
     {
         public virtual IList<Address> Addresses { get; set; }
         public virtual IList<PhoneNumber> PhoneNumbers { get; set; }
