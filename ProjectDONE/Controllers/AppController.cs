@@ -10,6 +10,8 @@ using System.Net;
 using System.Web.Http;
 using System.Net.Http;
 using Newtonsoft.Json;
+using ProjectDONE.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 //Services are defined by feature
 //Rather than functional area
@@ -17,6 +19,7 @@ using Newtonsoft.Json;
 
 namespace ProjectDONE.Controllers
 {
+   [Authorize]
    [RoutePrefix("api/app")]
     public class AppController : ApiController
     {
@@ -24,7 +27,10 @@ namespace ProjectDONE.Controllers
         const int default_take = 10;
         private JobRepo _IJobRepo;
         private BidRepo _IBidRepo;
-        //Variance issues, removing generic since i cancled the unit tests
+        protected ApplicationDbContext ApplicationDbContext { get; set; }
+        protected UserManager<ApplicationUser> UserManager { get; set; }
+
+        protected ApplicationUser AppUser { get { return UserManager.FindById(User.Identity.GetUserId()); } }
 
         public AppController()  :this(new JobRepo(), new BidRepo()){}
 
@@ -32,12 +38,16 @@ namespace ProjectDONE.Controllers
         {
             _IJobRepo = JobRepo;
             _IBidRepo = BidRepo;
+
+            this.ApplicationDbContext = new ApplicationDbContext();
+            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
 
         [HttpPost]
         [Route("Job")]
         public long AddJob(Job job)
         {
+            
             job.CreatedOn = DateTime.Now;
             _IJobRepo.Add(job);
             _IJobRepo.Save();
@@ -45,7 +55,6 @@ namespace ProjectDONE.Controllers
             return job.ID;
         }
 
-        //TODO: pass in paging data
         [HttpGet]
         [Route("Owner/{id}/Jobs")]
         public IQueryable<Job> GetJobsByOwner(int id)
@@ -62,10 +71,14 @@ namespace ProjectDONE.Controllers
         [Route("Jobs/{id}/")]
         public IQueryable<Job> GetJobById(long id)
         {
+           
             var result =
                 _IJobRepo
                 .Get()
                 .Where(j => j.ID == id);
+
+            
+
 
             return result;
         }

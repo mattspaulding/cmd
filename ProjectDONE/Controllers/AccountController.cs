@@ -16,6 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 using ProjectDONE.Models;
 using ProjectDONE.Providers;
 using ProjectDONE.Results;
+using ProjectDONE.Data.Repos;
+using ProjectDONE.Models.AppModels;
+using System.Linq;
 
 namespace ProjectDONE.Controllers
 {
@@ -323,19 +326,41 @@ namespace ProjectDONE.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            //TODO: Add claims with the owner information to the user object
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            //Right now there is a 1:1 relationship between owners and users
+            //However, we will transition into a claims based authorization model
+            //where we can have user who are not also able to be owners; such as tech support, and admin accounts
+
+            //Those accounts will be created manually for the time being, however this will change in the future
+           
+            var newOwner = new Owner {CreatedOn = DateTime.Now };
+
+            var user = new ApplicationUser()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Owner = newOwner
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var ownerRepo = new OwnerRepo();
 
             if (!result.Succeeded)
             {
+                ownerRepo.Remove(newOwner);
+                ownerRepo.Save();
                 return GetErrorResult(result);
             }
+
+            newOwner = ownerRepo.Get().Where(o => o.ID == newOwner.ID).FirstOrDefault();
+            newOwner.CreatedByUserId = user.Id;
+            newOwner.Name = user.UserName;
+            ownerRepo.Save();
 
             return Ok();
         }

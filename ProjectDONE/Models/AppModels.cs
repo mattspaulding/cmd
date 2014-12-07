@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 //TODO: Come back around for testing
 namespace ProjectDONE.Models.AppModels
 {
@@ -22,8 +23,8 @@ namespace ProjectDONE.Models.AppModels
     public class BaseAppModel
     {
         public DateTime CreatedOn { get; set; }
-        public long CreatedByUserId { get; set; }
-
+        public string CreatedByUserId { get; set; }
+        [Key]
         public long ID { get; set; }
         public Guid TransactionID { get; set; }
     }
