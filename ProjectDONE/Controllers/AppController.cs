@@ -19,7 +19,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjectDONE.Controllers
 {
-   [Authorize]
+   //[Authorize]
    [RoutePrefix("api/app")]
     public class AppController : ApiController
     {
@@ -29,7 +29,6 @@ namespace ProjectDONE.Controllers
         private BidRepo _IBidRepo;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
-
         protected ApplicationUser AppUser { get { return UserManager.FindById(User.Identity.GetUserId()); } }
 
         public AppController()  :this(new JobRepo(), new BidRepo()){}
@@ -47,12 +46,30 @@ namespace ProjectDONE.Controllers
         [Route("Job")]
         public long AddJob(Job job)
         {
-            
             job.CreatedOn = DateTime.Now;
+     //     job.CreatedByUserId = User.Identity.GetUserId();
+     //     job.Owner = AppUser.Owner;
             _IJobRepo.Add(job);
             _IJobRepo.Save();
 
             return job.ID;
+        }
+
+        [HttpGet]
+        [Route("Job/{id}/")]
+        public IQueryable<Job> GetJobById(long id)
+        {
+            //TODO:If the request comes from the owner
+            //of the job, or the owner of the jobs
+            //accepted bid, then populate job's private
+            //details, otherwise remove them.
+            var result =
+                _IJobRepo
+                .Get()
+                .Where(j => j.ID == id);
+                
+
+            return result;
         }
 
         [HttpGet]
@@ -67,21 +84,7 @@ namespace ProjectDONE.Controllers
             return query;
         }
 
-        [HttpGet]
-        [Route("Jobs/{id}/")]
-        public IQueryable<Job> GetJobById(long id)
-        {
-           
-            var result =
-                _IJobRepo
-                .Get()
-                .Where(j => j.ID == id);
-
-            
-
-
-            return result;
-        }
+      
 
         [HttpPost]
         [Route("Bids/")]

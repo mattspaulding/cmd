@@ -1,13 +1,68 @@
-﻿<script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+﻿<script type="text/javascript">
+    app = angular.module('ProjectDONE', []);
 
-<form id="test_add_job">
-    <input type="text" id="Title" />
-    <input type="text" id="PublicDescription"/>
-    <input type="text" id="PrivateDescription"/>
-    
-    <input type="submit" value="Submit" />
-</form>
+    app.controller('Job_Owner_Controller', ['$scope','Job',function ($scope, Job) {
+        $scope.message = "Hello";
+        $scope.job = new Job();
+        $scope.CreateJob = function () {
+            $scope.job.create();
+            $scope.job = new Job();
+        }
+    }]);
 
-<script type="text/javascript">
+    app.factory('Job', ['$http', function ($http) {
+        function Job(job) {
+            if (!!job)
+                this.set(job);
+        };
+
+        Job.prototype = {
+            set: function(job){
+                angular.extend(this, job);
+            },
+            create: function () {
+                $http.post('/api/app/Job', this)
+            },
+            getSingle: function (id) {
+                console.log("not implmented");
+            },
+            getMany: function(queryData){
+                console.log("not implemented");
+            },
+            CreatedOn: "",
+            CreatedByUserID: "",
+            ID: "",
+            TransactionID: "",
+            Owner: "",
+            Title: "",
+            PublicDescription: "",
+            Latitude: "",
+            Longitude: "",
+            Demographics: "",
+            PrivateDescription: "",
+            AcceptedBid: "",
+            Media: [],
+            Dialog: [],
+            Bids: [],
+            Status:0
+        };
+        return Job;
+    }]);
 
 </script>
+<div ng-app="ProjectDONE">
+    <div ng-controller="Job_Owner_Controller">
+        <div>
+            <input type="text" ng-model="job.Title" />
+            <textarea ng-model="job.PublicDescription"></textarea>
+            <button ng-click="CreateJob()">Create</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //Models
+
+
+</script>
+
