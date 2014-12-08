@@ -46,34 +46,32 @@ namespace ProjectDONE.Controllers
 
         [HttpPost]
         [Route("Job")]
-        public Job AddJob(Job job)
+        public JobViewModel AddJob(Job job)
         {
+            
             job.CreatedOn = DateTime.Now;
             job.CreatedByUserId = User.Identity.GetUserId();
             job.Owner_ID = AppUser.Owner.ID;
             _IJobRepo.Add(job);
             _IJobRepo.Save();
 
-            return job;
+            return new JobViewModel(job,job.Owner_ID??0);
         }
 
         [HttpGet]
         [Route("Job/{id}/")]
         [EnableQuery]
-        public IQueryable<Job> GetJobById(long id)
+        public IQueryable<JobViewModel> GetJobById(long id)
         {
             
             //TODO: refactor to conditionally exclude private details
             
-            var oid = AppUser.Owner.ID;
+            var ownerId = AppUser.Owner.ID;
             var result =
                 from job in _IJobRepo.Get()
-                let ownerId = oid
+                //let ownerId = oid
                 where job.ID == id
-                select job;
-
-
-
+                select new JobViewModel(job, ownerId);
 
             return result;
         }
@@ -85,12 +83,26 @@ namespace ProjectDONE.Controllers
         [HttpGet]
         [Route("Job")]
         [EnableQuery]
-        public IQueryable<Job> GetJobs()
+        public IQueryable<JobViewModel> GetJobs()
         {
-            //TODO: refactor to conditionally exclude private details
+            var ownerId = AppUser.Owner.ID;
+            
             var query =
-                from job in _IJobRepo.Get()
-                select job;
+                from source in _IJobRepo.Get()
+                select new JobViewModel
+                {
+                    ID = source.ID,
+                    CreatedByUserId = source.CreatedByUserId,
+                    CreatedOn = source.CreatedOn,
+                    Owner_Id = source.Owner.ID,
+                    Title = source.Title,
+                    PublicDescription = source.PublicDescription,
+                    Latitude = source.Latitude,
+                    Longitude = source.Longitude,
+                    //PrivateDescription = excludePrivate ? string.Empty : source.PrivateDescription,
+                    Status = source.Status
+                    //AcceptedBid = !excludePrivate && source.AcceptedBid != null ? new BidViewModel(source.AcceptedBid) : null,
+                };
 
 
             return query;

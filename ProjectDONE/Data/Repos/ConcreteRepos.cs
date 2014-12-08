@@ -18,7 +18,7 @@ namespace ProjectDONE.Data.Repos
         {
             Context.Set<T>().Add(item);
         }
-        public IQueryable<T> Get()
+        public virtual IQueryable<T> Get()
         {
             return Context.Set<T>();
         }
@@ -48,6 +48,7 @@ namespace ProjectDONE.Data.Repos
 
     public class JobRepo : BaseRepo<Job>
     {
+      
     }
 
     public class BidRepo : BaseRepo<Bid>

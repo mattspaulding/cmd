@@ -98,7 +98,7 @@ namespace ProjectDONE.Models.AppModels
     {
         //TODO: Why does EF add an additonal FK
         public decimal Amount { get; set; }
-        public long? Owner_ID{ get; set; }
+        public long Owner_ID{ get; set; }
         [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }
         public virtual IList<Dialog> Dialog { get; set; }
