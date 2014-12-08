@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 //TODO: Come back around for testing
 namespace ProjectDONE.Models.AppModels
 {
@@ -24,14 +25,15 @@ namespace ProjectDONE.Models.AppModels
     {
         public DateTime CreatedOn { get; set; }
         public string CreatedByUserId { get; set; }
-        [Key]
         public long ID { get; set; }
         public Guid TransactionID { get; set; }
     }
 
     public class Job : BaseAppModel
     {
-        public Owner Owner { get; set; }
+        public long? Owner_ID { get; set; }
+        [ForeignKey("Owner_ID")]
+        public virtual Owner Owner { get; set; }
         public string Title { get; set; }
         public string PublicDescription { get; set; }
         //TODO: Change to Geographical area type of some kind
@@ -94,11 +96,18 @@ namespace ProjectDONE.Models.AppModels
     // Add Media[] for bids
     public class Bid : BaseAppModel
     {
+        //TODO: Why does EF add an additonal FK
         public decimal Amount { get; set; }
+        public long? Owner_ID{ get; set; }
+        [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }
         public virtual IList<Dialog> Dialog { get; set; }
+        public long Job_ID { get; set; }
+        [ForeignKey("Job_ID")]
         public virtual Job Job { get; set; }
         public virtual BidStatus Status { get; set; }
+
+        
     }
 
 
