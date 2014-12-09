@@ -8,7 +8,10 @@
 
         $scope.LoadJob = function(jobId)
         {
-            
+            $scope.job.getJob(jobId)
+                .then(function (result) {
+                    $scope.job = new Job(result.data);
+                });
         };
 
         $scope.Login = function()
@@ -30,6 +33,10 @@
             $scope.job.create()
                 .then(function (result) {
                     $scope.job.ID = result.data.ID;
+                    $scope.job.getMyJobs($scope.owner.ID)
+                             .then(function (results) {
+                                 $scope.owner.jobs = results.data;
+                             });
                 });
         };
 
@@ -41,6 +48,14 @@
                     });
             
         }
+
+        $scope.AcceptBid = function (bidId) {
+            $scope.bid.acceptBid(bidId)
+                .then(function (result) {
+                    $scope.bid = new Bid(result.data);
+                    $scope.job.AcceptedBid_id = bidId;
+                });
+        };
     });
 
     app.factory('Owner', function ($http) {
@@ -94,7 +109,7 @@
                 return $http.get('/api/app/Job/' + id);
             },
             getMyJobs: function(ownerId){
-                return $http.get('/api/app/Job?$select=Title, ID&$filter=Owner_Id eq 1&$top=1');
+                return $http.get('/api/app/Job?$select=Title, ID&$filter=Owner_Id eq 1');
             },
             CreatedOn: "",
             CreatedByUserID: "",
@@ -107,7 +122,7 @@
             Longitude: "",
             Demographics: "",
             PrivateDescription: "",
-            AcceptedBid: "",
+            AcceptedBid_id: "",
             Media: [],
             Dialog: [],
             Bids: [],
@@ -121,7 +136,7 @@
             if (!!Bid)
                 this.set(Bid);
         };
-
+        //TODO: move these over to a service
         Bid.prototype = {
             set: function (Bid) {
                 angular.extend(this, Bid);
@@ -134,6 +149,9 @@
             },
             getMany: function (queryData) {
                 console.log("not implemented");
+            },
+            acceptBid: function(id){
+                return $http.post('/api/app/Bid/Accept/' + id);
             },
             CreatedOn: "",
             CreatedByUserID: "",
@@ -198,18 +216,23 @@
             </ul>
         </div>
     </div>
-    <div class="outline">
-        <p>Post a bid on that job</p>
-        <ul>
-            <li><input type="text" ng-model="bid.Amount" /></li>
-            <li><button ng-click="PlaceBid()">Bid</button></li>
-        </ul>
-    </div>
-    <div class="outline">
-        <p>Review all the bids on the current job</p>
-        <ul ng-repeat="bid in job.Bids">
-            <li>{{bid.Amount | currency}}</li>
-        </ul>
+    <div class="group">
+        <div class="outline">
+            <p>Review all the bids on the current job</p>
+            <ul ng-repeat="bid in job.Bids" style="text-decoration:none;">
+                <li>
+                    <div style="float:left;">{{bid.Amount | currency}}</div>
+                    <div style="float:right; margin-right:10px;"><a href="#" ng-click="AcceptBid(bid.ID)">Accept</a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="outline">
+            <p>Post a bid on that job</p>
+            <ul>
+                <li><input type="text" ng-model="bid.Amount" /></li>
+                <li><button ng-click="PlaceBid()">Bid</button></li>
+            </ul>
+        </div>
     </div>
 </div>
 

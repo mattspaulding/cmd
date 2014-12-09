@@ -31,7 +31,7 @@ namespace ProjectDONE.Models.AppModels
 
     public class Job : BaseAppModel
     {
-        public long? Owner_ID { get; set; }
+        public long Owner_ID { get; set; }
         [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }
         public string Title { get; set; }
@@ -42,7 +42,7 @@ namespace ProjectDONE.Models.AppModels
         public long Longitude { get; set; }
         public Demographics Demographics { get; set; }
         public string PrivateDescription { get; set; }
-        public virtual Bid AcceptedBid { get; set; }
+        public virtual long? AcceptedBid_Id { get; set; }
         public virtual List<Media> Media { get; set; }
         public virtual List<Dialog> Dialog { get; set; }
         public virtual List<Bid> Bids { get; set; }
@@ -98,16 +98,20 @@ namespace ProjectDONE.Models.AppModels
     {
         //TODO: Why does EF add an additonal FK
         public decimal Amount { get; set; }
+
         public long Owner_ID{ get; set; }
         [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }
-        public virtual IList<Dialog> Dialog { get; set; }
+
+
         public long Job_ID { get; set; }
+        
         [ForeignKey("Job_ID")]
         public virtual Job Job { get; set; }
+
         public virtual BidStatus Status { get; set; }
 
-        
+        public virtual IList<Dialog> Dialog { get; set; }
     }
 
 

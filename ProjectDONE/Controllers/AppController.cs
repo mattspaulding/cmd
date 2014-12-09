@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using ProjectDONE.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Http.OData;
+using System.Net.Http.Formatting;
 
 //Services are defined by feature
 //Rather than functional area
@@ -28,16 +29,18 @@ namespace ProjectDONE.Controllers
         const int default_take = 10;
         private JobRepo _IJobRepo;
         private BidRepo _IBidRepo;
+        private OwnerRepo _IOwnerRepo;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
         protected ApplicationUser AppUser { get { return UserManager.FindById(User.Identity.GetUserId()); } }
 
-        public AppController() : this(new JobRepo(), new BidRepo()) { }
+        public AppController() : this(new JobRepo(), new BidRepo(), new OwnerRepo()) { }
 
-        public AppController(JobRepo JobRepo, BidRepo BidRepo)
+        public AppController(JobRepo JobRepo, BidRepo BidRepo, OwnerRepo OwnerRepo)
         {
             _IJobRepo = JobRepo;
             _IBidRepo = BidRepo;
+            _IOwnerRepo = OwnerRepo;
 
             this.ApplicationDbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
@@ -52,28 +55,73 @@ namespace ProjectDONE.Controllers
             job.CreatedOn = DateTime.Now;
             job.CreatedByUserId = User.Identity.GetUserId();
             job.Owner_ID = AppUser.Owner.ID;
+            job.ID = 0;
             _IJobRepo.Add(job);
             _IJobRepo.Save();
-
-            return new JobViewModel(job,job.Owner_ID??0);
+            
+            
+            
+            return new JobViewModel
+            {
+                ID = job.ID,
+                CreatedByUserId = job.CreatedByUserId,
+                CreatedOn = job.CreatedOn,
+                Owner_Id = job.Owner_ID,
+                Title = job.Title,
+                PublicDescription = job.PublicDescription,
+                Latitude = job.Latitude,
+                Longitude = job.Longitude,
+                PrivateDescription = job.PrivateDescription,
+                Status = job.Status,
+                Bids = new List<BidViewModel>(),
+                AcceptedBid_ID = null,
+                Owner = new OwnerViewModel {ID = AppUser.Owner.ID, Name = AppUser.Owner.Name }
+            };
         }
 
         [HttpGet]
         [Route("Job/{id}/")]
         [EnableQuery]
-        public IQueryable<JobViewModel> GetJobById(long id)
-        {
-            
-            //TODO: refactor to conditionally exclude private details
-            
+        public JobViewModel GetJobById(long id)
+        { 
             var ownerId = AppUser.Owner.ID;
             var result =
                 from job in _IJobRepo.Get()
-                //let ownerId = oid
                 where job.ID == id
-                select new JobViewModel(job, ownerId);
+                select new JobViewModel
+                {
+                    ID = job.ID,
+                    CreatedByUserId = job.CreatedByUserId,
+                    CreatedOn = job.CreatedOn,
+                    Owner_Id = job.Owner.ID,
+                    Title = job.Title,
+                    PublicDescription = job.PublicDescription,
+                    Latitude = job.Latitude,
+                    Longitude = job.Longitude,
+                    Bids = (from b in job.Bids select new BidViewModel
+                    {
+                        Amount = b.Amount,
+                        CreatedByUserId = b.CreatedByUserId,
+                        CreatedOn = b.CreatedOn,
+                        ID = b.ID,
+                        Job_ID = b.Job_ID,
+                        Status = b.Status,
+                        Owner = new OwnerViewModel
+                        {
+                            ID = b.Owner.ID,
+                            CreatedOn = b.Owner.CreatedOn,
+                            CreatedByUserId = b.Owner.CreatedByUserId,
+                            Name = b.Owner.Name,
+                            IsCorporateEntity = b.Owner.IsCorporateEntity
+                        }
 
-            return result;
+                    }).ToList() ,
+                    //PrivateDescription = excludePrivate ? string.Empty : job.PrivateDescription,
+                    Status = job.Status
+                    //AcceptedBid = !excludePrivate && source.AcceptedBid != null ? new BidViewModel(source.AcceptedBid) : null,
+                };
+
+            return result.FirstOrDefault();
         }
 
         /// <summary>
@@ -85,23 +133,28 @@ namespace ProjectDONE.Controllers
         [EnableQuery]
         public IQueryable<JobViewModel> GetJobs()
         {
-            var ownerId = AppUser.Owner.ID;
-            
+            var oid = AppUser.Owner.ID;
+            //Future self: obviously...i hate you.
+            //TODO: Can we use a casting overlad here?
             var query =
-                from source in _IJobRepo.Get()
+                from job in _IJobRepo.Get()
+                let ownerId = oid
                 select new JobViewModel
                 {
-                    ID = source.ID,
-                    CreatedByUserId = source.CreatedByUserId,
-                    CreatedOn = source.CreatedOn,
-                    Owner_Id = source.Owner.ID,
-                    Title = source.Title,
-                    PublicDescription = source.PublicDescription,
-                    Latitude = source.Latitude,
-                    Longitude = source.Longitude,
-                    //PrivateDescription = excludePrivate ? string.Empty : source.PrivateDescription,
-                    Status = source.Status
-                    //AcceptedBid = !excludePrivate && source.AcceptedBid != null ? new BidViewModel(source.AcceptedBid) : null,
+                    ID = job.ID,
+                    CreatedByUserId = job.CreatedByUserId,
+                    CreatedOn = job.CreatedOn,
+                    Owner_Id = job.Owner.ID,
+                    Title = job.Title,
+                    PublicDescription = job.PublicDescription,
+                    Latitude = job.Latitude,
+                    Longitude = job.Longitude,
+                    PrivateDescription = ownerId!=job.Owner_ID ? 
+                                    string.Empty : job.PrivateDescription,
+                    Status = job.Status,
+                    AcceptedBid_ID = 
+                            (ownerId != job.Owner_ID) && 
+                            job.AcceptedBid_Id != null ?job.AcceptedBid_Id : null,
                 };
 
 
@@ -116,7 +169,7 @@ namespace ProjectDONE.Controllers
         /// <param name="bid"></param>
         [HttpPost]
         [Route("Job/{JobId}/Bid")]
-        public Bid CreateBid(long JobId, Bid bid)
+        public BidViewModel CreateBid(long JobId, Bid bid)
         {
             bid.Job = null;
             bid.CreatedOn = DateTime.Now;
@@ -126,18 +179,63 @@ namespace ProjectDONE.Controllers
             _IBidRepo.Add(bid);
             _IBidRepo.Save();
 
-            return bid;
+            return new BidViewModel
+            {
+                Amount = bid.Amount,
+                CreatedByUserId = bid.CreatedByUserId,
+                CreatedOn = bid.CreatedOn,
+                ID = bid.ID,
+                Job_ID = bid.Job_ID,
+                Status = bid.Status,
+                Owner = new OwnerViewModel
+                {
+                    ID = AppUser.Owner.ID,
+                    CreatedOn = AppUser.Owner.CreatedOn,
+                    CreatedByUserId = AppUser.Owner.CreatedByUserId,
+                    Name = AppUser.Owner.Name,
+                    IsCorporateEntity = AppUser.Owner.IsCorporateEntity
+                }
+            };
         }
 
         [HttpGet]
         [Route("Bids")]
-        public IQueryable<Bid> GetBidsByOwner(long id, int? skip, int? take)
+        [EnableQuery]
+        public IQueryable<BidViewModel> GetBidsByOwner(long id, int? skip, int? take)
         {
             var query = from bid in _IBidRepo.Get()
                         where bid.Owner.ID == id
-                        select bid;
-
-
+                        select new BidViewModel
+                        {
+                            Amount = bid.Amount,
+                            CreatedByUserId = bid.CreatedByUserId,
+                            CreatedOn = bid.CreatedOn,
+                            ID = bid.ID,
+                            Job_ID = bid.Job_ID,
+                            Status = bid.Status,
+                            Owner = new OwnerViewModel
+                            {
+                                ID = AppUser.Owner.ID,
+                                CreatedOn = AppUser.Owner.CreatedOn,
+                                CreatedByUserId = AppUser.Owner.CreatedByUserId,
+                                Name = AppUser.Owner.Name,
+                                IsCorporateEntity = AppUser.Owner.IsCorporateEntity
+                            },
+                           Job = new JobViewModel
+                           {
+                               ID = bid.Job.ID,
+                               CreatedByUserId = bid.Job.CreatedByUserId,
+                               CreatedOn = bid.Job.CreatedOn,
+                               Owner_Id = bid.Job.Owner.ID,
+                               Title = bid.Job.Title,
+                               PublicDescription = bid.Job.PublicDescription,
+                               Latitude = bid.Job.Latitude,
+                               Longitude = bid.Job.Longitude,
+                               //Bids - Up in the air on this one
+                               Status = bid.Job.Status
+                               //AcceptedBid = !excludePrivate && source.AcceptedBid != null ? new BidViewModel(source.AcceptedBid) : null,
+                           }
+                        };
 
             return query;
         }
@@ -152,7 +250,7 @@ namespace ProjectDONE.Controllers
         }
 
         [HttpGet]
-        [Route("Jobs/{id}/Bids/")]
+        [Route("Job/{id}/Bids/")]
         public IQueryable<Bid> GetBidsByJob(long id, int? skip, int? take)
         {
             var query = from bid in _IBidRepo.Get()
@@ -163,32 +261,62 @@ namespace ProjectDONE.Controllers
         }
 
         [HttpPost]
-        [Route("Jobs/AcceptBid")]
-        public void AcceptBid(Bid bid)
+        [Route("Bid/Accept/{BidId}")]
+        public HttpResponseMessage AcceptBid(long BidId)
         {
-            var bids = _IBidRepo.Get().Where(b => b.Job.ID == bid.Job.ID);
+            var bid = _IBidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
+            var bids = _IBidRepo.Get().Where(b => b.Job.ID == bid.Job.ID && b.ID!= BidId);
             var job = _IJobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
-
+            HttpResponseMessage response;
             if (job == null)
             {
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
                 response.Content = new StringContent("No job found with the ID of " + bid.Job.ID);
-                return;
+                return response;
             }
 
-            job.AcceptedBid = bid;
-            job.AcceptedBid.Status = BidStatus.Accepted;
+            if(job.Owner_ID != AppUser.Owner.ID)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.Forbidden);
+                response.Content = new StringContent("Authenticated user is not indicated as the owner of this job.");
+                return response;
+            }
 
-            _IBidRepo.Update(job.AcceptedBid);
+            job.AcceptedBid_Id = bid.ID;
+            bid.Status = BidStatus.Accepted;
+
+            _IBidRepo.Update(bid);
             _IJobRepo.Update(job);
 
-            foreach (var b in bids.Where(b => b.ID != job.AcceptedBid.ID))
+            foreach (var b in bids.Where(b => b.ID != bid.ID))
             {
                 b.Status = BidStatus.Declined;
                 _IBidRepo.Update(b);
             }
             _IBidRepo.Save();
             _IJobRepo.Save();
+
+            var result = new BidViewModel
+            {
+                Amount = bid.Amount,
+                CreatedByUserId = bid.CreatedByUserId,
+                CreatedOn = bid.CreatedOn,
+                ID = bid.ID,
+                Job_ID = bid.Job_ID,
+                Status = bid.Status,
+                Owner = new OwnerViewModel
+                {
+                    ID = bid.Owner.ID,
+                    CreatedOn = bid.Owner.CreatedOn,
+                    CreatedByUserId = bid.Owner.CreatedByUserId,
+                    Name = bid.Owner.Name,
+                    IsCorporateEntity = bid.Owner.IsCorporateEntity
+                }
+            };
+
+            response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new ObjectContent<BidViewModel>(result, new JsonMediaTypeFormatter(), "application/json");
+            return response;
         }
 
         [HttpPost]
