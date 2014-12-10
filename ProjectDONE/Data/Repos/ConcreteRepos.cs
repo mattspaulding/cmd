@@ -16,23 +16,29 @@ namespace ProjectDONE.Data.Repos
         }
         public void Add(T item)
         {
+            item.CreatedOn = DateTime.Now;
             Context.Set<T>().Add(item);
         }
         public virtual IQueryable<T> Get()
         {
-            return Context.Set<T>();
+            return Context.Set<T>().Where(i=>!i.Deleted);
         }
 
         public void Remove(T item)
         {
             //TODO: Handle Soft Delete
-            throw new NotImplementedException();
+            item.Deleted = true;
+            Context.Entry<T>(item).State = System.Data.Entity.EntityState.Modified;
         }
 
         public void RemoveAll(IList<T> items)
         {
             //TODO: Handle Soft Delete
-            throw new NotImplementedException();
+            foreach (var item in items)
+            { 
+                item.Deleted = true;
+                Context.Entry<T>(item).State = System.Data.Entity.EntityState.Modified;
+            }
         }
 
         public void Update(T item)

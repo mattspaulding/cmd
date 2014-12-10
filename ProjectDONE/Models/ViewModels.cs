@@ -12,7 +12,7 @@ namespace ProjectDONE.Models
         public string CreatedByUserId { get; set; }
         public long ID { get; set; }
     }
-    //TODO: Automapper would be nice in here
+    
     public class JobViewModel : BaseViewModel
     {
         public JobViewModel() { }

@@ -1,28 +1,20 @@
 ﻿<script type="text/javascript">
     app = angular.module('ProjectDONE', []);
 
-    app.controller('TestingController', function ($scope,$http,Job,Bid,User) {
+    app.controller('TestingController', function ($scope,$projectDone,$http,Job,Bid,User) {
         $scope.registration = { username: "", password: "", confirm: "" }
         $scope.login = { username: "David@Example.com", password: "Abc123!" }
 
         $scope.job = new Job();
         $scope.bid = new Bid();
         $scope.user = new User();
-
-        $scope.AcceptedBid = new Bid();
-        
         $scope.ConfirmedBid = new Bid();
-
-        
 
         $scope.LoadJob = function(jobId)
         {
-            $scope.job.getJob(jobId)
+            $projectDone.GetJob(jobId)
                 .then(function (result) {
                     $scope.job = new Job(result.data);
-                    if ($scope.job.AcceptedBid) {
-                        $scope.AcceptedBid = new Bid($scope.job.AcceptedBid)
-                    }
                 });
         };
 
@@ -36,7 +28,7 @@
         }
 
         $scope.Login = function () {
-            $scope.user
+            $projectDone
                 .Login($scope.login.username, $scope.login.password)
                         .then(function (result) {
                             $scope.user = new User(result.data);
@@ -49,7 +41,7 @@
                                 $scope.user.owner = result.data;
                             })
                             .then(function () {
-                                $scope.job.getMyJobs($scope.user.owner.ID)
+                                $projectDone.GetOwnerJobs($scope.user.owner.ID)
                                  .then(function (results) {
                                      $scope.user.owner.Jobs = results.data;
                                  })
@@ -59,7 +51,7 @@
         };
 
         $scope.CreateJob = function () {
-            $scope.job.create()
+            $projectDone.CreateJob($scope.job)
                 .then(function (result) {
                     $scope.job.ID = result.data.ID;
                     $scope.job.getMyJobs($scope.user.owner.ID)
@@ -70,7 +62,7 @@
         };
 
         $scope.PlaceBid = function () {
-            $scope.bid.create($scope.job.ID)
+            $projectDone.PlaceBid($scope.job.ID, $scope.bid)
                     .then(function (result) {
                         $scope.job.Bids.push(new Bid(result.data));
                         $scope.bid = result.data;
@@ -79,7 +71,7 @@
         }
 
         $scope.AcceptBid = function (bidId) {
-            $scope.bid.acceptBid(bidId)
+            $projectDone.AcceptBid(bidId)
                 .then(function (result) {
                     $scope.bid = new Bid(result.data);
                     $scope.job.AcceptedBid_id = bidId;
@@ -88,10 +80,10 @@
         
         $scope.ConfirmBid =function()
         {
-            if (!$scope.AcceptedBid)
+            if (!$scope.job.AcceptedBid_id)
                 return;
-            var bidId = $scope.AcceptedBid.ID;
-            $scope.bid.confirmBid(bidId)
+            var bidId = $scope.job.AcceptedBid_id;
+            $projectDone.ConfirmBid(bidId)
                     .then(function (results) {
                         $scope.ConfirmedBid = new Bid(results.data);
                     });
@@ -152,15 +144,6 @@
             set: function(job){
                 angular.extend(this, job);
             },
-            create: function () {
-                return $http.post('/api/app/Job', this);
-            },
-            getJob: function (id) {
-                return $http.get('/api/app/Job/' + id);
-            },
-            getMyJobs: function(ownerId){
-                return $http.get('/api/app/Job?$select=Title, ID&$filter=Owner_Id eq '+ownerId);
-            },
             CreatedOn: "",
             CreatedByUserID: "",
             ID: "",
@@ -191,21 +174,6 @@
             set: function (Bid) {
                 angular.extend(this, Bid);
             },
-            create: function (jobID) {
-                return $http.post('/api/app/Job/'+jobID+'/Bid', this)
-            },
-            getSingle: function (id) {
-                console.log("not implmented");
-            },
-            getMany: function (queryData) {
-                console.log("not implemented");
-            },
-            acceptBid: function(id){
-                return $http.post('/api/app/Bid/'+id+'/Accept');
-            },
-            confirmBid: function(id){
-                return $http.post('/api/app/Bid/'+id+'/Confirm')
-            },
             CreatedOn: "",
             CreatedByUserID: "",
             ID: "",
@@ -218,6 +186,71 @@
         };
         return Bid;
     }]);
+
+    app.service('$projectDone', function ($http, Job, Bid) {
+        //TODO: find a way to pass odata to queries that support it.
+        //User 
+        this.Login = function (username, password)
+        {
+            username = encodeURIComponent(username);
+            password = encodeURIComponent(password);
+            var request =
+                {
+                    method: 'POST',
+                    url: '/Token',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data:'grant_type=password&username='+username+'&password='+password
+                           
+                };
+            return $http(request);
+        };
+        this.Register = function(username, password, confirm){
+            return $http.post('/api/account/register', {
+                Email: username,
+                Password: password,
+                ConfirmPassword: confirm});
+        };
+        this.GetOwner = function () {
+            return $http.get("/api/app/Owner");
+        };
+
+        //Job
+        this.CreateJob = function (job) {
+            return $http.post('/api/app/Job', job);
+        };
+        this.GetJob = function (jobId) {
+            return $http.get('/api/app/Job/' + jobId);
+        };
+        this.GetOwnerJobs = function (ownerId) {
+            //TODO, Add pagination
+            return $http.get('/api/app/job?$select=Title, ID&$filter=Owner_Id eq ' + ownerId);
+        };
+
+        //Bid
+        this.PlaceBid = function (jobId, bid) {
+            return $http.post('/api/app/Job/' + jobId + '/Bid', bid);
+        };
+
+        this.GetBid = function (bidID) {
+            console.log("Not Implemented");
+        };
+
+        this.AcceptBid = function (bidID) {
+            return $http.post('/api/app/Bid/' + bidID + '/Accept');
+        };
+
+        this.ConfirmBid = function (bidID) {
+            return $http.post('/api/app/Bid/' + bidID + '/Confirm');
+        };
+
+        this.WithdrawlBid = function (bidID) {
+            console.log("Not implmented");
+        };
+
+
+    })
 
 </script>
 <style type="text/css">
@@ -315,7 +348,7 @@
             <p>Confirm a Bid</p>
             <div>
                 <div style="float-left;">
-                    {{AcceptedBid.Owner.Name}} for {{AcceptedBid.Amount | currency}}
+                    {{job.AcceptedBid.Owner.Name}} for {{job.AcceptedBid.Amount | currency}}
                 </div>
                 <div style="float:right;" ng-show="job.Status == 0">
                     <a href="#" ng-click="ConfirmBid()">Confirm</a>

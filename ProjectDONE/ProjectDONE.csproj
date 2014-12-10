@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201412091957386_Create.Designer.cs">
       <DependentUpon>201412091957386_Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412102200224_UniversalDelete.cs" />
+    <Compile Include="Migrations\201412102200224_UniversalDelete.Designer.cs">
+      <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1064,6 +1068,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412091957386_Create.resx">
       <DependentUpon>201412091957386_Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412102200224_UniversalDelete.resx">
+      <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

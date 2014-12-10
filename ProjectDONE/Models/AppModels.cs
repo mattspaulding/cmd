@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//TODO: Come back around for testing
+
 namespace ProjectDONE.Models.AppModels
 {
     public enum BidStatus
@@ -27,10 +27,12 @@ namespace ProjectDONE.Models.AppModels
         public string CreatedByUserId { get; set; }
         public long ID { get; set; }
         public Guid TransactionID { get; set; }
+        public bool Deleted { get; set; }
     }
 
     public class Job : BaseAppModel
     {
+        //TODO: Add Tagging
         public long Owner_ID { get; set; }
         [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }

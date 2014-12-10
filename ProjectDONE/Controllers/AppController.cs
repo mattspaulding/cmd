@@ -124,7 +124,8 @@ namespace ProjectDONE.Controllers
                     //PrivateDescription = excludePrivate ? string.Empty : job.PrivateDescription,
                     Status = job.Status,
                     AcceptedBid_ID = job.AcceptedBid_ID,
-                    AcceptedBid = new BidViewModel
+                    AcceptedBid = job.AcceptedBid ==null?null :
+                    new BidViewModel
                     {
                         Amount = job.AcceptedBid.Amount,
                         CreatedByUserId = job.AcceptedBid.CreatedByUserId,
@@ -156,8 +157,6 @@ namespace ProjectDONE.Controllers
         public IQueryable<JobViewModel> GetJobs()
         {
             var oid = AppUser.Owner.ID;
-            //Future self: obviously...i hate you.
-            //TODO: Can we use a casting overlad here?
             var query =
                 from job in _IJobRepo.Get()
                 let ownerId = oid
@@ -187,7 +186,6 @@ namespace ProjectDONE.Controllers
 
             return query;
         }
-
 
         /// <summary>
         /// Bid on a job, requires the JobID and the bid object
@@ -226,10 +224,11 @@ namespace ProjectDONE.Controllers
         }
 
         [HttpGet]
-        [Route("Bids")]
+        [Route("Owner/Bid")]
         [EnableQuery]
         public IQueryable<BidViewModel> GetBidsByOwner(long id, int? skip, int? take)
         {
+
             var query = from bid in _IBidRepo.Get()
                         where bid.Owner.ID == id
                         select new BidViewModel
@@ -268,12 +267,29 @@ namespace ProjectDONE.Controllers
         }
 
         [HttpDelete]
-        [Route("Bids/")]
-        public void WithdrawlBid(Bid bid)
+        [Route("Bid/{bidId}/Withdrawl")]
+        public HttpResponseMessage WithdrawlBid(long bidId)
         {
+            var  bid = _IBidRepo.Get().Where(b => b.ID == bidId).FirstOrDefault();
+            HttpResponseMessage response;
+            if(bid==null)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.Content = new StringContent("The bid could not be found in the database");
+                return response;
+            }
+            if(AppUser.Owner.ID != bid.Owner_ID)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.Forbidden);
+                response.Content = new StringContent("The logged in User is not the owner of this bid.");
+                return response;
+            }
+            
             _IBidRepo.Remove(bid);
             _IBidRepo.Save();
-
+            response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StringContent("Bid successfully withdrawn.");
+            return response;
         }
 
         [HttpGet]
