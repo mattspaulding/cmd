@@ -220,9 +220,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412082259554_test.cs" />
-    <Compile Include="Migrations\201412082259554_test.Designer.cs">
-      <DependentUpon>201412082259554_test.cs</DependentUpon>
+    <Compile Include="Migrations\201412091957386_Create.cs" />
+    <Compile Include="Migrations\201412091957386_Create.Designer.cs">
+      <DependentUpon>201412091957386_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -1062,8 +1062,8 @@
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412082259554_test.resx">
-      <DependentUpon>201412082259554_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412091957386_Create.resx">
+      <DependentUpon>201412091957386_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

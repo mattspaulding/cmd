@@ -49,13 +49,18 @@ namespace ProjectDONE.Controllers
 
         [HttpPost]
         [Route("Job")]
-        public JobViewModel AddJob(Job job)
+        public JobViewModel CreateJob(Job job)
         {
             
             job.CreatedOn = DateTime.Now;
             job.CreatedByUserId = User.Identity.GetUserId();
             job.Owner_ID = AppUser.Owner.ID;
             job.ID = 0;
+            job.Bids = null;
+            job.AcceptedBid = null;
+            job.AcceptedBid_ID = null;
+            job.Owner = null;
+            
             _IJobRepo.Add(job);
             _IJobRepo.Save();
             
@@ -117,8 +122,25 @@ namespace ProjectDONE.Controllers
 
                     }).ToList() ,
                     //PrivateDescription = excludePrivate ? string.Empty : job.PrivateDescription,
-                    Status = job.Status
-                    //AcceptedBid = !excludePrivate && source.AcceptedBid != null ? new BidViewModel(source.AcceptedBid) : null,
+                    Status = job.Status,
+                    AcceptedBid_ID = job.AcceptedBid_ID,
+                    AcceptedBid = new BidViewModel
+                    {
+                        Amount = job.AcceptedBid.Amount,
+                        CreatedByUserId = job.AcceptedBid.CreatedByUserId,
+                        CreatedOn = job.AcceptedBid.CreatedOn,
+                        ID = job.AcceptedBid.ID,
+                        Job_ID = job.AcceptedBid.Job_ID,
+                        Status = job.AcceptedBid.Status,
+                        Owner = new OwnerViewModel
+                        {
+                            ID = job.AcceptedBid.Owner.ID,
+                            CreatedOn = job.AcceptedBid.Owner.CreatedOn,
+                            CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId,
+                            Name = job.AcceptedBid.Owner.Name,
+                            IsCorporateEntity = job.AcceptedBid.Owner.IsCorporateEntity
+                        }
+                    }
                 };
 
             return result.FirstOrDefault();
@@ -145,6 +167,11 @@ namespace ProjectDONE.Controllers
                     CreatedByUserId = job.CreatedByUserId,
                     CreatedOn = job.CreatedOn,
                     Owner_Id = job.Owner.ID,
+                    Owner = new OwnerViewModel
+                    {
+                        Name = job.Owner.Name,
+                        ID = job.Owner.ID
+                    },
                     Title = job.Title,
                     PublicDescription = job.PublicDescription,
                     Latitude = job.Latitude,
@@ -154,7 +181,7 @@ namespace ProjectDONE.Controllers
                     Status = job.Status,
                     AcceptedBid_ID = 
                             (ownerId != job.Owner_ID) && 
-                            job.AcceptedBid_Id != null ?job.AcceptedBid_Id : null,
+                            job.AcceptedBid_ID != null ?job.AcceptedBid_ID : null,
                 };
 
 
@@ -259,9 +286,10 @@ namespace ProjectDONE.Controllers
 
             return query;
         }
-
+        
+        //The job poster accepts a bid
         [HttpPost]
-        [Route("Bid/Accept/{BidId}")]
+        [Route("Bid/{BidId}/Accept")]
         public HttpResponseMessage AcceptBid(long BidId)
         {
             var bid = _IBidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
@@ -282,7 +310,7 @@ namespace ProjectDONE.Controllers
                 return response;
             }
 
-            job.AcceptedBid_Id = bid.ID;
+            job.AcceptedBid_ID = bid.ID;
             bid.Status = BidStatus.Accepted;
 
             _IBidRepo.Update(bid);
@@ -319,22 +347,32 @@ namespace ProjectDONE.Controllers
             return response;
         }
 
+        //The bid poster confirms the bid, effectivly saying they will do the work
+        //this is the last step before the actual work is done
         [HttpPost]
-        [Route("Bids/ConfirmBid")]
-        public void ConfirmBid(Bid Bid)
+        [Route("Bid/{BidId}/Confirm")]
+        public HttpResponseMessage ConfirmBid(long BidId)
         {
-            var job = _IJobRepo.Get().Where(j => j.ID == Bid.Job.ID).FirstOrDefault();
-            if (job == null)
-            {
-                var Response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                Response.Content = new StringContent("No job found with the ID of " + Bid.Job.ID);
-                return;
-            }
+            var bid = _IBidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
+            var job = _IJobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
+
             job.Status = Jobstatus.Confirmed;
             _IJobRepo.Update(job);
             _IJobRepo.Save();
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StringContent("The job and bid have been confirmed.");
+            return result;
         }
 
-
+        [HttpGet]
+        [Route("Owner")]
+        public OwnerViewModel GetCurrentOwner()
+        {
+            return new OwnerViewModel
+            {
+                ID = AppUser.Owner.ID,
+                Name = AppUser.Owner.Name
+            };
+        }
     }
 }

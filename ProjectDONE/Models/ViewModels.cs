@@ -16,7 +16,8 @@ namespace ProjectDONE.Models
     public class JobViewModel : BaseViewModel
     {
         public JobViewModel() { }
-       
+
+        public BidViewModel AcceptedBid { get; internal set; }
 
         public long? AcceptedBid_ID { get;  set; }
         public List<BidViewModel> Bids { get;  set; }
@@ -29,7 +30,8 @@ namespace ProjectDONE.Models
         public string PublicDescription { get;  set; }
         public Jobstatus Status { get;  set; }
         public string Title { get;  set; }
-        
+
+      
     }
 
     public class BidViewModel : BaseViewModel

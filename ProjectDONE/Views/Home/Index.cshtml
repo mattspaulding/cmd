@@ -1,41 +1,70 @@
 ﻿<script type="text/javascript">
     app = angular.module('ProjectDONE', []);
 
-    app.controller('TestingController', function ($scope,$http,Job,Bid,Owner) {
+    app.controller('TestingController', function ($scope,$http,Job,Bid,User) {
+        $scope.registration = { username: "", password: "", confirm: "" }
+        $scope.login = { username: "David@Example.com", password: "Abc123!" }
+
         $scope.job = new Job();
         $scope.bid = new Bid();
-        $scope.owner = new Owner();
+        $scope.user = new User();
+
+        $scope.AcceptedBid = new Bid();
+        
+        $scope.ConfirmedBid = new Bid();
+
+        
 
         $scope.LoadJob = function(jobId)
         {
             $scope.job.getJob(jobId)
                 .then(function (result) {
                     $scope.job = new Job(result.data);
+                    if ($scope.job.AcceptedBid) {
+                        $scope.AcceptedBid = new Bid($scope.job.AcceptedBid)
+                    }
                 });
         };
 
-        $scope.Login = function()
+        $scope.Register = function()
         {
             $scope.owner
-                .Login('david@example.com', 'Abc123!')
-                        .then(function (result) {
-                            $scope.owner = new Owner(result.data);
-                            $http.defaults.headers.common.Authorization = 'Bearer ' + $scope.owner.access_token;
-                        })
-                        .then(function(){
-                            $scope.job.getMyJobs($scope.owner.ID)
-                             .then(function (results) {
-                                    $scope.owner.jobs = results.data;
-                            })});
+                    .Register($scope.registration.username, $scope.registration.password, $scope.registration.confirm)
+                        .then(function () {
+                            $scope.registration = { username: "", password: "", confirm: "" }
+                        });
         }
+
+        $scope.Login = function () {
+            $scope.user
+                .Login($scope.login.username, $scope.login.password)
+                        .then(function (result) {
+                            $scope.user = new User(result.data);
+                            $scope.login = { username: "", password: "" };
+                            $http.defaults.headers.common.Authorization = 'Bearer ' + $scope.user.access_token;
+                        })
+                        .then(function () {
+                            $scope.user.GetOwner()
+                            .then(function (result) {
+                                $scope.user.owner = result.data;
+                            })
+                            .then(function () {
+                                $scope.job.getMyJobs($scope.user.owner.ID)
+                                 .then(function (results) {
+                                     $scope.user.owner.Jobs = results.data;
+                                 })
+                            });
+                        })
+                        
+        };
 
         $scope.CreateJob = function () {
             $scope.job.create()
                 .then(function (result) {
                     $scope.job.ID = result.data.ID;
-                    $scope.job.getMyJobs($scope.owner.ID)
+                    $scope.job.getMyJobs($scope.user.owner.ID)
                              .then(function (results) {
-                                 $scope.owner.jobs = results.data;
+                                 $scope.user.owner.jobs = results.data;
                              });
                 });
         };
@@ -44,7 +73,7 @@
             $scope.bid.create($scope.job.ID)
                     .then(function (result) {
                         $scope.job.Bids.push(new Bid(result.data));
-                        $scope.bid = new Bid();
+                        $scope.bid = result.data;
                     });
             
         }
@@ -56,15 +85,26 @@
                     $scope.job.AcceptedBid_id = bidId;
                 });
         };
+        
+        $scope.ConfirmBid =function()
+        {
+            if (!$scope.AcceptedBid)
+                return;
+            var bidId = $scope.AcceptedBid.ID;
+            $scope.bid.confirmBid(bidId)
+                    .then(function (results) {
+                        $scope.ConfirmedBid = new Bid(results.data);
+                    });
+        }
     });
 
-    app.factory('Owner', function ($http) {
-        function Owner(Owner) {
-            if (!!Owner)
-                this.set(Owner);
+    app.factory('User', function ($http) {
+        function User(User) {
+            if (!!User)
+                this.set(User);
         };
 
-        Owner.prototype = {
+        User.prototype = {
             set: function(owner)
             {
                 angular.extend(this, owner);
@@ -85,11 +125,21 @@
                     };
                 return $http(request);
             },
-            jobs:[]
-
+            Register: function(username, password, confirm)
+            {
+                return $http.post('/api/account/register', {
+                    Email: username,
+                    Password: password,
+                    ConfirmPassword: confirm});
+            },
+            GetOwner: function()
+            {
+                return $http.get("/api/app/Owner");
+            },
+            Owner: {}
         }
 
-        return Owner;
+        return User;
     });
 
     app.factory('Job', ['$http', function ($http) {
@@ -109,7 +159,7 @@
                 return $http.get('/api/app/Job/' + id);
             },
             getMyJobs: function(ownerId){
-                return $http.get('/api/app/Job?$select=Title, ID&$filter=Owner_Id eq 1');
+                return $http.get('/api/app/Job?$select=Title, ID&$filter=Owner_Id eq '+ownerId);
             },
             CreatedOn: "",
             CreatedByUserID: "",
@@ -151,7 +201,10 @@
                 console.log("not implemented");
             },
             acceptBid: function(id){
-                return $http.post('/api/app/Bid/Accept/' + id);
+                return $http.post('/api/app/Bid/'+id+'/Accept');
+            },
+            confirmBid: function(id){
+                return $http.post('/api/app/Bid/'+id+'/Confirm')
             },
             CreatedOn: "",
             CreatedByUserID: "",
@@ -184,21 +237,38 @@
        font-weight: bold;
         margin-left: 10px;
     }
+    .info{
+        margin:10px;
+        border: 1px solid black;
+        box-sizing:border-box;
+        box-shadow:#ccc 2px 2px 3px;
+    }
 </style>
 <div ng-app="ProjectDONE" ng-controller="TestingController">
-    <div style="float:right">
+    <div class="info">
         <ul style="list-style:none;">
-            <li>Current User : {{owner.userName}}</li>
+            <li>Current User : {{user.owner.Name}}(ID: {{user.owner.ID}})</li>
             <li>Current Job ID: {{job.ID}}</li>
         </ul>
     </div>
-    <div class="outline">
-        <p>Login</p>
-        <ul>
-            <li>David@Example.com</li>
-            <li>Abc123!</li>
-            <li><button ng-click="Login()">Login</button></li>
-        </ul>
+    <div class="group">
+        <div class="outline">
+            <p>Register</p>
+            <ul>
+                <li>Email Address<input ng-model="registration.username" type="text" /></li>
+                <li>Password <input ng-model="registration.password" type="text" /></li>
+                <li>Confirm  <input ng-model="registration.confirm" type="text" /></li>
+                <li><button ng-click="Register()">Register</button></li>
+            </ul>
+        </div>
+        <div class="outline">
+            <p>Login</p>
+            <ul>
+                <li><input type="text" ng-model="login.username"/></li>
+                <li><input type="text" ng-model="login.password"/></li>
+                <li><button ng-click="Login()">Login</button></li>
+            </ul>
+        </div>
     </div>
     <div class="group">
         <div class="outline" style="float:left">
@@ -210,8 +280,8 @@
             </ul>
         </div>
         <div class="outline" style="float:left;">
-            <p>Or pick a job</p>
-            <ul ng-repeat="job in owner.jobs">
+            <p>Or pick one of your jobs</p>
+            <ul ng-repeat="job in user.owner.Jobs">
                 <li><a href="#" ng-click="LoadJob(job.ID)">Use</a> - {{job.Title}}</li>
             </ul>
         </div>
@@ -219,19 +289,47 @@
     <div class="group">
         <div class="outline">
             <p>Review all the bids on the current job</p>
-            <ul ng-repeat="bid in job.Bids" style="text-decoration:none;">
-                <li>
+            <div ng-repeat="bid in job.Bids" style="text-decoration:none;">
+                <div style="width:100%; height:20px; margin:0px; padding-left:10px; padding-right:10px; box-sizing:border-box;">
                     <div style="float:left;">{{bid.Amount | currency}}</div>
-                    <div style="float:right; margin-right:10px;"><a href="#" ng-click="AcceptBid(bid.ID)">Accept</a></div>
-                </li>
-            </ul>
+                    <div style="float:right">
+                        <div style="float:right;" ng-show="job.Owner_Id == user.owner.ID">
+                            <a ng-show="bid.Status == 0" href="#" ng-click="AcceptBid(bid.ID)">Accept</a>
+                            <span ng-show="bid.Status == 1">Accepted</span>
+                            <span ng-show="bid.Status == 2">Declined</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="outline">
             <p>Post a bid on that job</p>
-            <ul>
+            <ul ng-show="!job.AcceptedBid_ID">
                 <li><input type="text" ng-model="bid.Amount" /></li>
                 <li><button ng-click="PlaceBid()">Bid</button></li>
             </ul>
+        </div>
+    </div>
+    <div class="group">
+        <div class="outline">
+            <p>Confirm a Bid</p>
+            <div>
+                <div style="float-left;">
+                    {{AcceptedBid.Owner.Name}} for {{AcceptedBid.Amount | currency}}
+                </div>
+                <div style="float:right;" ng-show="job.Status == 0">
+                    <a href="#" ng-click="ConfirmBid()">Confirm</a>
+                </div>
+                <div style="float:right;" ng-show="job.Status == 1">
+                    Confirmed
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="group">
+        <div class="outline">
+            <p>Actual work gets done here</p>
         </div>
     </div>
 </div>

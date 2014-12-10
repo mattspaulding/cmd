@@ -3,7 +3,7 @@ namespace ProjectDONE.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test : DbMigration
+    public partial class Create : DbMigration
     {
         public override void Up()
         {
@@ -21,8 +21,8 @@ namespace ProjectDONE.Migrations
                         TransactionID = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Jobs", t => t.Job_ID, cascadeDelete: true)
                 .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Jobs", t => t.Job_ID, cascadeDelete: true)
                 .Index(t => t.Owner_ID)
                 .Index(t => t.Job_ID);
             
@@ -42,29 +42,32 @@ namespace ProjectDONE.Migrations
                 .ForeignKey("dbo.Jobs", t => t.Job_ID)
                 .Index(t => t.Bid_ID)
                 .Index(t => t.Job_ID);
-
+            
             CreateTable(
                 "dbo.Jobs",
                 c => new
-                {
-                    ID = c.Long(nullable: false, identity: true),
-                    Owner_ID = c.Long(nullable: false),
-                    Title = c.String(),
-                    PublicDescription = c.String(),
-                    Latitude = c.Long(nullable: false),
-                    Longitude = c.Long(nullable: false),
-                    PrivateDescription = c.String(),
-                    AcceptedBid_Id = c.Long(),
-                    Status = c.Int(nullable: false),
-                    CreatedOn = c.DateTime(nullable: false),
-                    CreatedByUserId = c.String(),
-                    TransactionID = c.Guid(nullable: false),
-                    Demographics_ID = c.Long(),
-                })
+                    {
+                        ID = c.Long(nullable: false, identity: true),
+                        Owner_ID = c.Long(nullable: false),
+                        Title = c.String(),
+                        PublicDescription = c.String(),
+                        Latitude = c.Long(nullable: false),
+                        Longitude = c.Long(nullable: false),
+                        PrivateDescription = c.String(),
+                        AcceptedBid_ID = c.Long(),
+                        Status = c.Int(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedByUserId = c.String(),
+                        TransactionID = c.Guid(nullable: false),
+                        Demographics_ID = c.Long(),
+                    })
                 .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Bids", t => t.AcceptedBid_ID)
                 .ForeignKey("dbo.Demographics", t => t.Demographics_ID)
-                .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: false);
-
+                .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: false)
+                .Index(t => t.Owner_ID)
+                .Index(t => t.AcceptedBid_ID)
+                .Index(t => t.Demographics_ID);
             
             CreateTable(
                 "dbo.Demographics",
@@ -233,6 +236,7 @@ namespace ProjectDONE.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Bids", "Job_ID", "dbo.Jobs");
             DropForeignKey("dbo.Media", "Owner_ID", "dbo.Owners");
             DropForeignKey("dbo.Jobs", "Owner_ID", "dbo.Owners");
             DropForeignKey("dbo.Bids", "Owner_ID", "dbo.Owners");
@@ -242,7 +246,7 @@ namespace ProjectDONE.Migrations
             DropForeignKey("dbo.PhoneNumbers", "Demographics_ID", "dbo.Demographics");
             DropForeignKey("dbo.Emails", "Demographics_ID", "dbo.Demographics");
             DropForeignKey("dbo.Addresses", "Demographics_ID", "dbo.Demographics");
-            DropForeignKey("dbo.Bids", "Job_ID", "dbo.Jobs");
+            DropForeignKey("dbo.Jobs", "AcceptedBid_ID", "dbo.Bids");
             DropForeignKey("dbo.Dialogs", "Bid_ID", "dbo.Bids");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -257,6 +261,7 @@ namespace ProjectDONE.Migrations
             DropIndex("dbo.Emails", new[] { "Demographics_ID" });
             DropIndex("dbo.Addresses", new[] { "Demographics_ID" });
             DropIndex("dbo.Jobs", new[] { "Demographics_ID" });
+            DropIndex("dbo.Jobs", new[] { "AcceptedBid_ID" });
             DropIndex("dbo.Jobs", new[] { "Owner_ID" });
             DropIndex("dbo.Dialogs", new[] { "Job_ID" });
             DropIndex("dbo.Dialogs", new[] { "Bid_ID" });

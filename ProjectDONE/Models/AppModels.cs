@@ -42,9 +42,14 @@ namespace ProjectDONE.Models.AppModels
         public long Longitude { get; set; }
         public Demographics Demographics { get; set; }
         public string PrivateDescription { get; set; }
-        public virtual long? AcceptedBid_Id { get; set; }
+
+        [ForeignKey("AcceptedBid_ID")]
+        public virtual Bid AcceptedBid { get; set; }
+        public virtual long? AcceptedBid_ID { get; set; }
+
         public virtual List<Media> Media { get; set; }
         public virtual List<Dialog> Dialog { get; set; }
+        
         public virtual List<Bid> Bids { get; set; }
         public virtual Jobstatus Status { get; set; }
     }
@@ -93,21 +98,19 @@ namespace ProjectDONE.Models.AppModels
         public virtual IList<Bid> Bids { get; set; }
     }
 
-    // Add Media[] for bids
+    
     public class Bid : BaseAppModel
     {
-        //TODO: Why does EF add an additonal FK
         public decimal Amount { get; set; }
 
         public long Owner_ID{ get; set; }
         [ForeignKey("Owner_ID")]
         public virtual Owner Owner { get; set; }
 
-
-        public long Job_ID { get; set; }
-        
+        [InverseProperty("Bids")]
         [ForeignKey("Job_ID")]
         public virtual Job Job { get; set; }
+        public long Job_ID { get; set; }
 
         public virtual BidStatus Status { get; set; }
 
