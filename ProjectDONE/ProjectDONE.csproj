@@ -228,10 +228,23 @@
     <Compile Include="Migrations\201412102200224_UniversalDelete.Designer.cs">
       <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412172333420_UpdateJob.cs" />
+    <Compile Include="Migrations\201412172333420_UpdateJob.Designer.cs">
+      <DependentUpon>201412172333420_UpdateJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412180429317_RemoveDemographics_Email.cs" />
+    <Compile Include="Migrations\201412180429317_RemoveDemographics_Email.Designer.cs">
+      <DependentUpon>201412180429317_RemoveDemographics_Email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412180519430_CreatedOnNullable.cs" />
+    <Compile Include="Migrations\201412180519430_CreatedOnNullable.Designer.cs">
+      <DependentUpon>201412180519430_CreatedOnNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AppModels.cs" />
+    <Compile Include="Models\IDemographics.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,6 +253,41 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\index.html" />
+    <Content Include="App\js\app.js" />
+    <Content Include="App\lib\onsen\css\font_awesome\css\font-awesome.css" />
+    <Content Include="App\lib\onsen\css\font_awesome\css\font-awesome.min.css" />
+    <Content Include="App\lib\onsen\css\ionicons\css\ionicons.css" />
+    <Content Include="App\lib\onsen\css\ionicons\css\ionicons.min.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-blue-basic-theme.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-blue-theme.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-dark-theme.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-default.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-purple-theme.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components-sunshine-theme.css" />
+    <Content Include="App\lib\onsen\css\onsen-css-components.css" />
+    <Content Include="App\lib\onsen\css\onsenui.css" />
+    <Content Include="App\lib\onsen\js\angular\angular-animate.js" />
+    <Content Include="App\lib\onsen\js\angular\angular-csp.css" />
+    <Content Include="App\lib\onsen\js\angular\angular-touch.js" />
+    <Content Include="App\lib\onsen\js\angular\angular.js" />
+    <Content Include="App\lib\onsen\js\angular\angular.min.js" />
+    <Content Include="App\lib\onsen\js\onsenui.js" />
+    <Content Include="App\lib\onsen\js\onsenui.min.js" />
+    <Content Include="App\lib\onsen\js\onsenui_all.js" />
+    <Content Include="App\lib\onsen\js\onsenui_all.min.js" />
+    <Content Include="App\styles\app.css" />
+    <Content Include="App\styles\onsen-css-components-blue-basic-theme.css" />
+    <Content Include="App\styles\onsen-css-components-blue-theme.css" />
+    <Content Include="App\styles\onsen-css-components-dark-theme.css" />
+    <Content Include="App\styles\onsen-css-components-default.css" />
+    <Content Include="App\styles\onsen-css-components-purple-theme.css" />
+    <Content Include="App\styles\onsen-css-components-sunshine-theme.css" />
+    <Content Include="App\styles\onsen-css-components.css" />
+    <Content Include="App\styles\onsenui.css" />
+    <Content Include="App\Templates\CreateJob.html" />
+    <Content Include="App\Templates\Dashboard.html" />
+    <Content Include="App\Templates\Login.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1051,6 +1099,47 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="App\lib\onsen\css\font_awesome\fonts\FontAwesome.otf" />
+    <Content Include="App\lib\onsen\css\ionicons\fonts\ionicons.eot" />
+    <Content Include="App\lib\onsen\css\ionicons\fonts\ionicons.svg" />
+    <Content Include="App\lib\onsen\css\ionicons\fonts\ionicons.ttf" />
+    <Content Include="App\lib\onsen\css\ionicons\fonts\ionicons.woff" />
+    <Content Include="App\lib\onsen\js\angular\angular.min.js.gzip" />
+    <Content Include="App\lib\onsen\js\angular\angular.min.js.map" />
+    <Content Include="App\lib\onsen\js\angular\bower.json" />
+    <Content Include="App\lib\onsen\js\angular\README.md" />
+    <Content Include="App\lib\onsen\stylus\blue-basic-theme.styl" />
+    <Content Include="App\lib\onsen\stylus\blue-theme.styl" />
+    <Content Include="App\lib\onsen\stylus\components\alert-dialog.styl" />
+    <Content Include="App\lib\onsen\stylus\components\button-bar.styl" />
+    <Content Include="App\lib\onsen\stylus\components\button.styl" />
+    <Content Include="App\lib\onsen\stylus\components\checkbox.styl" />
+    <Content Include="App\lib\onsen\stylus\components\dialog.styl" />
+    <Content Include="App\lib\onsen\stylus\components\global.styl" />
+    <Content Include="App\lib\onsen\stylus\components\index.styl" />
+    <Content Include="App\lib\onsen\stylus\components\list.styl" />
+    <Content Include="App\lib\onsen\stylus\components\modal.styl" />
+    <Content Include="App\lib\onsen\stylus\components\navigation-bar.styl" />
+    <Content Include="App\lib\onsen\stylus\components\notification.styl" />
+    <Content Include="App\lib\onsen\stylus\components\page.styl" />
+    <Content Include="App\lib\onsen\stylus\components\popover.styl" />
+    <Content Include="App\lib\onsen\stylus\components\radio-button.styl" />
+    <Content Include="App\lib\onsen\stylus\components\range.styl" />
+    <Content Include="App\lib\onsen\stylus\components\search-input.styl" />
+    <Content Include="App\lib\onsen\stylus\components\switch.styl" />
+    <Content Include="App\lib\onsen\stylus\components\tab-bar.styl" />
+    <Content Include="App\lib\onsen\stylus\components\text-input.styl" />
+    <Content Include="App\lib\onsen\stylus\components\textarea.styl" />
+    <Content Include="App\lib\onsen\stylus\components\toolbar-button.styl" />
+    <Content Include="App\lib\onsen\stylus\components\util.styl" />
+    <Content Include="App\lib\onsen\stylus\dark-theme.styl" />
+    <Content Include="App\lib\onsen\stylus\default.styl" />
+    <Content Include="App\lib\onsen\stylus\purple-theme.styl" />
+    <Content Include="App\lib\onsen\stylus\sunshine-theme.styl" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\errors.json" />
@@ -1071,6 +1160,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412102200224_UniversalDelete.resx">
       <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412172333420_UpdateJob.resx">
+      <DependentUpon>201412172333420_UpdateJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412180429317_RemoveDemographics_Email.resx">
+      <DependentUpon>201412180429317_RemoveDemographics_Email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412180519430_CreatedOnNullable.resx">
+      <DependentUpon>201412180519430_CreatedOnNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

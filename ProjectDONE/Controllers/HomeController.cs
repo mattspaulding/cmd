@@ -11,8 +11,8 @@ namespace ProjectDONE.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
-            return View();
+            var file = "~/App/index.html";
+            return File(file, "text/html");
         }
     }
 }

@@ -99,3 +99,6 @@ C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UniversalDelete.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UpdateJob.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.RemoveDemographics_Email.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.CreatedOnNullable.resources

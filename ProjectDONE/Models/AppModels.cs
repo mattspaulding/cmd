@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectDONE.Models.AppModels
@@ -23,13 +22,14 @@ namespace ProjectDONE.Models.AppModels
     }
     public class BaseAppModel
     {
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public string CreatedByUserId { get; set; }
         public long ID { get; set; }
         public Guid TransactionID { get; set; }
         public bool Deleted { get; set; }
     }
 
+    //TODO Extract interace for view models
     public class Job : BaseAppModel
     {
         //TODO: Add Tagging
@@ -42,17 +42,18 @@ namespace ProjectDONE.Models.AppModels
         //More research is needed.
         public long Latitude { get; set; }
         public long Longitude { get; set; }
-        public Demographics Demographics { get; set; }
         public string PrivateDescription { get; set; }
-
         [ForeignKey("AcceptedBid_ID")]
         public virtual Bid AcceptedBid { get; set; }
         public virtual long? AcceptedBid_ID { get; set; }
-
         public virtual List<Media> Media { get; set; }
         public virtual List<Dialog> Dialog { get; set; }
-        
         public virtual List<Bid> Bids { get; set; }
+        public virtual Address Address { get; set; }
+        public string AddressNotes { get; set; }
+        public DateTime? Earliest { get; set; }
+        public DateTime? DoneBy { get; set; }
+        public decimal MaxPay { get; set; }
         public virtual Jobstatus Status { get; set; }
     }
 
@@ -61,16 +62,17 @@ namespace ProjectDONE.Models.AppModels
         //TODO: Implement Question/ Answer
     }
 
-    public class Demographics : BaseAppModel
-    {
-        public virtual IList<Address> Addresses { get; set; }
-        public virtual IList<PhoneNumber> PhoneNumbers { get; set; }
-        public virtual IList<Email> EmailAddresses { get; set; }
-    }
+   
 
-    public class Address : BaseAppModel
+   public class Address : BaseAppModel
     {
-        //TODO: Implement as necessery
+        public string Name { get; set; }
+        public string Line1 { get; set; }
+        public string Line2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+
     }
 
     public class PhoneNumber : BaseAppModel
@@ -120,7 +122,5 @@ namespace ProjectDONE.Models.AppModels
     }
 
 
-
-
-  
+    
 }

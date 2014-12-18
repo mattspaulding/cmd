@@ -61,17 +61,20 @@ namespace ProjectDONE.Controllers
             job.AcceptedBid_ID = null;
             job.Owner = null;
             
+            if(job.Address!=null && job.Address.ID == 0)
+                job.Address.CreatedByUserId = User.Identity.GetUserId();
+
             _IJobRepo.Add(job);
             _IJobRepo.Save();
-            
-            
-            
+
+
+
             return new JobViewModel
             {
                 ID = job.ID,
                 CreatedByUserId = job.CreatedByUserId,
                 CreatedOn = job.CreatedOn,
-                Owner_Id = job.Owner_ID,
+                Owner_ID = job.Owner_ID,
                 Title = job.Title,
                 PublicDescription = job.PublicDescription,
                 Latitude = job.Latitude,
@@ -80,7 +83,10 @@ namespace ProjectDONE.Controllers
                 Status = job.Status,
                 Bids = new List<BidViewModel>(),
                 AcceptedBid_ID = null,
-                Owner = new OwnerViewModel {ID = AppUser.Owner.ID, Name = AppUser.Owner.Name }
+                Owner = new OwnerViewModel { ID = AppUser.Owner.ID, Name = AppUser.Owner.Name },
+                //we can use casting here because we only care 
+                //if the entire address is visible, not particular attributes
+                Address = (AddressViewModel)job.Address 
             };
         }
 
@@ -98,7 +104,7 @@ namespace ProjectDONE.Controllers
                     ID = job.ID,
                     CreatedByUserId = job.CreatedByUserId,
                     CreatedOn = job.CreatedOn,
-                    Owner_Id = job.Owner.ID,
+                    Owner_ID = job.Owner.ID,
                     Title = job.Title,
                     PublicDescription = job.PublicDescription,
                     Latitude = job.Latitude,
@@ -165,7 +171,7 @@ namespace ProjectDONE.Controllers
                     ID = job.ID,
                     CreatedByUserId = job.CreatedByUserId,
                     CreatedOn = job.CreatedOn,
-                    Owner_Id = job.Owner.ID,
+                    Owner_ID = job.Owner.ID,
                     Owner = new OwnerViewModel
                     {
                         Name = job.Owner.Name,
@@ -252,7 +258,7 @@ namespace ProjectDONE.Controllers
                                ID = bid.Job.ID,
                                CreatedByUserId = bid.Job.CreatedByUserId,
                                CreatedOn = bid.Job.CreatedOn,
-                               Owner_Id = bid.Job.Owner.ID,
+                               Owner_ID = bid.Job.Owner.ID,
                                Title = bid.Job.Title,
                                PublicDescription = bid.Job.PublicDescription,
                                Latitude = bid.Job.Latitude,

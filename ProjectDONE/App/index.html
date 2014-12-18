@@ -1,0 +1,61 @@
+﻿<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>My App</title>
+
+    <link rel="stylesheet" href="App/lib/onsen/css/onsenui.css">
+    <link rel="stylesheet" href="App/styles/app.css" />
+    <link rel="stylesheet" href="App/styles/onsen-css-components-blue-basic-theme.css">
+    <script src="App/lib/onsen/js/angular/angular.js"></script>
+    <script src="App/lib/onsen/js/onsenui.js"></script>
+
+    <script src="cordova.js"></script>
+    <script src="App/js/app.js"></script>
+
+</head>
+
+<body ng-controller="AppController">
+    <ons-navigator var="root_navigator">
+        <ons-page>
+            <div>
+                <ons-navigator var="top_navigator">
+                    <div>
+                        <p><b>Landing Page</b></p>
+                        <ul>
+                            <li>Application updates</li>
+                            <li>Community News</li>
+                            <li>Company News</li>
+                            <li>Alternate Login options</li>
+                        </ul>
+                    </div>
+                </ons-navigator>
+            </div>
+            <div style="width:100%; margin:0px; padding:0px; height:30%; position:absolute; bottom:0px;">
+                <ons-navigator var="bottom_navigator">
+                    <ons-page>
+                        <div class="center">
+                            <p>Loading...</p>
+                        </div>
+                    </ons-page>
+                </ons-navigator>
+            </div>
+        </ons-page>
+
+    </ons-navigator>
+    <ons-template id="loginLoading">
+        <div style="width:100%; text-align:center; padding-top:5em; box-sizing:border-box"><p>...Loading</p></div>
+    </ons-template>
+    <ons-template id="Login">
+        <div ng-include="'App/Templates/Login.html'"></div>
+    </ons-template>
+    <ons-template id="Dashboard">
+        <div ng-include="'App/Templates/Dashboard.html'"></div>
+    </ons-template>
+    <ons-template id="CreateJob">
+        <div ng-include="'App/Templates/CreateJob.html'"></div>
+    </ons-template>
+</body>
+</html>

@@ -1,0 +1,34 @@
+.left {
+    text-align: left;
+}
+
+
+.dashboard {
+}
+
+    .dashboard ons-button {
+        margin-left: 1.6%;
+        margin-top: 20%;
+        width: 47%;
+        height: 18vh;
+        text-align: center;
+        padding-top: 7vh;
+        bottom: 0px;
+    }
+
+.createJob {
+}
+
+    .createJob .content {
+        height: 90%;
+    }
+
+    .createJob .bottom_nav {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        height: 10%;
+        position: absolute;
+        bottom: 0px;
+        background-color:yellow;
+    }

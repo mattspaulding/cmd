@@ -16,7 +16,7 @@ namespace ProjectDONE.Migrations
                         Owner_ID = c.Long(nullable: false),
                         Job_ID = c.Long(nullable: false),
                         Status = c.Int(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                     })
@@ -31,7 +31,7 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Bid_ID = c.Long(),
@@ -56,7 +56,7 @@ namespace ProjectDONE.Migrations
                         PrivateDescription = c.String(),
                         AcceptedBid_ID = c.Long(),
                         Status = c.Int(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Demographics_ID = c.Long(),
@@ -74,7 +74,7 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                     })
@@ -85,7 +85,7 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Demographics_ID = c.Long(),
@@ -99,7 +99,7 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Demographics_ID = c.Long(),
@@ -113,7 +113,7 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Demographics_ID = c.Long(),
@@ -131,7 +131,7 @@ namespace ProjectDONE.Migrations
                         URL = c.String(),
                         Title = c.String(),
                         Meta = c.String(),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                         Job_ID = c.Long(),
@@ -150,7 +150,7 @@ namespace ProjectDONE.Migrations
                         ID = c.Long(nullable: false, identity: true),
                         Name = c.String(),
                         IsCorporateEntity = c.Boolean(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
                     })
