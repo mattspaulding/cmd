@@ -1,6 +1,29 @@
 ﻿<ons-page ng-controller="dashboardController" class="dashboard">
-    <div>
-        <ons-button ng-click="CreateJob()">Create Job</ons-button>
-        <ons-button ng-click="ListJobs()">See Jobs</ons-button>
-    </div>
+    <ons-toolbar>
+        <div class="center">Jobs</div>
+    </ons-toolbar>
+    <ons-scroller class="jobs">
+            <ons-list>
+                <ons-list-item class="list__item--tappable list__item__line-height job" modifier="chevron" ng-repeat="job in jobs">
+                    <ons-row>
+                        <ons-col width="95px">
+                            <div class="thumb"></div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="job">
+                                <div class="title" ng-bind="job.Title"></div>
+                                <div class="description" ng-bind="job.PublicDescription"></div>
+                                <div class="overlay"></div>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+    </ons-scroller>
+    
+    <ons-bottom-toolbar >
+        <div class="bottom">
+            <ons-button ng-click="CreateJob()">Create Job</ons-button>
+        </div>
+    </ons-bottom-toolbar>
 </ons-page>

@@ -24,7 +24,7 @@ ons.ready(function () {
                                           $projectDone.LoggedInUser.owner = result.data;
                                       })
                                       .then(function () {
-                                          bottom_navigator.pushPage('Dashboard');
+                                          root_navigator.pushPage('Dashboard');
                                           $projectDone.GetOwnerJobs($projectDone.LoggedInUser.owner.ID)
                                           .then(function (results) {
                                               $projectDone.LoggedInUser.owner.Jobs = results.data;
@@ -63,7 +63,7 @@ ons.ready(function () {
                                       $projectDone.GetOwnerJobs($projectDone.LoggedInUser.owner.ID)
                                       .then(function (results) {
                                           $projectDone.LoggedInUser.owner.Jobs = results.data;
-                                          bottom_navigator.pushPage('Dashboard');
+                                          root_navigator.pushPage('Dashboard');
                                       })
                                   });
                     });
@@ -73,24 +73,49 @@ ons.ready(function () {
     });
 
     app.controller('dashboardController', function ($scope, $projectDone) {
-        $scope.CreateJob = function ()
-        {
+        $scope.jobs = []
+        $scope.loadingJobs = false;
+        $scope.CreateJob = function () {
             root_navigator.pushPage('CreateJob');
-        }
-        $scope.ListJobs = function () { }
+        };
+
+        $scope.ListJobs = function () {
+            $scope.loadingJobs = true;
+            $projectDone.GetJobs()
+                .then(function (results) {
+                    $scope.loadingJobs = false;
+                    $scope.jobs = results.data;
+                });
+        };
+
+        $scope.ListJobs();
     });
 
     app.controller('createJobController', function ($scope, $projectDone, Job, Address) {
         $scope.Job = new Job();
         $scope.Job.Address = new Address();
-        $scope.CreateJob = function()
+        $scope.uploadingImage = false;
+        $scope.imageUrl = '';
+
+        onchange="angular.element(this).scope().fileNameChanged()"
+
+        $scope.fileNameChanged = function ()
         {
+            console.log($scope.imageUrl);
+        }
+
+        $scope.UploadImage = function (image) {
+
+        };
+
+        $scope.CreateJob = function () {
             $projectDone.CreateJob($scope.Job)
             .then(function (results) {
                 $scope.Job = new Job();
-                console.log(results);
+                $scope.Job.Address = new Address();
+                
             });
-        }
+        };
     });
 
     app.controller('DetailController', function ($scope) {
@@ -194,6 +219,25 @@ ons.ready(function () {
         return Address;
     });
 
+    app.factory('Media', function () {
+        function Media(Media) {
+            if (!!Media)
+                this.set(Media);
+        };
+        Media.prototype = {
+            set: function(media)
+            {
+                angular.extend(this, media);
+            },
+            ID: null,
+            MIME_TYPE: "",
+            URL: "",
+            Title: "",
+            Meta: ""
+        };
+
+    });
+
     app.service('$projectDone', function ($http, Job, Bid) {
         //TODO: find a way to pass odata to queries that support it.
         //User 
@@ -235,6 +279,10 @@ ons.ready(function () {
         this.GetOwnerJobs = function (ownerId) {
             //TODO, Add pagination
             return $http.get('/api/app/job?$select=Title, ID&$filter=Owner_ID eq ' + ownerId);
+        };
+        this.GetJobs = function(){
+            //TODO, pagination and filtering
+            return $http.get('/api/app/job?$select=Title, ID, PublicDescription');
         };
 
         //Bid

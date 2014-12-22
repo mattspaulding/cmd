@@ -22,18 +22,12 @@
         <ons-page>
             <div>
                 <ons-navigator var="top_navigator">
-                    <div>
-                        <p><b>Landing Page</b></p>
-                        <ul>
-                            <li>Application updates</li>
-                            <li>Community News</li>
-                            <li>Company News</li>
-                            <li>Alternate Login options</li>
-                        </ul>
+                    <div style="text-align:center;">
+                        <ons-icon icon="ion-network" size="200px" style="margin-top:200px;"></ons-icon>
                     </div>
                 </ons-navigator>
             </div>
-            <div style="width:100%; margin:0px; padding:0px; height:30%; position:absolute; bottom:0px;">
+            <div style="width:100%; margin:0px; padding:0px; height:19%; position:absolute; bottom:0px;">
                 <ons-navigator var="bottom_navigator">
                     <ons-page>
                         <div class="center">
@@ -57,5 +51,6 @@
     <ons-template id="CreateJob">
         <div ng-include="'App/Templates/CreateJob.html'"></div>
     </ons-template>
+    
 </body>
 </html>
