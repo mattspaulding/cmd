@@ -197,7 +197,6 @@ C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.CreatedOnNullab
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ru\System.Spatial.resources.dll
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
-\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UniversalDelete.resources
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UpdateJob.resources
