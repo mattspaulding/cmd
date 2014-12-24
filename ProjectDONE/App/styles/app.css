@@ -2,33 +2,249 @@
     text-align: left;
 }
 
-
 .dashboard {
 }
 
     .dashboard ons-button {
-        margin-left: 1.6%;
-        margin-top: 20%;
-        width: 47%;
-        height: 18vh;
+        margin-top: 2%;
+        margin-left: 5%;
+        width: 90%;
         text-align: center;
-        padding-top: 7vh;
+        height: 7vh;
+        padding-top: 12px;
         bottom: 0px;
     }
+
+    .dashboard .jobs {
+        height: 83vh;
+    }
+
+    .dashboard .bottom-bar {
+        box-shadow: darkgray 0px -1px 5px;
+        height: 9vh !important;
+    }
+
+    .dashboard .bottom {
+        background-color: lightgray !important;
+        height: 100%;
+    }
+
+    .dashboard .job {
+        height: 90px;
+    }
+
+        .dashboard .job .title {
+            font-weight: bold;
+            font-size: larger;
+            line-height: 1em;
+            max-height: 90px;
+        }
+
+        .dashboard .job .description {
+            margin-top: 3px;
+            line-height: 1em;
+            padding-right: 20px;
+            overflow: hidden;
+        }
+
+        .dashboard .job .thumb {
+            width: 90px;
+            height: 90px;
+            background-color: black;
+            margin: 2px;
+        }
+
+        .dashboard .job .overlay {
+            position: absolute;
+            bottom: 0px;
+            width: 68%;
+            height: 63px;
+            background: linear-gradient(to top, rgba(255,255,255,1) 18%,rgba(255,255,255,0) 100%);
+        }
 
 .createJob {
 }
 
-    .createJob .content {
-        height: 90%;
+    .createJob .createJobForm {
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
-    .createJob .bottom_nav {
+        .createJob .createJobForm ons-row {
+            width: 100vw;
+            padding-bottom: 5px;
+            border-bottom: 1px solid;
+            border-bottom-color: lightgray;
+            margin-top: 10px;
+        }
+
+        .createJob .createJobForm > ons-col {
+            width: 106px;
+        }
+
+        .createJob .createJobForm input, textarea {
+            width: 90%;
+            font-size: xx-large;
+            border: 0px solid white;
+            padding-left: 5px;
+            padding-top: 2px;
+            box-shadow: rgba(235,235,235,1) 2px 2px 5px inset;
+        }
+
+        .createJob .createJobForm ons-row ons-col .photo {
+            height: 300px;
+            margin-right: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+            .createJob .createJobForm ons-row ons-col .photo > label {
+                color: lightgray;
+                border: 5px dashed lightgray;
+                height: 100%;
+                width: 100%;
+                display: inline-block;
+                text-align: center;
+                opacity: .5;
+                cursor: pointer;
+                margin-bottom: 2px;
+                box-sizing: padding-box;
+            }
+
+                .createJob .createJobForm ons-row ons-col .photo > label ons-icon {
+                    font-size: 300px;
+                }
+
+            .createJob .createJobForm ons-row ons-col .photo input[type="file"] {
+                visibility: hidden;
+            }
+
+        .createJob .createJobForm ons-row ons-button {
+            margin-left: 5%;
+            width: 90%;
+            height: 8vh;
+            text-align: center;
+            padding-top: 2vh;
+            bottom: 0px;
+        }
+
+.reviewJob {
+}
+
+    .reviewJob .jobDescription {
+    }
+
+        .reviewJob .jobDescription img {
+            height: 45vh;
+            width: 100%;
+            background-color: black;
+        }
+
+        .reviewJob .jobDescription .description {
+            margin: 3px 5px 5px 5px;
+            padding: 10px;
+            height: 25vh;
+            overflow-x: hidden;
+            background-color: #FDF7EF;
+            overflow-y: scroll;
+        }
+
+        .reviewJob .jobDescription .location {
+            display: block;
+            font-style: italic;
+            padding-left: 25px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+    .reviewJob .jobState > .bid {
         width: 100%;
-        margin: 0px;
-        padding: 0px;
-        height: 10%;
+        height: 15vh;
+    }
+
+    .reviewJob .jobState .bid ons-icon {
+        font-size: 8em;
+        color: rgba(200,200,200,0.15);
+        position: absolute;
+        bottom: 0vh;
+        font-style: italic;
+        left: -4vw;
+    }
+
+    .reviewJob .jobState .bid input {
+        border: none;
+        border-bottom: 1px solid lightgray;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: transparent;
+        font-size: 1.5em;
+        width: 55vw;
+        padding: 0px 0px 0px 15px;
+        text-align: center;
+        font-size: 3em;
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: italic;
+        position: absolute;
+        bottom: 1vh;
+        left: 10vw;
+    }
+
+    .reviewJob .jobState .bid > ons-button {
+        text-align: center;
+        width: 26vw;
         position: absolute;
         bottom: 0px;
-        background-color:yellow;
+        right: 0px;
+        height: 26vw;
+        margin: 0px 5px 5px 0px;
+        padding-top: 9.5%;
+        box-sizing: border-box;
     }
+
+    .reviewJob .jobState .bids {
+    }
+
+        .reviewJob .jobState .bids .bid {
+            border-bottom: 1px solid darkgray;
+            padding-left: 4px;
+            padding-top: 4px;
+            margin-top: 5px;
+            height: 80px;
+            position:relative;
+        }
+
+
+            .reviewJob .jobState .bids .bid .accept {
+                float: right;
+                margin-top:10px;
+                margin-right:10px;
+            }
+
+            .reviewJob .jobState .bids .bid .amount {
+                display: inline;
+                font-size: xx-large;
+                float: right;
+                margin-right: 25px;
+                margin-top: 15px;
+            }
+
+            .reviewJob .jobState .bids .bid .owner {
+                display: inline;
+                width: 100px;
+                text-align: center;
+            }
+
+                .reviewJob .jobState .bids .bid .owner .photo {
+                    display: inline;
+                    height: 60px;
+                    width: 60px;
+                    background-color: black;
+                    border-radius: 50px;
+                }
+
+                .reviewJob .jobState .bids .bid .owner .name {
+                    position: absolute;
+                    left: 4px;
+                    bottom: 0px;
+                }
