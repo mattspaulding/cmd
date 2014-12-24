@@ -88,6 +88,12 @@ ons.ready(function () {
                 });
         };
 
+        $scope.SelectJob = function (job) {
+            $projectDone.SelectedJob = job;
+            root_navigator.pushPage('ReviewJob');
+            console.log(job);
+        };
+
         $scope.ListJobs();
     });
 
@@ -118,8 +124,20 @@ ons.ready(function () {
         };
     });
 
-    app.controller('DetailController', function ($scope) {
+    app.controller('ReviewJobController',function($scope, $projectDone, Job)
+    {
+        $scope.job = {}
+        $scope.loadJob = function ()
+        {
+            $scope.job = $projectDone.SelectedJob;
+            $projectDone.GetJob($scope.job.ID)
+            .then(function (results) {
+                $scope.job = results.data;
+                
+            });
+        };
 
+        $scope.loadJob();
     });
 
     app.factory('User', function () {
@@ -242,6 +260,8 @@ ons.ready(function () {
         //TODO: find a way to pass odata to queries that support it.
         //User 
         this.LoggedInUser = {};
+
+        this.SelectedJob = {};
 
         this.Login = function (username, password) {
             username = encodeURIComponent(username);

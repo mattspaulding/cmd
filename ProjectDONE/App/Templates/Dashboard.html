@@ -4,7 +4,11 @@
     </ons-toolbar>
     <ons-scroller class="jobs">
             <ons-list>
-                <ons-list-item class="list__item--tappable list__item__line-height job" modifier="chevron" ng-repeat="job in jobs">
+                <ons-list-item 
+                    class="list__item--tappable list__item__line-height job" 
+                    modifier="chevron" 
+                    ng-repeat="job in jobs"
+                    ng-click="SelectJob(job)">
                     <ons-row>
                         <ons-col width="95px">
                             <div class="thumb"></div>

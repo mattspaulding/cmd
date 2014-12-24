@@ -130,7 +130,9 @@ namespace ProjectDONE.Controllers
                     Address = new AddressViewModel
                     {
                         ID = job.Address.ID,
-                        City = job.Address.City
+                        City = job.Address.City,
+                        State = job.Address.State
+                        
                     },
                     //PrivateDescription = excludePrivate ? string.Empty : job.PrivateDescription,
                     Status = job.Status,

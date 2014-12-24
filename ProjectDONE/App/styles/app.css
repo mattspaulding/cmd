@@ -65,8 +65,6 @@
 .createJob {
 }
 
-
-
     .createJob .createJobForm {
         height: 100vh;
         overflow-y: auto;
@@ -130,3 +128,35 @@
             padding-top: 2vh;
             bottom: 0px;
         }
+
+.reviewJob {
+}
+
+    .reviewJob .jobDescription{
+        
+    }
+    .reviewJob .jobDescription img {
+        height: 335px;
+        width: 100%;
+        background-color: black;
+        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
+    }
+
+    .reviewJob .jobDescription .description {
+        margin: 3px 5px 5px 5px;
+        padding: 10px;
+        height: 200px;
+        overflow-x: hidden;
+        background-color: #FDF7EF;
+        overflow-y: scroll;
+        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
+    }
+    .reviewJob .jobDescription .location{
+        display:block;
+        font-style:italic;
+        padding-left:25px;
+        margin-left:5px;
+        margin-right:5px;
+        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
+    }
+

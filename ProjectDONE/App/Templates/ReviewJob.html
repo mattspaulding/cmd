@@ -1,0 +1,37 @@
+﻿<ons-page ng-controller="ReviewJobController" class="reviewJob">
+    <ons-toolbar>
+        <div class="left"><ons-back-button ons-if-platform="ios"></ons-back-button></div>
+        <div class="center">{{job.Title}}</div>
+    </ons-toolbar>
+    <div class="jobDescription">
+        <img ng-src="{{job.Media[0].URL}}" />
+        <div class="description">
+            {{job.PublicDescription}}
+        </div>
+        <sup class="location">
+            <span>Located in <b>{{job.Address.City}}</b>, <b>{{job.Address.State}}</b></span>
+        </sup>
+    </div>
+    <div class="jobState">
+        <div class="biddable">
+            <!-- As the job Owner, i want to see a list of bids here and be able to accept a bid-->
+            <!-- for now, as the non owner, i want to have the option to bid on this job (Perhaps to also see all other bids as well) -->
+        </div>
+        <div class="finishable">
+            <!-- As the job owner, i want to see the accepted bid-->
+            <!-- As the owner of the winning bid, i want to see the option to 'Finish' the job-->
+            <!-- As the non-owner of the job or the winning bid, I want to see the winning bid -->
+        </div>
+        <div class="payable">
+            <!-- As the job owner, I want to see that the job was marked as finished with an option to "Pay"-->
+            <!-- As the owner of the winning bid, i want to see that the job was marked as finished and is waiting payment from the owner of the job-->
+            <!-- as the non-owner of the bid or job, I want to see the winning bid -->
+        </div>
+        <div class="finished">
+            <!-- as the job owner, I want to see that this job was marked finished and payment was made.-->
+            <!-- As the owner of the winning bid, i want to see that the job was marked finished and payment was made.-->
+            <!-- As the non-owner of the bid or job, i want to see that the job was finished and paid.-->
+        </div>
+    </div>
+
+</ons-page>
