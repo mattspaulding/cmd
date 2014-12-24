@@ -1135,7 +1135,9 @@
     <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="App\lib\onsen\css\font_awesome\fonts\fontawesome-webfont.ttf" />
