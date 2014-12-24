@@ -91,7 +91,6 @@ ons.ready(function () {
         $scope.SelectJob = function (job) {
             $projectDone.SelectedJob = job;
             root_navigator.pushPage('ReviewJob');
-            console.log(job);
         };
 
         $scope.ListJobs();
@@ -124,16 +123,26 @@ ons.ready(function () {
         };
     });
 
-    app.controller('ReviewJobController',function($scope, $projectDone, Job)
+    app.controller('ReviewJobController',function($scope, $projectDone, Job, Bid)
     {
         $scope.job = {}
+        $scope.bid = new Bid();
+        $scope.isJobOwner = null;
+
         $scope.loadJob = function ()
         {
             $scope.job = $projectDone.SelectedJob;
             $projectDone.GetJob($scope.job.ID)
             .then(function (results) {
                 $scope.job = results.data;
-                
+                $scope.isJobOwner = $scope.job.Owner_ID == $projectDone.LoggedInUser.owner.ID;
+            });
+        };
+
+        $scope.BidOnCurrentJob = function () {
+            $projectDone.PlaceBid($projectDone.SelectedJob.ID, $scope.bid)
+            .then(function (results) {
+                $scope.bid = new Bid();
             });
         };
 

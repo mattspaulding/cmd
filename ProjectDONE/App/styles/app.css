@@ -132,31 +132,119 @@
 .reviewJob {
 }
 
-    .reviewJob .jobDescription{
-        
+    .reviewJob .jobDescription {
     }
-    .reviewJob .jobDescription img {
-        height: 335px;
+
+        .reviewJob .jobDescription img {
+            height: 45vh;
+            width: 100%;
+            background-color: black;
+        }
+
+        .reviewJob .jobDescription .description {
+            margin: 3px 5px 5px 5px;
+            padding: 10px;
+            height: 25vh;
+            overflow-x: hidden;
+            background-color: #FDF7EF;
+            overflow-y: scroll;
+        }
+
+        .reviewJob .jobDescription .location {
+            display: block;
+            font-style: italic;
+            padding-left: 25px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+    .reviewJob .jobState > .bid {
         width: 100%;
-        background-color: black;
-        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
+        height: 15vh;
     }
 
-    .reviewJob .jobDescription .description {
-        margin: 3px 5px 5px 5px;
-        padding: 10px;
-        height: 200px;
-        overflow-x: hidden;
-        background-color: #FDF7EF;
-        overflow-y: scroll;
-        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
-    }
-    .reviewJob .jobDescription .location{
-        display:block;
-        font-style:italic;
-        padding-left:25px;
-        margin-left:5px;
-        margin-right:5px;
-        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.53);
+    .reviewJob .jobState .bid ons-icon {
+        font-size: 8em;
+        color: rgba(200,200,200,0.15);
+        position: absolute;
+        bottom: 0vh;
+        font-style: italic;
+        left: -4vw;
     }
 
+    .reviewJob .jobState .bid input {
+        border: none;
+        border-bottom: 1px solid lightgray;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: transparent;
+        font-size: 1.5em;
+        width: 55vw;
+        padding: 0px 0px 0px 15px;
+        text-align: center;
+        font-size: 3em;
+        font-family: Arial, Helvetica, sans-serif;
+        font-style: italic;
+        position: absolute;
+        bottom: 1vh;
+        left: 10vw;
+    }
+
+    .reviewJob .jobState .bid > ons-button {
+        text-align: center;
+        width: 26vw;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        height: 26vw;
+        margin: 0px 5px 5px 0px;
+        padding-top: 9.5%;
+        box-sizing: border-box;
+    }
+
+    .reviewJob .jobState .bids {
+    }
+
+        .reviewJob .jobState .bids .bid {
+            border-bottom: 1px solid darkgray;
+            padding-left: 4px;
+            padding-top: 4px;
+            margin-top: 5px;
+            height: 80px;
+            position:relative;
+        }
+
+
+            .reviewJob .jobState .bids .bid .accept {
+                float: right;
+                margin-top:10px;
+                margin-right:10px;
+            }
+
+            .reviewJob .jobState .bids .bid .amount {
+                display: inline;
+                font-size: xx-large;
+                float: right;
+                margin-right: 25px;
+                margin-top: 15px;
+            }
+
+            .reviewJob .jobState .bids .bid .owner {
+                display: inline;
+                width: 100px;
+                text-align: center;
+            }
+
+                .reviewJob .jobState .bids .bid .owner .photo {
+                    display: inline;
+                    height: 60px;
+                    width: 60px;
+                    background-color: black;
+                    border-radius: 50px;
+                }
+
+                .reviewJob .jobState .bids .bid .owner .name {
+                    position: absolute;
+                    left: 4px;
+                    bottom: 0px;
+                }
