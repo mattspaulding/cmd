@@ -94,6 +94,7 @@ ons.ready(function () {
         };
 
         $scope.ListJobs();
+       
     });
 
     app.controller('createJobController', function ($scope, $projectDone, Job, Address) {
@@ -311,7 +312,7 @@ ons.ready(function () {
         };
         this.GetJobs = function(){
             //TODO, pagination and filtering
-            return $http.get('/api/app/job?$select=Title, ID, PublicDescription');
+            return $http.get('/api/app/job?$select=Title,ID,PublicDescription');
         };
 
         //Bid
