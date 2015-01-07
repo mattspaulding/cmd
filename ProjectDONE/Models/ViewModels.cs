@@ -98,4 +98,12 @@ namespace ProjectDONE.Models
             return retval;
         }
     }
+
+    public class MediaViewModel : BaseViewModel
+    {
+        public string MIME_TYPE { get; set; }
+        public string URL { get; set; }
+        public string Title { get; set; }
+        public string Meta { get; set; }
+    }
 }

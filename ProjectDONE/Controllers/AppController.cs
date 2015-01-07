@@ -127,6 +127,13 @@ namespace ProjectDONE.Controllers
                         }
 
                     }).ToList() ,
+                    Address = new AddressViewModel
+                    {
+                        ID = job.Address.ID,
+                        City = job.Address.City,
+                        State = job.Address.State
+                        
+                    },
                     //PrivateDescription = excludePrivate ? string.Empty : job.PrivateDescription,
                     Status = job.Status,
                     AcceptedBid_ID = job.AcceptedBid_ID,
@@ -158,6 +165,7 @@ namespace ProjectDONE.Controllers
         /// the ownermaking the request
         /// </summary>
         [HttpGet]
+       
         [Route("Job")]
         [EnableQuery]
         public IQueryable<JobViewModel> GetJobs()
@@ -181,12 +189,22 @@ namespace ProjectDONE.Controllers
                     PublicDescription = job.PublicDescription,
                     Latitude = job.Latitude,
                     Longitude = job.Longitude,
-                    PrivateDescription = ownerId!=job.Owner_ID ? 
+                    PrivateDescription = ownerId != job.Owner_ID ?
                                     string.Empty : job.PrivateDescription,
                     Status = job.Status,
-                    AcceptedBid_ID = 
-                            (ownerId != job.Owner_ID) && 
-                            job.AcceptedBid_ID != null ?job.AcceptedBid_ID : null,
+                    AcceptedBid_ID =
+                            (ownerId != job.Owner_ID) &&
+                            job.AcceptedBid_ID != null ? job.AcceptedBid_ID : null,
+                    Address = new AddressViewModel
+                    {
+                        ID = job.Address.ID,
+                        City = job.Address.City,
+                        State = job.Address.State,
+                        Zip = job.Address.Zip,
+                        Line1 = (ownerId == job.Owner_ID) ? job.Address.Line1 : null,
+                        Line2 = (ownerId == job.Owner_ID) ? job.Address.Line2 : null,
+                        
+                    }
                 };
 
 

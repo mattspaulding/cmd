@@ -1,106 +1,73 @@
 ﻿<ons-page ng-controller="createJobController" class="createJob">
-    <div class="content">
-        <ons-carousel swipeable auto-scroll fullscreen var="carousel">
-            <ons-carousel-item >
-                <ons-page id="what" style="background-color: white;">
-                    <ons-toolbar><div class="center">What</div></ons-toolbar>
-                    <ons-carousel style="margin-left:0px; margin-top:0px; margin-bottom:2vw; width:100vw; height:40vh;" var="photos_carousel" auto-scroll>
-                        
-                        <ons-carousel-item style="background-color:black;">
-                            <div></div>
-                        </ons-carousel-item>
-                        <ons-carousel-item style="background-color:orange;">
-                            <div></div>
-                        </ons-carousel-item>
-                        
-                        <ons-carousel-cover>
-                            <div style="height:100%; width:100%; background-color:white; opacity:.25">
-                                <ons-button>
-                                    <ons-icon icon="ion-camera" size="80px;"></ons-icon>
+    <ons-toolbar>
+        <div class="left"><ons-back-button ons-if-platform="ios">Back</ons-back-button></div>
+        <div class="center">Create Job</div>
+    </ons-toolbar>
+    <ng-form novalidate class="createJobForm">
+        <!--What-->
+        <ons-row>
+            <ons-col width="90px">
+                <label for="title">Title</label>
+            </ons-col>
+            <ons-col>
+                <input id="title" ng-model="Job.Title" />
+            </ons-col>
+        </ons-row>
+        <ons-row>
+            <ons-col width="50px">
+                <label>Photo</label>
+            </ons-col>
+            <ons-col>
+                <div class="photo">
+                    <label for="{{uploadingImage?'':'upload'}}">
+                        <ons-icon spin="{{uploadingImage}}" 
+                                  icon="{{uploadingImage?'ion-load-c':'ion-upload'}}">
+                        </ons-icon>
+                    </label>
+                    <input type="file"
+                           id="upload"
+                           name="photoUpload"
+                           accept="image/*"
+                           ng-model="imageUrl"
+                           onchange="angular.element(this).scope().fileNameChanged()"
+                           capture="camera">
+                </div>
+            </ons-col>
+        </ons-row>
+        <ons-row>
+            <ons-col width="100px">
+                <label for="description">Description</label>
+            </ons-col>
+            <ons-col>
+                <textarea id="description" ng-model="Job.PublicDescription" style="height:100px;"></textarea>
+            </ons-col>
+        </ons-row>
 
-                                </ons-button>
-                            </div>
-                        </ons-carousel-cover>
-                    </ons-carousel>
-
-                    <div id="TextDescription">
-                        <textarea class="textarea" placeholder="Job Description"
-                                  style="margin-left: 1vw; height : 52vh; box-sizing: border-box; width: 98vw;"
-                                  ng-model="Job.PublicDescription"></textarea>
-                    </div>
-                </ons-page>
-            </ons-carousel-item>
-
-            <ons-carousel-item style="background-color: #085078;">
-                <ons-page id="where" style="background: #ffffff">
-                    <ons-toolbar><div class="center">Where</div></ons-toolbar>
-                    <div>
-                        <!--TODO: Option to use home address-->
-                        <input class="text-input" id="addr1" placeholder="Address line 1" style="width: 98vw;line-height: 2.5em;height: 2.5em;font-size: 1em;margin-left: 1vw;margin-top: 1vw;" ng-model="Job.Address.Line1" />
-                        <input class="text-input" id="addr2" placeholder="Address line 2" style="width: 98vw;line-height: 2.5em;height: 2.5em;font-size: 1em;margin-left: 1vw;margin-top: 1vw;" ng-model="Job.Address.Line2" />
-                        <input class="text-input" id="City" placeholder="City" style="width: 98vw;line-height: 2.5em;height: 2.5em;font-size: 1em;margin-left: 1vw;margin-top: 1vw;" ng-model="Job.Address.City" />
-                        <input class="text-input" id="State" placeholder="State" style="width: 98vw;line-height: 2.5em;height: 2.5em;font-size: 1em;margin-left: 1vw;margin-top: 1vw;" ng-model="Job.Address.State" />
-                        <input class="text-input" id="Zip" placeholder="Zip" style="width: 98vw;line-height: 2.5em;height: 2.5em;font-size: 1em;margin-left: 1vw;margin-top: 1vw;" ng-model="Job.Address.Zip" />
-                        <textarea class="textarea" id="AreaNotes" placeholder="Area notes / Name (For example, 'SoHo', 'Clearwater Beach' or 'Near the Taco Bell on Beach and Hodges')"
-                                  style="margin-top:10vh; margin-left: 1vw; height : 52vh; box-sizing: border-box; width: 98vw;"></textarea>
-                    </div>
-                </ons-page>
-            </ons-carousel-item>
-
-            <ons-carousel-item style="background-color: #373B44;">
-               <ons-page id="whenHowMuch">
-                   <ons-toolbar><div class="center">How Much</div></ons-toolbar>
-                   <div style="margin-left:2vw;">
-                       <label for="earliest" style="display:block;">Earliest work can begin.</label>
-                       <input ng-model="Job.Earliest" class="text-input" type="datetime" id="earliest"/>
-                       <label for="doneBy" style="display:block;">When the work must be completed by</label>
-                       <input ng-model="Job.FinishedBy"class="text-input" type="datetime" id="doneBy"/>
-                       <hr style="width:90vw; margin-left:3vw; color:gray" />
-                       <label for="maxPay">The most you can pay for this job.</label>
-                       <input ng-model="Job.MaxPay"class="text-input" type="number" id="maxPay" min="0"/>
-                   </div>
-               </ons-page>
-            </ons-carousel-item>
-
-            <ons-carousel-item style="background-color: #D38312;">
-               <ons-page id="special">
-                   <ons-toolbar><div class="center">Special Instructions</div></ons-toolbar>
-                   <div>
-                       <textarea class="textarea" id="specialInstructions" 
-                                 ng-model="Job.PrivateDescription"
-                                 placeholder="Special instructions are kept private and include things such as 'Gate Code is 1234#', 'Leaky faucet is on the right of the house', 'knock quietly, baby is sleeping' or 'Call ahead'"
-                                 style="margin-top:2vh; margin-left: 1vw; height : 90vh; box-sizing: border-box; width: 98vw;"></textarea>
-                   </div>
-               </ons-page>
-            </ons-carousel-item>
-
-            <ons-carousel-item>
-                <ons-page id="review">
-                    <ons-toolbar><div class="center">Review and Submit</div></ons-toolbar>
-                    <div>
-                        {{Job.PublicDescription}}
-                    </div>
-                    <div >
-                        <ons-button style ="
-                                margin-left: 10vw;
-                                width: 80vw;
-                                height: 18vh;
-                                text-align: center;
-                                padding-top: 7vh;
-                                bottom: 0px;
-                                position:absolute;
-                                bottom:2vh;"
-                                ng-click="CreateJob()">Post Job</ons-button>
-                    </div>
-                </ons-page>
-            </ons-carousel-item>
-
-            <ons-carousel-cover>
-                
-            </ons-carousel-cover>
-
-        </ons-carousel>
-    </div>
-
+        <!--Where-->
+        <ons-row>
+            <ons-col width="100px">
+                <label>Location</label>
+            </ons-col>
+            <ons-col>
+                <input placeholder="Address Line 1" ng-model="Job.Address.Line1" id="addressLine1" />
+                <input placeholder="Address Line City" ng-model="Job.Address.City" id="addressCity" />
+                <input placeholder="Address Line State" ng-model="Job.Address.State" id="addressState" />
+                <input placeholder="Address Line Zip" ng-model="Job.Address.Zip" id="addressZip" />
+            </ons-col>
+        </ons-row>
+        <!--When-->
+        <ons-row>
+            <ons-col width="100px">
+                <label>Date & Time</label>
+            </ons-col>
+            <ons-col>
+                <input type="datetime" ng-model="Job.Earliest" id="date" />
+            </ons-col>
+        </ons-row>
+        <!--Save-->
+        <ons-row>
+            <ons-button ng-click="CreateJob()">Post Job</ons-button>
+        </ons-row>
+    </ng-form>
 
 </ons-page>
