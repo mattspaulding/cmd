@@ -165,6 +165,7 @@ namespace ProjectDONE.Controllers
         /// the ownermaking the request
         /// </summary>
         [HttpGet]
+       
         [Route("Job")]
         [EnableQuery]
         public IQueryable<JobViewModel> GetJobs()

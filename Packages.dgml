@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Antlr 3.4.1.9004" Category="Package" Bounds="1799.50492911572,326.389647586367,102.053333333333,25.96" Label="Antlr 3.4.1.9004" />
+    <Node Id="EntityFramework 6.1.2" Category="Package" Bounds="240.363433333333,111.920060395926,136.196666666667,25.96" Label="EntityFramework 6.1.2" />
+    <Node Id="Microsoft.AspNet.Identity.Core 2.1.0" Category="Package" Bounds="0,111.920060395926,210.363333333333,25.96" Label="Microsoft.AspNet.Identity.Core 2.1.0" />
+    <Node Id="Microsoft.AspNet.Identity.EntityFramework 2.1.0" Category="Package" Bounds="724.573448120196,55.9600603959262,273.753333333333,25.96" Label="Microsoft.AspNet.Identity.EntityFramework 2.1.0" />
+    <Node Id="Microsoft.AspNet.Identity.Owin 2.1.0" Category="Package" Bounds="481.703348120196,55.9600603959261,212.87,25.96" Label="Microsoft.AspNet.Identity.Owin 2.1.0" />
+    <Node Id="Microsoft.AspNet.Mvc 5.2.2" Category="Package" Bounds="770.397693638442,111.92,164.746666666667,25.96" Label="Microsoft.AspNet.Mvc 5.2.2" />
+    <Node Id="Microsoft.AspNet.Razor 3.2.2" Category="Package" Bounds="1083.16401878056,223.839984986741,172.593333333333,25.96" Label="Microsoft.AspNet.Razor 3.2.2" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Package" Bounds="2179.95756666667,208.141654639397,238.463333333333,25.96" Label="Microsoft.AspNet.Web.Optimization 1.1.3" />
+    <Node Id="Microsoft.AspNet.WebApi 5.2.2" Category="Package" Bounds="1621.11599473933,55.9600009988262,184.92,25.96" Label="Microsoft.AspNet.WebApi 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebApi.Client 5.2.2" Category="Package" Bounds="1698.52736666667,270.429647586367,217.896666666667,25.96" Label="Microsoft.AspNet.WebApi.Client 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebApi.Core 5.2.2" Category="Package" Bounds="1536.45088544723,214.469647586367,212.43,25.96" Label="Microsoft.AspNet.WebApi.Core 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebApi.HelpPage 5.2.2" Category="Package" Bounds="1232.35263764925,55.9600000000001,238.446666666667,25.96" Label="Microsoft.AspNet.WebApi.HelpPage 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebApi.OData 5.3.1" Category="Package" Bounds="2190.43756666667,148.407689007913,221.26,25.96" Label="Microsoft.AspNet.WebApi.OData 5.3.1" />
+    <Node Id="Microsoft.AspNet.WebApi.Owin 5.2.2" Category="Package" Bounds="406.560200000001,158.509647586367,214.936666666667,25.96" Label="Microsoft.AspNet.WebApi.Owin 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebApi.WebHost 5.2.2" Category="Package" Bounds="1923.66746666667,111.92,236.77,25.96" Label="Microsoft.AspNet.WebApi.WebHost 5.2.2" />
+    <Node Id="Microsoft.AspNet.WebPages 3.2.2" Category="Package" Bounds="178.076766666667,167.879984986741,198.483333333333,25.96" Label="Microsoft.AspNet.WebPages 3.2.2" />
+    <Node Id="Microsoft.Data.Edm 5.6.1" Category="Package" Bounds="2285.41456591857,365.561020814937,151.64,25.96" Label="Microsoft.Data.Edm 5.6.1" />
+    <Node Id="Microsoft.Data.OData 5.6.1" Category="Package" Bounds="2195.76026197378,279.799999006944,161.906666666667,25.96" Label="Microsoft.Data.OData 5.6.1" />
+    <Node Id="Microsoft.Data.Services.Client 5.6.1" Category="Package" Bounds="1946.42413333333,223.839999006944,203.533333333334,25.96" Label="Microsoft.Data.Services.Client 5.6.1" />
+    <Node Id="Microsoft.Owin 3.0.0" Category="Package" Bounds="1127.46735211389,279.8,128.29,25.96" Label="Microsoft.Owin 3.0.0" />
+    <Node Id="Microsoft.Owin.Host.SystemWeb 3.0.0" Category="Package" Bounds="1285.75745211389,214.469647586367,220.693333333333,25.96" Label="Microsoft.Owin.Host.SystemWeb 3.0.0" />
+    <Node Id="Microsoft.Owin.Security 3.0.0" Category="Package" Bounds="880.337252113892,223.84,172.826666666667,25.96" Label="Microsoft.Owin.Security 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.Cookies 3.0.0" Category="Package" Bounds="651.496966666667,167.88,217.156666666667,25.96" Label="Microsoft.Owin.Security.Cookies 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.Facebook 3.0.0" Category="Package" Bounds="1923.66746666667,167.88,226.29,25.96" Label="Microsoft.Owin.Security.Facebook 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.Google 3.0.0" Category="Package" Bounds="1679.69736666667,158.509647586367,213.97,25.96" Label="Microsoft.Owin.Security.Google 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Category="Package" Bounds="1138.51383333333,158.509647586367,269.306666666667,25.96" Label="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.OAuth 3.0.0" Category="Package" Bounds="898.653733333332,167.88,209.86,25.96" Label="Microsoft.Owin.Security.OAuth 3.0.0" />
+    <Node Id="Microsoft.Owin.Security.Twitter 3.0.0" Category="Package" Bounds="1437.8206,158.509647586367,211.876666666667,25.96" Label="Microsoft.Owin.Security.Twitter 3.0.0" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" Bounds="1285.75745211389,270.429647586367,208.076666666667,25.96" Label="Microsoft.Web.Infrastructure 1.0.0.0" />
+    <Node Id="Newtonsoft.Json 6.0.4" Category="Package" Bounds="1634.05149578238,326.389647586367,135.453333333333,25.96" Label="Newtonsoft.Json 6.0.4" />
+    <Node Id="Owin 1.0" Category="Package" Bounds="1224.74956449492,335.76,66.2433333333333,25.96" Label="Owin 1.0" />
+    <Node Id="ProjectDONE" Category="Project" Bounds="1496.87697807266,0,89.2233333333334,25.96" Label="ProjectDONE" />
+    <Node Id="System.Spatial 5.6.1" Category="Package" Bounds="2131.25894205889,341.578709293423,123.97,25.96" Label="System.Spatial 5.6.1" />
+    <Node Id="WebGrease 1.5.2" Category="Package" Bounds="1559.9306,270.429647586367,108.596666666667,25.96" Label="WebGrease 1.5.2" />
+    <Node Id="angularjs 1.3.8" Category="Package" Bounds="1836.03609473933,55.96,95.8366666666666,25.96" Label="angularjs 1.3.8" />
+  </Nodes>
+  <Links>
+    <Link Source="Microsoft.AspNet.Identity.EntityFramework 2.1.0" Target="EntityFramework 6.1.2" Category="Package Dependency" Bounds="385.514368446263,81.9200603959261,347.66932820979,35.1826140148455" />
+    <Link Source="Microsoft.AspNet.Identity.EntityFramework 2.1.0" Target="Microsoft.AspNet.Identity.Core 2.1.0" Category="Package Dependency" Bounds="178.763366699219,81.9200592041016,594.66650390625,28.2332077026367" />
+    <Link Source="Microsoft.AspNet.Identity.Owin 2.1.0" Target="Microsoft.AspNet.Identity.Core 2.1.0" Category="Package Dependency" Bounds="218.438891808165,81.1566983578153,264.265093756756,30.6202920769634" />
+    <Link Source="Microsoft.AspNet.Identity.Owin 2.1.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="620.860107421875,81.9200592041016,306.688354492188,138.408676147461" />
+    <Link Source="Microsoft.AspNet.Identity.Owin 2.1.0" Target="Microsoft.Owin.Security.Cookies 3.0.0" Category="Package Dependency" Bounds="608.078866702451,81.9200603959263,124.513149581266,81.0500827698181" />
+    <Link Source="Microsoft.AspNet.Identity.Owin 2.1.0" Target="Microsoft.Owin.Security.OAuth 3.0.0" Category="Package Dependency" Bounds="621.5712890625,81.9200592041016,288.38525390625,84.5971221923828" />
+    <Link Source="Microsoft.AspNet.Mvc 5.2.2" Target="Microsoft.AspNet.Razor 3.2.2" Category="Package Dependency" Bounds="935.138000488281,135.075424194336,221.116394042969,81.1930541992188" />
+    <Link Source="Microsoft.AspNet.Mvc 5.2.2" Target="Microsoft.AspNet.WebPages 3.2.2" Category="Package Dependency" Bounds="333.593627929688,129.137466430664,436.804077148438,36.3744201660156" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" Bounds="1462.73229980469,234.101654052734,789.938842773438,34.5457153320313" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="WebGrease 1.5.2" Category="Package Dependency" Bounds="1658.94372558594,234.101654052734,593.727416992188,33.4636840820313" />
+    <Link Source="Microsoft.AspNet.WebApi 5.2.2" Target="Microsoft.AspNet.WebApi.WebHost 5.2.2" Category="Package Dependency" Bounds="1789.76657161063,81.9200009988262,167.223147174981,28.4885157648527" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 5.2.2" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1734.24886768029,296.389647586367,48.7101411579606,25.7888647394979" />
+    <Link Source="Microsoft.AspNet.WebApi.Core 5.2.2" Target="Microsoft.AspNet.WebApi.Client 5.2.2" Category="Package Dependency" Bounds="1680.89375165336,240.429647586367,79.8319408974137,27.1063675712635" />
+    <Link Source="Microsoft.AspNet.WebApi.HelpPage 5.2.2" Target="Microsoft.AspNet.Mvc 5.2.2" Category="Package Dependency" Bounds="944.08825159215,81.92,291.789217366486,32.7352902169202" />
+    <Link Source="Microsoft.AspNet.WebApi.HelpPage 5.2.2" Target="Microsoft.AspNet.Razor 3.2.2" Category="Package Dependency" Bounds="1128.37963867188,81.9199981689453,186.725341796875,134.301116943359" />
+    <Link Source="Microsoft.AspNet.WebApi.HelpPage 5.2.2" Target="Microsoft.AspNet.WebApi.WebHost 5.2.2" Category="Package Dependency" Bounds="1470.79930431592,78.6025124461673,443.897575199204,35.9758926819617" />
+    <Link Source="Microsoft.AspNet.WebApi.OData 5.3.1" Target="Microsoft.AspNet.WebApi.Client 5.2.2" Category="Package Dependency" Bounds="1839.37841796875,174.367691040039,414.757080078125,91.7787628173828" />
+    <Link Source="Microsoft.AspNet.WebApi.OData 5.3.1" Target="Microsoft.AspNet.WebApi.Core 5.2.2" Category="Package Dependency" Bounds="1757.86682128906,174.367691040039,496.680786132813,46.6478729248047" />
+    <Link Source="Microsoft.AspNet.WebApi.OData 5.3.1" Target="Microsoft.Data.OData 5.6.1" Category="Package Dependency" Bounds="2169.8232421875,174.367691040039,84.724365234375,101.709945678711" />
+    <Link Source="Microsoft.AspNet.WebApi.Owin 5.2.2" Target="Microsoft.AspNet.WebApi.Core 5.2.2" Category="Package Dependency" Bounds="564.908081054688,184.469650268555,1003.59265136719,28.2496795654297" />
+    <Link Source="Microsoft.AspNet.WebApi.Owin 5.2.2" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="566.300231933594,184.469650268555,552.213806152344,100.840194702148" />
+    <Link Source="Microsoft.AspNet.WebApi.Owin 5.2.2" Target="Owin 1.0" Category="Package Dependency" Bounds="568.499952353588,184.469647586367,647.494740759259,154.291587886304" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 5.2.2" Target="Microsoft.AspNet.WebApi.Core 5.2.2" Category="Package Dependency" Bounds="1754.791015625,137.880004882813,236.473266601563,75.4664611816406" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.2" Target="Microsoft.AspNet.Razor 3.2.2" Category="Package Dependency" Bounds="376.560089111328,186.08154296875,708.653533935547,37.2855682373047" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.2" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" Bounds="374.170196533203,193.777297973633,902.596405029297,84.5256195068359" />
+    <Link Source="Microsoft.Data.OData 5.6.1" Target="Microsoft.Data.Edm 5.6.1" Category="Package Dependency" Bounds="2289.50591255577,305.759999006944,52.6188871178642,53.3908862260063" />
+    <Link Source="Microsoft.Data.OData 5.6.1" Target="System.Spatial 5.6.1" Category="Package Dependency" Bounds="2218.01542633809,305.759999006944,41.1607989893359,30.4644978979383" />
+    <Link Source="Microsoft.Data.Services.Client 5.6.1" Target="Microsoft.Data.OData 5.6.1" Category="Package Dependency" Bounds="2101.19698089861,249.799999006944,113.768715582969,27.8593534420357" />
+    <Link Source="Microsoft.Owin 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1206.98119146413,305.76,28.6453433003805,24.1928845481298" />
+    <Link Source="Microsoft.Owin.Host.SystemWeb 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1240.81441326357,240.429647586367,114.660763022881,36.6314408565473" />
+    <Link Source="Microsoft.Owin.Host.SystemWeb 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1262.24755859375,240.429641723633,86.2449951171875,86.5063323974609" />
+    <Link Source="Microsoft.Owin.Security 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1018.90758564975,249.8,111.814154322238,27.8265183478167" />
+    <Link Source="Microsoft.Owin.Security 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="996.768798828125,249.800003051758,219.216918945313,89.1507415771484" />
+    <Link Source="Microsoft.Owin.Security.Cookies 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="778.152709960938,193.839996337891,340.361328125,91.4698486328125" />
+    <Link Source="Microsoft.Owin.Security.Cookies 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="808.013920534399,193.84,102.110852663976,27.6478307636605" />
+    <Link Source="Microsoft.Owin.Security.Cookies 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="778.152709960938,193.839996337891,437.824096679688,145.302947998047" />
+    <Link Source="Microsoft.Owin.Security.Facebook 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1241.91809082031,193.839996337891,760.118408203125,83.2858581542969" />
+    <Link Source="Microsoft.Owin.Security.Facebook 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="1056.75952148438,185.776840209961,866.907958984375,37.6724243164063" />
+    <Link Source="Microsoft.Owin.Security.Facebook 3.0.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1778.41027832031,193.839996337891,218.677734375,134.331848144531" />
+    <Link Source="Microsoft.Owin.Security.Facebook 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1299.86328125,193.839996337891,679.771240234375,147.696472167969" />
+    <Link Source="Microsoft.Owin.Security.Google 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1233.59411621094,184.469650268555,450.197021484375,92.1334075927734" />
+    <Link Source="Microsoft.Owin.Security.Google 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="1029.72509765625,184.469650268555,691.187866210938,37.2942657470703" />
+    <Link Source="Microsoft.Owin.Security.Google 3.0.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1694.86376953125,184.469650268555,87.2769775390625,133.04621887207" />
+    <Link Source="Microsoft.Owin.Security.Google 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1299.86328125,184.469650268555,482.277465820313,157.066818237305" />
+    <Link Source="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1229.19714355469,184.469650268555,42.9022216796875,91.6905670166016" />
+    <Link Source="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="1036.43236966735,184.469647586367,175.855174017242,37.4936644961766" />
+    <Link Source="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1369.36096191406,184.469650268555,263.560546875,140.017318725586" />
+    <Link Source="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1259.76513386722,184.469647586367,12.2819151796321,142.323677631923" />
+    <Link Source="Microsoft.Owin.Security.OAuth 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1027.181640625,193.839996337891,108.897338867188,83.5522766113281" />
+    <Link Source="Microsoft.Owin.Security.OAuth 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="980.242261344295,193.84,14.7979719968712,22.482317164568" />
+    <Link Source="Microsoft.Owin.Security.OAuth 3.0.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1106.33264160156,193.72607421875,526.588623046875,130.761840820313" />
+    <Link Source="Microsoft.Owin.Security.OAuth 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1027.181640625,193.839996337891,188.804077148438,145.110748291016" />
+    <Link Source="Microsoft.Owin.Security.Twitter 3.0.0" Target="Microsoft.Owin 3.0.0" Category="Package Dependency" Bounds="1229.18005371094,184.240234375,210.489990234375,91.8817443847656" />
+    <Link Source="Microsoft.Owin.Security.Twitter 3.0.0" Target="Microsoft.Owin.Security 3.0.0" Category="Package Dependency" Bounds="1062.10678050486,183.404198441721,376.420892765375,42.6193306739997" />
+    <Link Source="Microsoft.Owin.Security.Twitter 3.0.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1532.16418457031,184.469650268555,100.757202148438,140.018020629883" />
+    <Link Source="Microsoft.Owin.Security.Twitter 3.0.0" Target="Owin 1.0" Category="Package Dependency" Bounds="1299.86328125,184.469650268555,240.07080078125,157.066909790039" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.Identity.EntityFramework 2.1.0" Category="Installed Package" Bounds="1007.01872830517,16.651073698139,489.858249767493,40.3102118998285" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.Identity.Owin 2.1.0" Category="Installed Package" Bounds="684.094299316406,15.1931219100952,812.782653808594,40.3210077285767" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Installed Package" Bounds="1552.89587402344,25.9599990844727,704.131469726563,178.951957702637" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.WebApi 5.2.2" Category="Installed Package" Bounds="1581.4045447238,25.96,83.6967056956469,27.2168043399278" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.WebApi.HelpPage 5.2.2" Category="Installed Package" Bounds="1404.25949726384,25.6391323828731,94.2675735249511,27.7770477878341" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.WebApi.OData 5.3.1" Category="Installed Package" Bounds="1586.10034179688,16.6385269165039,670.216064453125,128.737648010254" />
+    <Link Source="ProjectDONE" Target="Microsoft.AspNet.WebApi.Owin 5.2.2" Category="Installed Package" Bounds="630.490783691406,17.072961807251,866.386169433594,150.14252281189" />
+    <Link Source="ProjectDONE" Target="Microsoft.Owin.Host.SystemWeb 3.0.0" Category="Installed Package" Bounds="1404.62658691406,25.9599990844727,127.246215820313,180.151634216309" />
+    <Link Source="ProjectDONE" Target="Microsoft.Owin.Security.Facebook 3.0.0" Category="Installed Package" Bounds="1552.89587402344,25.9599990844727,412.866088867188,140.08260345459" />
+    <Link Source="ProjectDONE" Target="Microsoft.Owin.Security.Google 3.0.0" Category="Installed Package" Bounds="1552.89587402344,25.9599990844727,196.875610351563,128.842002868652" />
+    <Link Source="ProjectDONE" Target="Microsoft.Owin.Security.MicrosoftAccount 3.0.0" Category="Installed Package" Bounds="1317.58740234375,25.9599990844727,214.867431640625,129.493629455566" />
+    <Link Source="ProjectDONE" Target="Microsoft.Owin.Security.Twitter 3.0.0" Category="Installed Package" Bounds="1541.67455358714,25.96,1.76957967815247,123.550570575176" />
+    <Link Source="ProjectDONE" Target="angularjs 1.3.8" Category="Installed Package" Bounds="1586.10034179688,19.299840927124,241.080810546875,39.3218593597412" />
+    <Link Source="WebGrease 1.5.2" Target="Antlr 3.4.1.9004" Category="Package Dependency" Bounds="1667.11639109264,295.934187536689,124.339158456591,29.4453699129653" />
+    <Link Source="WebGrease 1.5.2" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" Bounds="1634.53609905746,296.389647586367,39.351644216169,25.1529114828209" />
+  </Links>
+  <Categories>
+    <Category Id="Installed Package" />
+    <Category Id="Package" />
+    <Category Id="Package Dependency" />
+    <Category Id="Project" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

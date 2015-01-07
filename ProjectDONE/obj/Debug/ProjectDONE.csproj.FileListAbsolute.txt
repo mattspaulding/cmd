@@ -1,4 +1,3 @@
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
 C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.dll.config
 C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.dll
 C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.pdb
@@ -8,6 +7,9 @@ C:\code\ProjectDONE\ProjectDONE\bin\EntityFramework.SqlServer.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Services.Client.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.dll
@@ -18,11 +20,15 @@ C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Web.Infrastructure.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Newtonsoft.Json.dll
 C:\code\ProjectDONE\ProjectDONE\bin\Owin.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Net.Http.Formatting.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Helpers.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.Owin.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.WebHost.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Mvc.dll
@@ -32,6 +38,12 @@ C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Deployment.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.dll
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Razor.dll
 C:\code\ProjectDONE\ProjectDONE\bin\WebGrease.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Services.Client.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.xml
 C:\code\ProjectDONE\ProjectDONE\bin\Newtonsoft.Json.xml
 C:\code\ProjectDONE\ProjectDONE\bin\System.Net.Http.Formatting.xml
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Helpers.xml
@@ -59,16 +71,6 @@ C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Google.xml
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.xml
 C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.Owin.xml
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
-C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.dll
-C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.dll
-C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.dll
-C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.dll
-C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.xml
-C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.xml
-C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.xml
-C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.xml
 C:\code\ProjectDONE\ProjectDONE\bin\de\Microsoft.Data.Edm.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\es\Microsoft.Data.Edm.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\fr\Microsoft.Data.Edm.resources.dll
@@ -87,6 +89,15 @@ C:\code\ProjectDONE\ProjectDONE\bin\ko\Microsoft.Data.OData.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\ru\Microsoft.Data.OData.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\Microsoft.Data.OData.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\de\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\es\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\fr\System.Spatial.resources.dll
@@ -97,15 +108,14 @@ C:\code\ProjectDONE\ProjectDONE\bin\ru\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UniversalDelete.resources
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UpdateJob.resources
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.RemoveDemographics_Email.resources
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.CreatedOnNullable.resources
-\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ProjectDONE.dll.config
-\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ProjectDONE.dll
-\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ProjectDONE.pdb
-\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Antlr3.Runtime.dll
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.dll
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.SqlServer.dll
 \\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.dll
