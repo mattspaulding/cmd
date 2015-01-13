@@ -105,5 +105,15 @@ namespace ProjectDONE.Models
         public string URL { get; set; }
         public string Title { get; set; }
         public string Meta { get; set; }
+
+        public static implicit operator MediaViewModel(Media model)
+        {
+            var retval = new MediaViewModel();
+            retval.MIME_TYPE = model.MIME_TYPE;
+            retval.URL = model.URL;
+            retval.Title = model.Title;
+            retval.Meta = model.Meta;
+            return retval;
+        }
     }
 }

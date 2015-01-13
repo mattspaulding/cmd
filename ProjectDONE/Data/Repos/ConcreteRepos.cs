@@ -67,5 +67,8 @@ namespace ProjectDONE.Data.Repos
 
     }
 
+    public class MediaRepo : BaseRepo<Media>
+    { }
+
    
 }
