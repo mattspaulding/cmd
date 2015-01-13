@@ -19,25 +19,24 @@ namespace ProjectDONE.Controllers
     {
         [HttpGet]
         [Route("*{path}")]
-        public HttpResponseMessage Get(string path)
+        public HttpResponseMessage Image(string path)
         {
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             response.Content = new StringContent(path ?? "");
             return response;
         }
+
+       
        [HttpPost]
        [Route("Upload")]
         public async Task<HttpResponseMessage> Upload()
         {
-
-
             HttpRequestMessage request = this.Request;
             if (!request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            
             var provider = new MultipartFileStreamProvider(Path.GetTempPath());
             await request.Content.ReadAsMultipartAsync(provider);
 
