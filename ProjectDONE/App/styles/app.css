@@ -1,3 +1,7 @@
+.validation-error {
+    color: #ff0000;
+}
+
 .left {
     text-align: left;
 }

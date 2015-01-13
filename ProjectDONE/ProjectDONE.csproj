@@ -275,6 +275,10 @@
     <Content Include="App\Templates\Dashboard.html" />
     <Content Include="App\Templates\Login.html" />
     <Content Include="App\Templates\ReviewJob.html" />
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
@@ -1058,7 +1062,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Spa\" />
     <Folder Include="Views\App\" />
     <Folder Include="Views\Media\" />
