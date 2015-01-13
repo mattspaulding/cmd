@@ -255,6 +255,7 @@
     <Content Include="App\lib\onsen\css\onsenui.css" />
     <Content Include="App\lib\onsen\js\angular\angular-animate.js" />
     <Content Include="App\lib\onsen\js\angular\angular-csp.css" />
+    <Content Include="App\lib\onsen\js\angular\angular-messages.min.js" />
     <Content Include="App\lib\onsen\js\angular\angular-touch.js" />
     <Content Include="App\lib\onsen\js\angular\angular.js" />
     <Content Include="App\lib\onsen\js\angular\angular.min.js" />
