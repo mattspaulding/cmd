@@ -1,0 +1,30 @@
+﻿<ons-page ng-controller="registerController">
+    <ons-toolbar>
+        <div class="left"><ons-back-button ons-if-platform="ios">Back</ons-back-button></div>
+        <div class="center">Sign Up</div>
+    </ons-toolbar>
+    <section>
+
+        <form name="register.form" novalidate ng-submit="Submit()">
+            <input placeholder="Email Address" name="email" ng-model="register.email" type="email" class="text-input" style="width:100%;" required />
+            <div class="validation-error" ng-messages="register.form.email.$error" ng-if="register.form.$submitted">
+                <div ng-message="required">Required</div>
+                <div ng-message="email">Invalid format for email address</div>
+            </div>
+
+            <input placeholder="Password" name="password" ng-model="register.password" type="password" class="text-input" style="width:100%" required />
+
+            <div class="validation-error" ng-messages="register.form.password.$error" ng-if="register.form.$submitted">
+                <div ng-message="required">Required</div>
+            </div>
+            <input placeholder="Confirm Password" name="confirmPassword" ng-model="register.confirmPassword" type="password" class="text-input" style="width:100%" required />
+
+            <div class="validation-error" ng-messages="register.form.confirmPassword.$error" ng-if="register.form.$submitted">
+                <div ng-message="required">Required</div>
+            </div>
+
+            <input type="submit" value="Sign Up" />
+        </form>
+</section>
+        
+</ons-page>

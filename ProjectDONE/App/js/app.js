@@ -6,7 +6,7 @@ ons.ready(function () {
 
 (function () {
     'use strict';
-    var app = angular.module('app', ['onsen']);
+    var app = angular.module('app', ['onsen', 'ngMessages']);
     //TODO: put user's auth token in local storage
     app.controller('AppController', function ($scope, $projectDone, $http, $timeout) {
 
@@ -40,6 +40,46 @@ ons.ready(function () {
         $timeout($scope.CheckLogin, 500)
     });
 
+    app.controller('registerController', function ($scope, User, $projectDone, $http) {
+        $scope.register = {};
+
+        $scope.Submit = function () {
+            if (!$scope.register.form.$valid) return;
+            root_navigator.pushPage('loginLoading', {
+                onTransitionEnd: function () {
+
+                    $projectDone.Register($scope.register.email, $scope.register.password, $scope.register.confirmPassword)
+                    .then(function (result) {
+
+
+                        $projectDone.Login($scope.register.email, $scope.register.password)
+                        .then(function (result) {
+                            $scope.register.email = $scope.register.password = "";
+                            var authKey = result.data.access_token;;
+                            window.localStorage['authKey'] = authKey;
+                            $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
+
+                        })
+                        .then(function () {
+                            $projectDone.GetOwner()
+                                      .then(function (result) {
+                                          $projectDone.LoggedInUser.owner = result.data;
+                                      })
+                                      .then(function () {
+                                          $projectDone.GetOwnerJobs($projectDone.LoggedInUser.owner.ID)
+                                          .then(function (results) {
+                                              $projectDone.LoggedInUser.owner.Jobs = results.data;
+                                              root_navigator.pushPage('Dashboard');
+                                          })
+                                      });
+                        });
+
+                    });
+                }
+            });
+        }
+    });
+
     app.controller('loginController', function ($scope, User, $projectDone, $http) {
 
         $scope.Login = function () {
@@ -69,6 +109,10 @@ ons.ready(function () {
                     });
                 }
             });
+        }
+
+        $scope.GoToRegister = function () {
+            root_navigator.pushPage('Register');
         }
     });
 

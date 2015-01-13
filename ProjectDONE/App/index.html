@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="App/styles/app.css" />
     <link rel="stylesheet" href="App/styles/onsen-css-components-blue-basic-theme.css">
     <script src="App/lib/onsen/js/angular/angular.js"></script>
+    <script src="App/lib/onsen/js/angular/angular-messages.min.js"></script>
     <script src="App/lib/onsen/js/onsenui.js"></script>
 
     <script src="cordova.js"></script>
@@ -27,7 +28,7 @@
                     </div>
                 </ons-navigator>
             </div>
-            <div style="width:100%; margin:0px; padding:0px; height:19%; position:absolute; bottom:0px;">
+            <div style="width:100%; margin:0px; padding:0px; height:25%; position:absolute; bottom:0px;">
                 <ons-navigator var="bottom_navigator">
                     <ons-page>
                         <div class="center">
@@ -41,6 +42,9 @@
     </ons-navigator>
     <ons-template id="loginLoading">
         <div style="width:100%; text-align:center; padding-top:5em; box-sizing:border-box"><p>...Loading</p></div>
+    </ons-template>
+    <ons-template id="Register">
+        <div ng-include="'App/Templates/Register.html'"></div>
     </ons-template>
     <ons-template id="Login">
         <div ng-include="'App/Templates/Login.html'"></div>
