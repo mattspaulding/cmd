@@ -53,7 +53,7 @@ ons.ready(function () {
             root_navigator.pushPage('loginLoading', {
                 onTransitionEnd: function () {
 
-                    $projectDone.Register($scope.register.email, $scope.register.password, $scope.register.confirmPassword)
+                    $projectDone.Register($scope.register.email, $scope.register.password)
                     .then(function (result) {
                         $projectDone.Login($scope.register.email, $scope.register.password)
                         .then(function (result) {
@@ -343,11 +343,10 @@ ons.ready(function () {
             });
             return deferred.promise;
         };
-        self.Register = function (username, password, confirm) {
+        self.Register = function (username, password) {
             return $http.post('/api/account/register', {
                 Email: username,
-                Password: password,
-                ConfirmPassword: confirm
+                Password: password
             });
         };
         self.GetOwner = function () {

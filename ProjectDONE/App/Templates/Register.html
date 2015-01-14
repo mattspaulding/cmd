@@ -3,29 +3,33 @@
         <div class="left"><ons-back-button ons-if-platform="ios">Back</ons-back-button></div>
         <div class="center">Sign Up</div>
     </ons-toolbar>
-    <section>
 
-        <form name="register.form" novalidate ng-submit="register.Submit()">
-            <input placeholder="Email Address" name="email" ng-model="register.email" type="email" class="text-input" style="width:100%;" required />
-            <div class="validation-error" ng-messages="register.form.email.$error" ng-if="register.form.$submitted">
-                <div ng-message="required">Required</div>
-                <div ng-message="email">Invalid format for email address</div>
+    <div style="text-align: center;">
+        <ons-icon icon="ion-network" size="200px"></ons-icon>
+    </div>
+
+
+    <ons-row align="center" style="position: absolute; top: 0; bottom: 0;">
+        <ons-col align="center">
+            <div style="margin: 0 10px; padding: 5px; background-color: #f9f9f9;">
+                <form name="register.form" novalidate ng-submit="register.Submit()">
+                    <input placeholder="Email Address" name="email" ng-model="register.email" type="email" class="text-input" style="width:100%;" required />
+                    <div class="validation-error" ng-messages="register.form.email.$error" ng-if="register.form.$submitted">
+                        <div ng-message="required">Required</div>
+                        <div ng-message="email">Invalid format for email address</div>
+                    </div>
+
+                    <input placeholder="Password" name="password" ng-model="register.password" type="password" class="text-input" style="width:100%" required />
+
+                    <div class="validation-error" ng-messages="register.form.password.$error" ng-if="register.form.$submitted">
+                        <div ng-message="required">Required</div>
+                    </div>
+
+                    <ons-button modifier="large" ng-click="register.RegisterClick()" style="width:100%; margin-top: 10px;">Sign Up</ons-button>
+                    <input type="submit" value="Sign Up" class="ng-hide" />
+                </form>
             </div>
+        </ons-col>
+    </ons-row>
 
-            <input placeholder="Password" name="password" ng-model="register.password" type="password" class="text-input" style="width:100%" required />
-
-            <div class="validation-error" ng-messages="register.form.password.$error" ng-if="register.form.$submitted">
-                <div ng-message="required">Required</div>
-            </div>
-            <input placeholder="Confirm Password" name="confirmPassword" ng-model="register.confirmPassword" type="password" class="text-input" style="width:100%" required />
-
-            <div class="validation-error" ng-messages="register.form.confirmPassword.$error" ng-if="register.form.$submitted">
-                <div ng-message="required">Required</div>
-            </div>
-
-            <ons-button modifier="large" ng-click="register.RegisterClick()" style="width:76vw; margin-left:12vw">Sign Up</ons-button>
-            <input type="submit" value="Sign Up" class="ng-hide" />
-        </form>
-</section>
-        
 </ons-page>

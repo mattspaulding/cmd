@@ -1,10 +1,17 @@
 ﻿<ons-page ng-controller="loginController">
-    
-    <section style="display:block; margin:10px;">
-        <input placeholder="Email Address" class="text-input" ng-model="email" style="width:100%; margin-bottom:10px;"/>
-        <input placeholder="Password" type="password" class="text-input" ng-model="password" style="width:100%"/>
-    </section>
-        
-    <ons-button modifier="large" ng-click="Login()" style="width:76vw; margin-left:12vw">Login</ons-button>
-    <a href="#" style="width:76vw; margin-left:12vw" ng-click="GoToRegister()">Sign Up</a>
+    <div style="text-align: center;">
+        <ons-icon icon="ion-network" size="200px"></ons-icon>
+    </div>
+
+    <ons-row align="center" style="position: absolute; top: 0; bottom: 0;">
+        <ons-col align="center">
+            <div style="margin: 0 10px; padding: 5px; background-color: #f9f9f9;">
+                <input placeholder="Email Address" class="text-input" ng-model="email" style="width:100%;" />
+                <input placeholder="Password" type="password" class="text-input" ng-model="password" style="width:100%; margin-bottom:10px;" />
+                <ons-button modifier="large" ng-click="Login()" style="width:100%; margin-bottom:10px;">Login</ons-button>
+                <a href="#" style="width:100%" ng-click="GoToRegister()">Sign Up</a>
+            </div>
+        </ons-col>
+    </ons-row>
+
 </ons-page>
