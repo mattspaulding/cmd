@@ -34,7 +34,7 @@ ons.ready(function () {
             }
             else
             {
-                bottom_navigator.pushPage('Login');
+                root_navigator.pushPage('Login');
             }
         }
         $timeout($scope.CheckLogin, 500)
@@ -43,37 +43,30 @@ ons.ready(function () {
     app.controller('registerController', function ($scope, User, $projectDone, $http) {
         $scope.register = {};
 
-        $scope.Submit = function () {
+        $scope.register.RegisterClick = function () {
+            $scope.register.form.$setSubmitted();
+            $scope.register.Submit();
+        };
+
+        $scope.register.Submit = function () {
             if (!$scope.register.form.$valid) return;
             root_navigator.pushPage('loginLoading', {
                 onTransitionEnd: function () {
 
                     $projectDone.Register($scope.register.email, $scope.register.password, $scope.register.confirmPassword)
                     .then(function (result) {
-
-
                         $projectDone.Login($scope.register.email, $scope.register.password)
                         .then(function (result) {
-                            $scope.register.email = $scope.register.password = "";
-                            var authKey = result.data.access_token;;
-                            window.localStorage['authKey'] = authKey;
-                            $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
-
+                            root_navigator.pushPage('Dashboard');
                         })
-                        .then(function () {
-                            $projectDone.GetOwner()
-                                      .then(function (result) {
-                                          $projectDone.LoggedInUser.owner = result.data;
-                                      })
-                                      .then(function () {
-                                          $projectDone.GetOwnerJobs($projectDone.LoggedInUser.owner.ID)
-                                          .then(function (results) {
-                                              $projectDone.LoggedInUser.owner.Jobs = results.data;
-                                              root_navigator.pushPage('Dashboard');
-                                          })
-                                      });
+                        .catch(function () {
+                            root_navigator.popPage();
+                            ons.notification.alert({ message: 'An error has occurred!' });
                         });
-
+                    })
+                    .catch(function (error) {
+                        root_navigator.popPage();
+                        ons.notification.alert({message: 'An error has occurred!'});
                     });
                 }
             });
@@ -83,33 +76,20 @@ ons.ready(function () {
     app.controller('loginController', function ($scope, User, $projectDone, $http) {
 
         $scope.Login = function () {
-            bottom_navigator.pushPage('loginLoading', {
+            root_navigator.pushPage('loginLoading', {
                 onTransitionEnd: function () {
 
                     $projectDone.Login($scope.email, $scope.password)
                     .then(function (result) {
-                        $scope.email = $scope.password = "";
-                        var authKey = result.data.access_token;;
-                        window.localStorage['authKey'] = authKey;
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
-
+                        root_navigator.pushPage('Dashboard');
                     })
-                    .then(function () {
-                        $projectDone.GetOwner()
-                                  .then(function (result) {
-                                      $projectDone.LoggedInUser.owner = result.data;
-                                  })
-                                  .then(function () {
-                                      $projectDone.GetOwnerJobs($projectDone.LoggedInUser.owner.ID)
-                                      .then(function (results) {
-                                          $projectDone.LoggedInUser.owner.Jobs = results.data;
-                                          root_navigator.pushPage('Dashboard');
-                                      })
-                                  });
+                    .catch(function () {
+                        root_navigator.popPage();
+                        ons.notification.alert({ message: 'An error has occurred!' });
                     });
                 }
             });
-        }
+        };
 
         $scope.GoToRegister = function () {
             root_navigator.pushPage('Register');
@@ -310,14 +290,17 @@ ons.ready(function () {
 
     });
 
-    app.service('$projectDone', function ($http, Job, Bid) {
+    app.service('$projectDone', function ($http, Job, Bid, $q) {
+        var self = this;
         //TODO: find a way to pass odata to queries that support it.
         //User 
-        this.LoggedInUser = {};
+        self.LoggedInUser = {};
 
-        this.SelectedJob = {};
+        self.SelectedJob = {};
 
-        this.Login = function (username, password) {
+        self.Login = function (username, password) {
+            var deferred = $q.defer();
+
             username = encodeURIComponent(username);
             password = encodeURIComponent(password);
             var request =
@@ -330,53 +313,81 @@ ons.ready(function () {
                     data: 'grant_type=password&username=' + username + '&password=' + password
 
                 };
-            return $http(request);
+
+
+            $http(request)
+            .then(function (result) {
+                var authKey = result.data.access_token;
+                window.localStorage['authKey'] = authKey;
+                $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
+
+                self.GetOwner()
+                          .then(function (result) {
+                              self.LoggedInUser.owner = result.data;
+
+                              self.GetOwnerJobs(self.LoggedInUser.owner.ID)
+                              .then(function (results) {
+                                  self.LoggedInUser.owner.Jobs = results.data;
+                                  deferred.resolve();
+                              })
+                              .catch(function () {
+                                  deferred.reject();
+                              });
+                          })
+                            .catch(function () {
+                                deferred.reject();
+                            });
+            })
+            .catch(function () {
+                deferred.reject();
+            });
+            return deferred.promise;
         };
-        this.Register = function (username, password, confirm) {
+        self.Register = function (username, password, confirm) {
             return $http.post('/api/account/register', {
                 Email: username,
                 Password: password,
                 ConfirmPassword: confirm
             });
         };
-        this.GetOwner = function () {
+        self.GetOwner = function () {
             return $http.get("/api/app/Owner");
         };
 
         //Job
-        this.CreateJob = function (job) {
+        self.CreateJob = function (job) {
             return $http.post('/api/app/Job', job);
         };
-        this.GetJob = function (jobId) {
+        self.GetJob = function (jobId) {
             return $http.get('/api/app/Job/' + jobId);
         };
-        this.GetOwnerJobs = function (ownerId) {
+        self.GetOwnerJobs = function (ownerId) {
             //TODO, Add pagination
             return $http.get('/api/app/job?$select=Title, ID&$filter=Owner_ID eq ' + ownerId);
         };
-        this.GetJobs = function(){
+        self.GetJobs = function () {
             //TODO, pagination and filtering
             return $http.get('/api/app/job?$select=Title,ID,PublicDescription');
         };
 
         //Bid
-        this.PlaceBid = function (jobId, bid) {
+        self.PlaceBid = function (jobId, bid) {
             return $http.post('/api/app/Job/' + jobId + '/Bid', bid);
         };
 
-        this.GetBid = function (bidID) {
+        self.GetBid = function (bidID) {
             console.log("Not Implemented");
         };
 
-        this.AcceptBid = function (bidID) {
+        self.AcceptBid = function (bidID) {
             return $http.post('/api/app/Bid/' + bidID + '/Accept');
         };
 
-        this.ConfirmBid = function (bidID) {
+        self.ConfirmBid = function (bidID) {
             return $http.post('/api/app/Bid/' + bidID + '/Confirm');
         };
 
-        this.WithdrawlBid = function (bidID) {
+        self.WithdrawlBid = function (bidID) {
             console.log("Not implmented");
         };
 

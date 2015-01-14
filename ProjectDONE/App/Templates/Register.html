@@ -5,7 +5,7 @@
     </ons-toolbar>
     <section>
 
-        <form name="register.form" novalidate ng-submit="Submit()">
+        <form name="register.form" novalidate ng-submit="register.Submit()">
             <input placeholder="Email Address" name="email" ng-model="register.email" type="email" class="text-input" style="width:100%;" required />
             <div class="validation-error" ng-messages="register.form.email.$error" ng-if="register.form.$submitted">
                 <div ng-message="required">Required</div>
@@ -23,7 +23,8 @@
                 <div ng-message="required">Required</div>
             </div>
 
-            <input type="submit" value="Sign Up" />
+            <ons-button modifier="large" ng-click="register.RegisterClick()" style="width:76vw; margin-left:12vw">Sign Up</ons-button>
+            <input type="submit" value="Sign Up" class="ng-hide" />
         </form>
 </section>
         
