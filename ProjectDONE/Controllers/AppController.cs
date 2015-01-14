@@ -60,7 +60,9 @@ namespace ProjectDONE.Controllers
             job.AcceptedBid = null;
             job.AcceptedBid_ID = null;
             job.Owner = null;
-            
+            job.Media_ID = job.Media.ID;
+            job.Media = null;
+
             if(job.Address!=null && job.Address.ID == 0)
                 job.Address.CreatedByUserId = User.Identity.GetUserId();
 
@@ -154,7 +156,9 @@ namespace ProjectDONE.Controllers
                             Name = job.AcceptedBid.Owner.Name,
                             IsCorporateEntity = job.AcceptedBid.Owner.IsCorporateEntity
                         }
-                    }
+                    },
+                    Media_ID = job.Media_ID,
+                    Media = job.Media
                 };
 
             return result.FirstOrDefault();
@@ -204,7 +208,9 @@ namespace ProjectDONE.Controllers
                         Line1 = (ownerId == job.Owner_ID) ? job.Address.Line1 : null,
                         Line2 = (ownerId == job.Owner_ID) ? job.Address.Line2 : null,
                         
-                    }
+                    },
+                    Media_ID = job.Media_ID,
+                    Media = job.Media
                 };
 
 

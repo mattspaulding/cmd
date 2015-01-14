@@ -16,13 +16,14 @@ namespace ProjectDONE.Migrations
                         Owner_ID = c.Long(nullable: false),
                         Job_ID = c.Long(nullable: false),
                         Status = c.Int(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
+                        Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: true)
-                .ForeignKey("dbo.Jobs", t => t.Job_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: false)
+                .ForeignKey("dbo.Jobs", t => t.Job_ID, cascadeDelete: false)
                 .Index(t => t.Owner_ID)
                 .Index(t => t.Job_ID);
             
@@ -31,9 +32,10 @@ namespace ProjectDONE.Migrations
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
+                        Deleted = c.Boolean(nullable: false),
                         Bid_ID = c.Long(),
                         Job_ID = c.Long(),
                     })
@@ -55,72 +57,45 @@ namespace ProjectDONE.Migrations
                         Longitude = c.Long(nullable: false),
                         PrivateDescription = c.String(),
                         AcceptedBid_ID = c.Long(),
+                        Media_ID = c.Long(nullable: false),
+                        AddressNotes = c.String(),
+                        Earliest = c.DateTime(),
+                        DoneBy = c.DateTime(),
+                        MaxPay = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Status = c.Int(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
-                        Demographics_ID = c.Long(),
+                        Deleted = c.Boolean(nullable: false),
+                        Address_ID = c.Long(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Bids", t => t.AcceptedBid_ID)
-                .ForeignKey("dbo.Demographics", t => t.Demographics_ID)
+                .ForeignKey("dbo.Addresses", t => t.Address_ID)
+                .ForeignKey("dbo.Media", t => t.Media_ID, cascadeDelete: false)
                 .ForeignKey("dbo.Owners", t => t.Owner_ID, cascadeDelete: false)
                 .Index(t => t.Owner_ID)
                 .Index(t => t.AcceptedBid_ID)
-                .Index(t => t.Demographics_ID);
-            
-            CreateTable(
-                "dbo.Demographics",
-                c => new
-                    {
-                        ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
-                        CreatedByUserId = c.String(),
-                        TransactionID = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
+                .Index(t => t.Media_ID)
+                .Index(t => t.Address_ID);
             
             CreateTable(
                 "dbo.Addresses",
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        Name = c.String(),
+                        Line1 = c.String(),
+                        Line2 = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zip = c.String(),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
-                        Demographics_ID = c.Long(),
+                        Deleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Demographics", t => t.Demographics_ID)
-                .Index(t => t.Demographics_ID);
-            
-            CreateTable(
-                "dbo.Emails",
-                c => new
-                    {
-                        ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
-                        CreatedByUserId = c.String(),
-                        TransactionID = c.Guid(nullable: false),
-                        Demographics_ID = c.Long(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Demographics", t => t.Demographics_ID)
-                .Index(t => t.Demographics_ID);
-            
-            CreateTable(
-                "dbo.PhoneNumbers",
-                c => new
-                    {
-                        ID = c.Long(nullable: false, identity: true),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
-                        CreatedByUserId = c.String(),
-                        TransactionID = c.Guid(nullable: false),
-                        Demographics_ID = c.Long(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Demographics", t => t.Demographics_ID)
-                .Index(t => t.Demographics_ID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Media",
@@ -131,16 +106,14 @@ namespace ProjectDONE.Migrations
                         URL = c.String(),
                         Title = c.String(),
                         Meta = c.String(),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
-                        Job_ID = c.Long(),
+                        Deleted = c.Boolean(nullable: false),
                         Owner_ID = c.Long(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Jobs", t => t.Job_ID)
                 .ForeignKey("dbo.Owners", t => t.Owner_ID)
-                .Index(t => t.Job_ID)
                 .Index(t => t.Owner_ID);
             
             CreateTable(
@@ -150,9 +123,10 @@ namespace ProjectDONE.Migrations
                         ID = c.Long(nullable: false, identity: true),
                         Name = c.String(),
                         IsCorporateEntity = c.Boolean(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false, defaultValueSql : "GetDate()"),
+                        CreatedOn = c.DateTime(),
                         CreatedByUserId = c.String(),
                         TransactionID = c.Guid(nullable: false),
+                        Deleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -174,8 +148,8 @@ namespace ProjectDONE.Migrations
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: false)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -212,7 +186,7 @@ namespace ProjectDONE.Migrations
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -224,7 +198,7 @@ namespace ProjectDONE.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: false)
                 .Index(t => t.UserId);
             
         }
@@ -240,12 +214,9 @@ namespace ProjectDONE.Migrations
             DropForeignKey("dbo.Media", "Owner_ID", "dbo.Owners");
             DropForeignKey("dbo.Jobs", "Owner_ID", "dbo.Owners");
             DropForeignKey("dbo.Bids", "Owner_ID", "dbo.Owners");
-            DropForeignKey("dbo.Media", "Job_ID", "dbo.Jobs");
+            DropForeignKey("dbo.Jobs", "Media_ID", "dbo.Media");
             DropForeignKey("dbo.Dialogs", "Job_ID", "dbo.Jobs");
-            DropForeignKey("dbo.Jobs", "Demographics_ID", "dbo.Demographics");
-            DropForeignKey("dbo.PhoneNumbers", "Demographics_ID", "dbo.Demographics");
-            DropForeignKey("dbo.Emails", "Demographics_ID", "dbo.Demographics");
-            DropForeignKey("dbo.Addresses", "Demographics_ID", "dbo.Demographics");
+            DropForeignKey("dbo.Jobs", "Address_ID", "dbo.Addresses");
             DropForeignKey("dbo.Jobs", "AcceptedBid_ID", "dbo.Bids");
             DropForeignKey("dbo.Dialogs", "Bid_ID", "dbo.Bids");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -256,11 +227,8 @@ namespace ProjectDONE.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Media", new[] { "Owner_ID" });
-            DropIndex("dbo.Media", new[] { "Job_ID" });
-            DropIndex("dbo.PhoneNumbers", new[] { "Demographics_ID" });
-            DropIndex("dbo.Emails", new[] { "Demographics_ID" });
-            DropIndex("dbo.Addresses", new[] { "Demographics_ID" });
-            DropIndex("dbo.Jobs", new[] { "Demographics_ID" });
+            DropIndex("dbo.Jobs", new[] { "Address_ID" });
+            DropIndex("dbo.Jobs", new[] { "Media_ID" });
             DropIndex("dbo.Jobs", new[] { "AcceptedBid_ID" });
             DropIndex("dbo.Jobs", new[] { "Owner_ID" });
             DropIndex("dbo.Dialogs", new[] { "Job_ID" });
@@ -274,10 +242,7 @@ namespace ProjectDONE.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Owners");
             DropTable("dbo.Media");
-            DropTable("dbo.PhoneNumbers");
-            DropTable("dbo.Emails");
             DropTable("dbo.Addresses");
-            DropTable("dbo.Demographics");
             DropTable("dbo.Jobs");
             DropTable("dbo.Dialogs");
             DropTable("dbo.Bids");

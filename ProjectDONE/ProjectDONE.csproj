@@ -206,25 +206,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412091957386_Create.cs" />
-    <Compile Include="Migrations\201412091957386_Create.Designer.cs">
-      <DependentUpon>201412091957386_Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412102200224_UniversalDelete.cs" />
-    <Compile Include="Migrations\201412102200224_UniversalDelete.Designer.cs">
-      <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412172333420_UpdateJob.cs" />
-    <Compile Include="Migrations\201412172333420_UpdateJob.Designer.cs">
-      <DependentUpon>201412172333420_UpdateJob.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412180429317_RemoveDemographics_Email.cs" />
-    <Compile Include="Migrations\201412180429317_RemoveDemographics_Email.Designer.cs">
-      <DependentUpon>201412180429317_RemoveDemographics_Email.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412180519430_CreatedOnNullable.cs" />
-    <Compile Include="Migrations\201412180519430_CreatedOnNullable.Designer.cs">
-      <DependentUpon>201412180519430_CreatedOnNullable.cs</DependentUpon>
+    <Compile Include="Migrations\201501140744540_Create.cs" />
+    <Compile Include="Migrations\201501140744540_Create.Designer.cs">
+      <DependentUpon>201501140744540_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -259,6 +243,7 @@
     <Content Include="App\lib\onsen\js\angular\angular-touch.js" />
     <Content Include="App\lib\onsen\js\angular\angular.js" />
     <Content Include="App\lib\onsen\js\angular\angular.min.js" />
+    <Content Include="App\lib\onsen\js\jquery-2.1.3.js" />
     <Content Include="App\lib\onsen\js\onsenui.js" />
     <Content Include="App\lib\onsen\js\onsenui.min.js" />
     <Content Include="App\lib\onsen\js\onsenui_all.js" />
@@ -1045,6 +1030,9 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1058,6 +1046,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1123,20 +1112,8 @@
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412091957386_Create.resx">
-      <DependentUpon>201412091957386_Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412102200224_UniversalDelete.resx">
-      <DependentUpon>201412102200224_UniversalDelete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412172333420_UpdateJob.resx">
-      <DependentUpon>201412172333420_UpdateJob.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412180429317_RemoveDemographics_Email.resx">
-      <DependentUpon>201412180429317_RemoveDemographics_Email.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412180519430_CreatedOnNullable.resx">
-      <DependentUpon>201412180519430_CreatedOnNullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501140744540_Create.resx">
+      <DependentUpon>201501140744540_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

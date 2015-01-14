@@ -30,7 +30,8 @@ namespace ProjectDONE.Models
         public long Latitude { get; set; }
         public long Longitude { get; set; }
         public decimal MaxPay { get; set; }
-        public List<Media> Media{ get; set; }
+        public long Media_ID { get; set; }
+        public Media Media{ get; set; }
         public OwnerViewModel Owner { get; set; }
         public long Owner_ID { get; set; }
         public string PrivateDescription { get; set; }
@@ -109,6 +110,10 @@ namespace ProjectDONE.Models
         public static implicit operator MediaViewModel(Media model)
         {
             var retval = new MediaViewModel();
+            retval.ID = model.ID;
+            retval.Deleted = model.Deleted;
+            retval.CreatedByUserId = model.CreatedByUserId;
+            retval.CreatedOn = model.CreatedOn;
             retval.MIME_TYPE = model.MIME_TYPE;
             retval.URL = model.URL;
             retval.Title = model.Title;

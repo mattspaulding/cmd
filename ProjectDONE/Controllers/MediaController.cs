@@ -71,16 +71,18 @@ namespace ProjectDONE.Controllers
             var guid_file_name = Guid.NewGuid().ToString() + Path.GetExtension(filename);
             var blob = container.GetBlockBlobReference(guid_file_name);
             blob.Properties.ContentType = provider.FileData[0].Headers.ContentType.MediaType;
+            var fileupload = blob.UploadFromStreamAsync(File.OpenRead(provider.FileData[0].LocalFileName));
 
             var model = new Media
             {
                 CreatedOn = DateTime.Now,
                 MIME_TYPE = blob.Properties.ContentType,
-                Title = Path.GetFileName(filename)
+                Title = Path.GetFileName(filename),
+                URL = "/api/media/" + guid_file_name
             };
 
-            model.URL = "/api/media/" + guid_file_name;
-            var fileupload =  blob.UploadFromStreamAsync(File.OpenRead(provider.FileData[0].LocalFileName));
+           
+           
       
             _MediaRepo.Add(model);
             _MediaRepo.Save();

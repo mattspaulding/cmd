@@ -46,7 +46,9 @@ namespace ProjectDONE.Models.AppModels
         [ForeignKey("AcceptedBid_ID")]
         public virtual Bid AcceptedBid { get; set; }
         public virtual long? AcceptedBid_ID { get; set; }
-        public virtual List<Media> Media { get; set; }
+        public long Media_ID { get; set; }
+        [ForeignKey("Media_ID")]
+        public virtual Media Media { get; set; }
         public virtual List<Dialog> Dialog { get; set; }
         public virtual List<Bid> Bids { get; set; }
         public virtual Address Address { get; set; }
@@ -87,6 +89,7 @@ namespace ProjectDONE.Models.AppModels
 
     public class Media : BaseAppModel
     {
+
         public string MIME_TYPE { get; set; }
         public string URL { get; set; }
         public string Title { get; set; }

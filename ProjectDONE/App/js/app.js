@@ -16,8 +16,7 @@ ons.ready(function () {
                 return
             }
             var authKey = window.localStorage['authKey'];
-            if (authKey)
-            {
+            if (authKey) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
                 $projectDone.GetOwner()
                                       .then(function (result) {
@@ -32,8 +31,7 @@ ons.ready(function () {
                                           });
                                       });
             }
-            else
-            {
+            else {
                 bottom_navigator.pushPage('Login');
             }
         }
@@ -138,44 +136,49 @@ ons.ready(function () {
         };
 
         $scope.ListJobs();
-       
+
     });
 
     app.controller('createJobController', function ($scope, $projectDone, Job, Address) {
         $scope.Job = new Job();
         $scope.Job.Address = new Address();
         $scope.uploadingImage = false;
-        $scope.imageUrl = '';
+        $scope.imageData = null;
+        $scope.image = null;
 
-        onchange="angular.element(this).scope().fileNameChanged()"
+        $scope.$watch('imageData', function () {
+            if ($scope.imageData) {
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    $scope.$apply(function () {
+                        $scope.image = e.target.result;
+                    });
+                };
+                fr.readAsDataURL($scope.imageData);
+            }
 
-        $scope.fileNameChanged = function ()
-        {
-            console.log($scope.imageUrl);
-        }
-
-        $scope.UploadImage = function (image) {
-
-        };
+        });
 
         $scope.CreateJob = function () {
-            $projectDone.CreateJob($scope.Job)
+            $projectDone.UploadImage($scope.imageData)
             .then(function (results) {
-                $scope.Job = new Job();
-                $scope.Job.Address = new Address();
-                
-            });
+                $scope.Job.Media = results.data;
+                $projectDone.CreateJob($scope.Job)
+                .then(function (results) {
+                    $scope.Job = new Job();
+                    $scope.Job.Address = new Address();
+                    $scope.imageData = $scope.image = null;
+                });
+            })
         };
     });
 
-    app.controller('ReviewJobController',function($scope, $projectDone, Job, Bid)
-    {
+    app.controller('ReviewJobController', function ($scope, $projectDone, Job, Bid) {
         $scope.job = {}
         $scope.bid = new Bid();
         $scope.isJobOwner = null;
 
-        $scope.loadJob = function ()
-        {
+        $scope.loadJob = function () {
             $scope.job = $projectDone.SelectedJob;
             $projectDone.GetJob($scope.job.ID)
             .then(function (results) {
@@ -232,14 +235,14 @@ ons.ready(function () {
             Demographics: "",
             PrivateDescription: "",
             AcceptedBid_id: "",
-            Media: [],
+            Media: {},
             Dialog: [],
             Bids: [],
             Address: {},
-            AddressNotes: "", 
+            AddressNotes: "",
             Earliest: "",
-            DoneBy: "", 
-            MaxPay:0,
+            DoneBy: "",
+            MaxPay: 0,
             Status: 0
         };
         return Job;
@@ -297,8 +300,7 @@ ons.ready(function () {
                 this.set(Media);
         };
         Media.prototype = {
-            set: function(media)
-            {
+            set: function (media) {
                 angular.extend(this, media);
             },
             ID: null,
@@ -354,34 +356,56 @@ ons.ready(function () {
             //TODO, Add pagination
             return $http.get('/api/app/job?$select=Title, ID&$filter=Owner_ID eq ' + ownerId);
         };
-        this.GetJobs = function(){
+        this.GetJobs = function () {
             //TODO, pagination and filtering
-            return $http.get('/api/app/job?$select=Title,ID,PublicDescription');
+            return $http.get('/api/app/job');
         };
 
         //Bid
         this.PlaceBid = function (jobId, bid) {
             return $http.post('/api/app/Job/' + jobId + '/Bid', bid);
         };
-
         this.GetBid = function (bidID) {
             console.log("Not Implemented");
         };
-
         this.AcceptBid = function (bidID) {
             return $http.post('/api/app/Bid/' + bidID + '/Accept');
         };
-
         this.ConfirmBid = function (bidID) {
             return $http.post('/api/app/Bid/' + bidID + '/Confirm');
         };
-
         this.WithdrawlBid = function (bidID) {
             console.log("Not implmented");
         };
 
 
+        //Media
+        this.UploadImage = function (file) {
+            var fd = new FormData();
+            fd.append('file', file);
+            return $http.post('/api/media/upload', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+           
+        }
     })
+
+    app.directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function () {
+                    scope.$apply(function () {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);
 
 })();
 

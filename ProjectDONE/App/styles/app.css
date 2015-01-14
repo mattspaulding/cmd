@@ -54,7 +54,7 @@
         .dashboard .job .thumb {
             width: 90px;
             height: 90px;
-            background-color: black;
+            background-color: white;
             margin: 2px;
         }
 
@@ -101,6 +101,9 @@
             margin-right: 10px;
             padding: 10px;
             box-sizing: border-box;
+            background-size: contain !important;
+            background-position-x: center !important;
+            background-position-y: center !important;
         }
 
             .createJob .createJobForm ons-row ons-col .photo > label {
@@ -215,14 +218,14 @@
             padding-top: 4px;
             margin-top: 5px;
             height: 80px;
-            position:relative;
+            position: relative;
         }
 
 
             .reviewJob .jobState .bids .bid .accept {
                 float: right;
-                margin-top:10px;
-                margin-right:10px;
+                margin-top: 10px;
+                margin-right: 10px;
             }
 
             .reviewJob .jobState .bids .bid .amount {

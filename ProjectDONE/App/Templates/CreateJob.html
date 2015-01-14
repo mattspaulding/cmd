@@ -18,9 +18,9 @@
                 <label>Photo</label>
             </ons-col>
             <ons-col>
-                <div class="photo">
+                <div class="photo" ng-style="{'background': 'url(' + image + ') no-repeat'}">
                     <label for="{{uploadingImage?'':'upload'}}">
-                        <ons-icon spin="{{uploadingImage}}" 
+                        <ons-icon spin="{{uploadingImage}}"
                                   icon="{{uploadingImage?'ion-load-c':'ion-upload'}}">
                         </ons-icon>
                     </label>
@@ -28,8 +28,7 @@
                            id="upload"
                            name="photoUpload"
                            accept="image/*"
-                           ng-model="imageUrl"
-                           onchange="angular.element(this).scope().fileNameChanged()"
+                           file-model="imageData"
                            capture="camera">
                 </div>
             </ons-col>
