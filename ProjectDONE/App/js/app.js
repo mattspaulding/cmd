@@ -150,22 +150,19 @@ ons.ready(function () {
                 $scope.Job.Media = results.data;
                 $projectDone.CreateJob($scope.Job)
                 .then(function (results) {
-                    $scope.Job = new Job();
-                    $scope.Job.Address = new Address();
-                    $scope.imageData = $scope.image = null;
+                    root_navigator.popPage();
                 });
             })
         };
     });
 
     app.controller('ReviewJobController', function ($scope, $projectDone, Job, Bid) {
-        $scope.job = {}
+        $scope.job = undefined;
         $scope.bid = new Bid();
         $scope.isJobOwner = null;
 
         $scope.loadJob = function () {
-            $scope.job = $projectDone.SelectedJob;
-            $projectDone.GetJob($scope.job.ID)
+            $projectDone.GetJob($projectDone.SelectedJob.ID)
             .then(function (results) {
                 $scope.job = results.data;
                 $scope.isJobOwner = $scope.job.Owner_ID == $projectDone.LoggedInUser.owner.ID;
@@ -176,6 +173,7 @@ ons.ready(function () {
             $projectDone.PlaceBid($projectDone.SelectedJob.ID, $scope.bid)
             .then(function (results) {
                 $scope.bid = new Bid();
+                ons.notification.alert({ title: 'Success', message: 'Your bid was submitted' });
             });
         };
 
