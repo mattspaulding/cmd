@@ -72,12 +72,17 @@ ons.ready(function () {
     });
 
     app.controller('loginController', function ($scope, User, $projectDone, $http) {
+        $scope.login = {};
+        $scope.login.LoginClick = function () {
+            $scope.login.form.$setSubmitted();
+            $scope.login.Submit();
+        };
 
-        $scope.Login = function () {
+        $scope.login.Submit = function () {
             root_navigator.pushPage('loginLoading', {
                 onTransitionEnd: function () {
 
-                    $projectDone.Login($scope.email, $scope.password)
+                    $projectDone.Login($scope.login.email, $scope.login.password)
                     .then(function (result) {
                         root_navigator.pushPage('Dashboard');
                     })
@@ -89,7 +94,7 @@ ons.ready(function () {
             });
         };
 
-        $scope.GoToRegister = function () {
+        $scope.login.GoToRegister = function () {
             root_navigator.pushPage('Register');
         }
     });
