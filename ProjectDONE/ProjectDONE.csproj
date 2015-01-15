@@ -223,6 +223,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\images\icon-logo-with-text.png" />
+    <Content Include="App\images\icon-logo.png" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
     <Content Include="App\lib\onsen\css\font_awesome\css\font-awesome.css" />

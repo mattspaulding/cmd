@@ -4,20 +4,22 @@
         <div class="center">Create Job</div>
     </ons-toolbar>
     <ng-form novalidate class="createJobForm">
-        <!--What-->
         <ons-row>
-            <ons-col width="90px">
-                <label for="title">Title</label>
-            </ons-col>
             <ons-col>
+                <label for="title">Title<br />
+                    <span class="description">A brief summary of your job.</span>
+                </label>
                 <input id="title" ng-model="Job.Title" />
             </ons-col>
         </ons-row>
         <ons-row>
-            <ons-col width="50px">
-                <label>Photo</label>
-            </ons-col>
             <ons-col>
+                <label>Photo<br />
+                    <span class="description">
+                        A picture can say a thousand words.  Share a photo of your job.
+                    </span>
+                </label>
+
                 <div class="photo" ng-style="{'background': 'url(' + image + ') no-repeat'}">
                     <label for="{{uploadingImage?'':'upload'}}">
                         <ons-icon spin="{{uploadingImage}}"
@@ -29,38 +31,46 @@
                            name="photoUpload"
                            accept="image/*"
                            file-model="imageData"
-                           capture="camera">
+                           capture="camera"
+                           >
                 </div>
             </ons-col>
         </ons-row>
         <ons-row>
-            <ons-col width="100px">
-                <label for="description">Description</label>
-            </ons-col>
             <ons-col>
+                <label for="description">
+                    Description<br />
+                    <span class="description">
+                        Tell the world about your job.
+                    </span>
+                </label>
+
                 <textarea id="description" ng-model="Job.PublicDescription" style="height:100px;"></textarea>
             </ons-col>
         </ons-row>
 
         <!--Where-->
         <ons-row>
-            <ons-col width="100px">
-                <label>Location</label>
-            </ons-col>
             <ons-col>
-                <input placeholder="Address Line 1" ng-model="Job.Address.Line1" id="addressLine1" />
-                <input placeholder="Address Line City" ng-model="Job.Address.City" id="addressCity" />
-                <input placeholder="Address Line State" ng-model="Job.Address.State" id="addressState" />
-                <input placeholder="Address Line Zip" ng-model="Job.Address.Zip" id="addressZip" />
+                <label>
+                    Job Location<br />
+                    <span class="description">Where this job is located.</span>
+                </label>
+
+                <input placeholder="Address Line 1" ng-model="Job.Address.Line1" />
+                <input placeholder="City" ng-model="Job.Address.City" />
+                <input placeholder="State" ng-model="Job.Address.State"  />
+                <input placeholder="Zip" ng-model="Job.Address.Zip" />
             </ons-col>
         </ons-row>
         <!--When-->
         <ons-row>
-            <ons-col width="100px">
-                <label>Date & Time</label>
-            </ons-col>
             <ons-col>
-                <input type="datetime" ng-model="Job.Earliest" id="date" />
+                <label>Date<br />
+                    <span class="description">Earliest you would like this job done.</span>
+                </label>
+
+                <input type="datetime-local" ng-model="Job.Earliest" id="date" />
             </ons-col>
         </ons-row>
         <!--Save-->

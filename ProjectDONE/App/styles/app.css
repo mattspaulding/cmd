@@ -67,6 +67,8 @@
         }
 
 .createJob {
+        margin-left: 5px;
+        margin-right: 5px;
 }
 
     .createJob .createJobForm {
@@ -76,24 +78,30 @@
     }
 
         .createJob .createJobForm ons-row {
-            width: 100vw;
-            padding-bottom: 5px;
-            border-bottom: 1px solid;
-            border-bottom-color: lightgray;
+            padding-bottom: 30px;
+            border-bottom: 1px solid lightgray;
             margin-top: 10px;
+            margin-bottom: 30px;
         }
 
-        .createJob .createJobForm > ons-col {
-            width: 106px;
+        .createJob .createJobForm label {
+            font-weight: bold;
+            font-size: x-large;
         }
+        .createJob .createJobForm label .description {
+            font-weight: normal;
+            font-size: medium;
+            color: #808080;
+        }
+
 
         .createJob .createJobForm input, textarea {
-            width: 90%;
-            font-size: xx-large;
-            border: 0px solid white;
-            padding-left: 5px;
-            padding-top: 2px;
+            font-size: x-large;
+            width: 100%;
+            border: 0;
+            padding: 2px 5px;
             box-shadow: rgba(235,235,235,1) 2px 2px 5px inset;
+            line-height: 2em;
         }
 
         .createJob .createJobForm ons-row ons-col .photo {
@@ -104,6 +112,7 @@
             background-size: contain !important;
             background-position-x: center !important;
             background-position-y: center !important;
+            overflow: hidden;
         }
 
             .createJob .createJobForm ons-row ons-col .photo > label {

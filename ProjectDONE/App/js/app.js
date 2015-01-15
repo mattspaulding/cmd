@@ -72,12 +72,17 @@ ons.ready(function () {
     });
 
     app.controller('loginController', function ($scope, User, $projectDone, $http) {
+        $scope.login = {};
+        $scope.login.LoginClick = function () {
+            $scope.login.form.$setSubmitted();
+            $scope.login.Submit();
+        };
 
-        $scope.Login = function () {
+        $scope.login.Submit = function () {
             root_navigator.pushPage('loginLoading', {
                 onTransitionEnd: function () {
 
-                    $projectDone.Login($scope.email, $scope.password)
+                    $projectDone.Login($scope.login.email, $scope.login.password)
                     .then(function (result) {
                         root_navigator.pushPage('Dashboard');
                     })
@@ -89,7 +94,7 @@ ons.ready(function () {
             });
         };
 
-        $scope.GoToRegister = function () {
+        $scope.login.GoToRegister = function () {
             root_navigator.pushPage('Register');
         }
     });
@@ -145,22 +150,19 @@ ons.ready(function () {
                 $scope.Job.Media = results.data;
                 $projectDone.CreateJob($scope.Job)
                 .then(function (results) {
-                    $scope.Job = new Job();
-                    $scope.Job.Address = new Address();
-                    $scope.imageData = $scope.image = null;
+                    root_navigator.popPage();
                 });
             })
         };
     });
 
     app.controller('ReviewJobController', function ($scope, $projectDone, Job, Bid) {
-        $scope.job = {}
+        $scope.job = undefined;
         $scope.bid = new Bid();
         $scope.isJobOwner = null;
 
         $scope.loadJob = function () {
-            $scope.job = $projectDone.SelectedJob;
-            $projectDone.GetJob($scope.job.ID)
+            $projectDone.GetJob($projectDone.SelectedJob.ID)
             .then(function (results) {
                 $scope.job = results.data;
                 $scope.isJobOwner = $scope.job.Owner_ID == $projectDone.LoggedInUser.owner.ID;
@@ -171,6 +173,7 @@ ons.ready(function () {
             $projectDone.PlaceBid($projectDone.SelectedJob.ID, $scope.bid)
             .then(function (results) {
                 $scope.bid = new Bid();
+                ons.notification.alert({ title: 'Success', message: 'Your bid was submitted' });
             });
         };
 
