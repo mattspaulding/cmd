@@ -253,6 +253,7 @@
     <Content Include="App\lib\onsen\js\onsenui.min.js" />
     <Content Include="App\lib\onsen\js\onsenui_all.js" />
     <Content Include="App\lib\onsen\js\onsenui_all.min.js" />
+    <Content Include="App\styles\spinner.css" />
     <Content Include="App\styles\app.css" />
     <Content Include="App\styles\onsen-css-components-blue-basic-theme.css" />
     <Content Include="App\styles\onsen-css-components-blue-theme.css" />
