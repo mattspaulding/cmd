@@ -1,6 +1,6 @@
 ﻿<ons-page ng-controller="ReviewJobController" class="reviewJob">
     <ons-toolbar>
-        <div class="left"><ons-back-button ons-if-platform="ios"></ons-back-button></div>
+        <div class="left"><ons-back-button ></ons-back-button></div>
         <div class="center">{{job.Title}}</div>
     </ons-toolbar>
     <div ng-show="job">
@@ -15,10 +15,12 @@
         </div>
         <div class="jobState">
             <hr style="margin:0px;" />
-            <div class="pending">
+            
+            <div class="pending" ng-show="!job.AcceptedBid && job.Status ===0">
                 <!-- As the job Owner, i want to see a list of bids here and be able to accept a bid-->
                 <!-- for now, as the non owner, i want to have the option to bid on this job (Perhaps to also see all other bids as well) -->
-                <div class="bid" ng-show="!!!isJobOwner">
+                <div class="bid" ng-show="!isJobOwner">
+                    <!-- TODO: If this user has already bid, we should'nt allow them to bid via the UI again, also prevent this on the server-->
                     <ons-icon icon="ion-social-usd"></ons-icon>
                     <input type="text"
                            id="bid_amount" ng-model="bid.Amount" placeholder="0.00" />
@@ -32,7 +34,7 @@
                             <div class="name">{{bid.Owner.Name}}</div>
                         </div>
                         <div class="accept">
-                            <ons-button ng-click="">Accept</ons-button>
+                            <ons-button ng-click="AcceptBid(bid)">Accept</ons-button>
                         </div>
 
                         <div class="amount">
@@ -44,15 +46,92 @@
 
                 </div>
             </div>
-            <div class="accepted">
-                <!-- As the job owner, i want to see the accepted bid-->
+            
+            <div class="accepted" ng-show="job.AcceptedBid && job.Status ===0">
+               
                 <!-- As the owner of the winning bid, i want to see the option to 'Finish' the job-->
+                <div class="acceptedBid bid" ng-show="!isJobOwner">
+                    <ons-button ng-click="ConfirmBid(job.AcceptedBid)">Confirm Bid</ons-button>
+                </div>
+                <!-- As the job owner, i want to see the accepted bid-->
+                <div class="bids" ng-show="!!isJobOwner">
+
+                    <div class="acceptedBid bid">
+                        <div class="owner">
+                            <img class="photo" ng-src="{{job.AcceptedBid.Owner.Media[0]}}" />
+                            <div class="name">{{job.AcceptedBid.Owner.Name}}</div>
+                        </div>
+                        <div class="accept">
+                            <ons-icon icon="ion-checkmark-circled" style="color:green"></ons-icon>
+                        </div>
+
+                        <div class="amount">
+                            <span style="font-size:.8em; font-style:italic">Accepted!</span>
+                            <span> {{job.AcceptedBid.Amount | currency}}</span>
+                            
+                        </div>
+
+
+                    </div>
+
+                </div>
+                
                 <!-- As the non-owner of the job or the winning bid, I want to see the winning bid -->
             </div>
-            <div class="finished">
+            <div class="confirmed" ng-show="job.Status === 1">
+                <!-- As the owner of the winning bid, i want to see the option to 'Finish' the job-->
+                <div class="acceptedBid bid" ng-show="!isJobOwner">
+                    <ons-button ng-click="FinishJob()">Finish Job</ons-button>
+                </div>
+                <!-- As the job owner, i want to see the accepted bid-->
+                <div class="bids" ng-show="!!isJobOwner">
+
+                    <div class="acceptedBid bid">
+                        <div class="owner">
+                            <img class="photo" ng-src="{{job.AcceptedBid.Owner.Media[0]}}" />
+                            <div class="name">{{job.AcceptedBid.Owner.Name}}</div>
+                        </div>
+                        <div class="accept">
+                            <ons-icon icon="ion-checkmark-circled" style="color:green"></ons-icon>
+                        </div>
+
+                        <div class="amount">
+                            <span style="font-size:.8em; font-style:italic">Confirmed!</span>
+                            <span> {{job.AcceptedBid.Amount | currency}}</span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="finished" ng-show="job.Status === 2">
                 <!-- As the job owner, I want to see that the job was marked as finished with an option to "Pay"-->
                 <!-- As the owner of the winning bid, i want to see that the job was marked as finished and is waiting payment from the owner of the job-->
-                <!-- as the non-owner of the bid or job, I want to see the winning bid -->
+                <!-- As the owner of the winning bid, i want to see the option to 'Finish' the job-->
+                <div class="acceptedBid bid" ng-show="!isJobOwner">
+                    <span>Awaiting Payment</span>
+                </div>
+                <!-- As the job owner, i want to see the accepted bid-->
+                <div class="bids" ng-show="!!isJobOwner">
+
+                    <div class="acceptedBid bid">
+                        <div class="owner">
+                            <img class="photo" ng-src="{{job.AcceptedBid.Owner.Media[0]}}" />
+                            <div class="name">{{job.AcceptedBid.Owner.Name}}</div>
+                        </div>
+
+                        <div class="amount">
+                            <ons-button ng-click="PayJob()">Pay Job</ons-button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                
+                 <!-- as the non-owner of the bid or job, I want to see the winning bid -->
             </div>
             <div class="satisfied">
                 <!-- as the job owner, I want to see that this job was marked finished and payment was made.-->
