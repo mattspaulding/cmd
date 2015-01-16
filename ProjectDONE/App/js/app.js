@@ -334,12 +334,13 @@ ons.ready(function () {
                 //TODO: wrap the token in another object
                 //that contains the Tip and other ancllery information as it
                 //comes up.
-                
+                root_navigator.pushPage('Processing', { animation: "fade" });
                 $http.post(
                     '/api/app/Job/' + self._currentJob.ID + '/MakePayment',
                     JSON.stringify(token))
                 .then(function () {
                     //TODO: Loading goes here.
+                    root_navigator.popPage();
                     self._currentJob = null;
                 });
 
