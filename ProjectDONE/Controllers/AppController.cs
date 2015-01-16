@@ -14,6 +14,7 @@ using ProjectDONE.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Http.OData;
 using System.Net.Http.Formatting;
+using Stripe;
 
 //Services are defined by feature
 //Rather than functional area
@@ -107,6 +108,13 @@ namespace ProjectDONE.Controllers
                     CreatedByUserId = job.CreatedByUserId,
                     CreatedOn = job.CreatedOn,
                     Owner_ID = job.Owner.ID,
+                    Owner = new OwnerViewModel {
+                        ID = job.Owner.ID,
+                        CreatedOn = job.Owner.CreatedOn,
+                        CreatedByUserId = job.Owner.CreatedByUserId,
+                        Name = job.Owner.Name,
+                        IsCorporateEntity = job.Owner.IsCorporateEntity
+                    },
                     Title = job.Title,
                     PublicDescription = job.PublicDescription,
                     Latitude = job.Latitude,
@@ -253,6 +261,45 @@ namespace ProjectDONE.Controllers
             };
         }
 
+
+       
+
+        [HttpPost]
+        [Route("Job/{jobId}/MakePayment")]
+        public HttpResponseMessage MakePayment([FromBody]StripeToken token,long jobId)
+        {
+       
+            HttpResponseMessage response;
+            var job = _IJobRepo.Get().Where(j => j.ID == jobId).FirstOrDefault();
+            if(job==null)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.Content = new StringContent("The Job could not be found in the database");
+                return response;
+            }
+
+            var myCharge = new StripeChargeCreateOptions();
+
+            // always set these properties
+            myCharge.Amount = (int)(job.AcceptedBid.Amount*100);
+            myCharge.Currency = "usd";
+
+            // set this if you want to
+            myCharge.Description = job.Title;
+
+            // set this property if using a token
+            myCharge.TokenId = token.Id ;
+            var chargeService = new StripeChargeService();
+            StripeCharge stripeCharge = chargeService.Create(myCharge);
+
+
+            response = new HttpResponseMessage(HttpStatusCode.OK);
+            //TODO: Should respond with what the total was of the payment
+            //sort of like a recipt
+            response.Content = new StringContent("Payment successfully made. Quack Quack.");
+            return response;
+        }
+
         [HttpGet]
         [Route("Owner/Bid")]
         [EnableQuery]
@@ -332,7 +379,38 @@ namespace ProjectDONE.Controllers
 
             return query;
         }
-        
+
+        [HttpPost]
+        [Route("Job/{id}/Finish/")]
+        public HttpResponseMessage FinishJob(long id)
+        {
+            HttpResponseMessage response;
+            //Get the job
+            var job = _IJobRepo.Get().Where(j => j.ID == id).FirstOrDefault();
+            if(job== null)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.Content = new StringContent("No job found with the ID of " + id);
+                return response;
+            }
+
+            //Current user must be the winner of the accepted bid
+            
+            if(!(job.AcceptedBid != null ? job.AcceptedBid.Owner_ID == AppUser.Owner.ID : false))
+            {
+                var x = AppUser.Owner;
+                response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                response.Content = new StringContent("User is not the owner of the accepted bid and is therefore unauthorized to finalize job");
+                return response;
+            }
+
+            job.Status = Jobstatus.Finished;
+            _IJobRepo.Save();
+            response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StringContent("Job is now marked as finished.");
+            return response;
+        }
+
         //The job poster accepts a bid
         [HttpPost]
         [Route("Bid/{BidId}/Accept")]

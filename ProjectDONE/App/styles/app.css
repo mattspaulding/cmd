@@ -1,9 +1,17 @@
+body, html{
+    height:100%;
+    width:100%;
+}
 .validation-error {
     color: #ff0000;
 }
 
 .left {
     text-align: left;
+}
+
+.stripe_checkout_app{
+  overflow-y: hidden !important;
 }
 
 .dashboard {
@@ -194,6 +202,14 @@
         left: -4vw;
     }
 
+    .reviewJob .jobState .acceptedBid ons-icon{
+        color: rgba(28, 216, 13, 0.21) !important;
+        font-size:5em;
+        right:0vw;
+        left:auto !important;
+       
+    }
+
     .reviewJob .jobState .bid input {
         border: none;
         border-bottom: 1px solid lightgray;
@@ -221,6 +237,18 @@
         height: 26vw;
         margin: 0px 5px 5px 0px;
         padding-top: 9.5%;
+        box-sizing: border-box;
+    }
+
+    .reviewJob .jobState .acceptedBid > ons-button {
+        text-align: center;
+        width: 80vw;
+        position: absolute;
+        bottom: 0px;
+        right: 9vw;
+        height: 23vw;
+        margin: 0px 5px 5px 0px;
+        padding-top: 7%;
         box-sizing: border-box;
     }
 

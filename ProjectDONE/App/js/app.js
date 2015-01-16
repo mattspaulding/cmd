@@ -182,6 +182,31 @@ ons.ready(function () {
             });
         };
 
+        $scope.AcceptBid = function (bid) {
+            $projectDone.AcceptBid(bid.ID)
+            .then(function (results) {
+                console.log(results);
+            });
+        };
+
+        $scope.ConfirmBid = function () {
+            $projectDone.ConfirmBid($scope.job.AcceptedBid_ID)
+            .then(function (results) {
+                console.log(results);
+            });
+        };
+
+        $scope.FinishJob = function () {
+            $projectDone.FinishJob($scope.job.ID)
+            .then(function (results) {
+                console.log(results);
+            });
+        };
+
+        $scope.PayJob = function () {
+            $projectDone.TakePayment($scope.job);
+        }
+
         $scope.loadJob();
     });
 
@@ -302,12 +327,28 @@ ons.ready(function () {
 
     app.service('$projectDone', function ($http, Job, Bid, $q) {
         var self = this;
-        //TODO: find a way to pass odata to queries that support it.
+        self.handler = StripeCheckout.configure({
+            image: 'App/images/icon-logo.png',
+            key: 'pk_test_6UITNydd2WGnJ9LVxEx7RZNR',
+            token: function (token) {
+                //TODO: wrap the token in another object
+                //that contains the Tip and other ancllery information as it
+                //comes up.
+                
+                $http.post(
+                    '/api/app/Job/' + self._currentJob.ID + '/MakePayment',
+                    JSON.stringify(token))
+                .then(function () {
+                    //TODO: Loading goes here.
+                    self._currentJob = null;
+                });
+
+                
+            }
+        });
         //User 
         self.LoggedInUser = {};
-
         self.SelectedJob = {};
-
         self.Login = function (username, password) {
             var deferred = $q.defer();
 
@@ -378,7 +419,9 @@ ons.ready(function () {
             //TODO, pagination and filtering
             return $http.get('/api/app/job');
         };
-
+        self.FinishJob = function (jobId) {
+            return $http.post('/api/app/Job/'+ jobId +'/Finish/')
+        };
         //Bid
         self.PlaceBid = function (jobId, bid) {
             return $http.post('/api/app/Job/' + jobId + '/Bid', bid);
@@ -396,6 +439,17 @@ ons.ready(function () {
             console.log("Not implmented");
         };
 
+        //Stripe
+        self.TakePayment = function(job)
+        {
+            self._currentJob = job;
+            self.handler.open({
+                name: 'Project: Done!',
+                description: job.Title,
+                amount: job.AcceptedBid.Amount * 100,
+                email: job.Owner.Name
+            });
+        }
 
         //Media
         this.UploadImage = function (file) {
