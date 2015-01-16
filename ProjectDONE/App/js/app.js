@@ -100,6 +100,11 @@ ons.ready(function () {
     });
 
     app.controller('dashboardController', function ($scope, $projectDone) {
+        root_navigator.on("prepop", function () {
+            $scope.ListJobs();
+        });
+
+
         $scope.jobs = []
         $scope.loadingJobs = false;
         $scope.CreateJob = function () {
