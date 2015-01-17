@@ -53,22 +53,24 @@ namespace ProjectDONE.Data.Repos
     }
 
     public class JobRepo : BaseRepo<Job>
-    {
-      
+    { 
     }
 
     public class BidRepo : BaseRepo<Bid>
-    {
-        
+    {   
     }
 
     public class OwnerRepo : BaseRepo<Owner>
     {
-
     }
 
     public class MediaRepo : BaseRepo<Media>
-    { }
+    {
+    }
 
+    public class StripeTransactionRepo : BaseRepo<StripeTransaction>
+    {
+
+    }
    
 }

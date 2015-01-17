@@ -222,8 +222,8 @@ C:\code\ProjectDONE\ProjectDONE\bin\ko\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\ru\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache

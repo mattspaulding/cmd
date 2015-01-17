@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace ProjectDONE.Controllers
 {
+   
     [RoutePrefix("api/media")]
     public class MediaController : ApiController
     {
@@ -46,10 +47,10 @@ namespace ProjectDONE.Controllers
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(blob.Properties.ContentType);
             return response;
         }
-    
 
-       
-       [HttpPost]
+
+        [Authorize]
+        [HttpPost]
        [Route("Upload")]
         public async Task<HttpResponseMessage> Upload()
         {

@@ -76,7 +76,7 @@ namespace ProjectDONE.Models
 
     }
 
-   public class AddressViewModel : BaseViewModel
+    public class AddressViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Line1 { get; set; }

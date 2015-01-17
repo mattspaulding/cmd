@@ -28,21 +28,20 @@ namespace ProjectDONE.Controllers
     {
         const int default_skip = 0;
         const int default_take = 10;
-        private JobRepo _IJobRepo;
-        private BidRepo _IBidRepo;
-        private OwnerRepo _IOwnerRepo;
+        private JobRepo JobRepo;
+        private BidRepo BidRepo;
+        private OwnerRepo OwnerRepo;
+        private StripeTransactionRepo StripeTransactionRepo;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
         protected ApplicationUser AppUser { get { return UserManager.FindById(User.Identity.GetUserId()); } }
-
-        public AppController() : this(new JobRepo(), new BidRepo(), new OwnerRepo()) { }
-
-        public AppController(JobRepo JobRepo, BidRepo BidRepo, OwnerRepo OwnerRepo)
+        public AppController() : this(new JobRepo(), new BidRepo(), new OwnerRepo(), new StripeTransactionRepo()) { }
+        public AppController(JobRepo JobRepo, BidRepo BidRepo, OwnerRepo OwnerRepo, StripeTransactionRepo StripeTransactionRepo)
         {
-            _IJobRepo = JobRepo;
-            _IBidRepo = BidRepo;
-            _IOwnerRepo = OwnerRepo;
-
+            this.JobRepo = JobRepo;
+            this.BidRepo = BidRepo;
+            this.OwnerRepo = OwnerRepo;
+            this.StripeTransactionRepo = StripeTransactionRepo;
             this.ApplicationDbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
@@ -67,8 +66,8 @@ namespace ProjectDONE.Controllers
             if(job.Address!=null && job.Address.ID == 0)
                 job.Address.CreatedByUserId = User.Identity.GetUserId();
 
-            _IJobRepo.Add(job);
-            _IJobRepo.Save();
+            JobRepo.Add(job);
+            JobRepo.Save();
 
 
 
@@ -100,7 +99,7 @@ namespace ProjectDONE.Controllers
         { 
             var ownerId = AppUser.Owner.ID;
             var result =
-                from job in _IJobRepo.Get()
+                from job in JobRepo.Get()
                 where job.ID == id
                 select new JobViewModel
                 {
@@ -184,7 +183,7 @@ namespace ProjectDONE.Controllers
         {
             var oid = AppUser.Owner.ID;
             var query =
-                from job in _IJobRepo.Get()
+                from job in JobRepo.Get()
                 let ownerId = oid
                 select new JobViewModel
                 {
@@ -239,8 +238,8 @@ namespace ProjectDONE.Controllers
             bid.CreatedByUserId = User.Identity.GetUserId();
             bid.Owner_ID = AppUser.Owner.ID;
             bid.Job_ID = JobId;
-            _IBidRepo.Add(bid);
-            _IBidRepo.Save();
+            BidRepo.Add(bid);
+            BidRepo.Save();
 
             return new BidViewModel
             {
@@ -261,16 +260,13 @@ namespace ProjectDONE.Controllers
             };
         }
 
-
-       
-
         [HttpPost]
         [Route("Job/{jobId}/MakePayment")]
         public HttpResponseMessage MakePayment([FromBody]StripeToken token,long jobId)
         {
        
             HttpResponseMessage response;
-            var job = _IJobRepo.Get().Where(j => j.ID == jobId).FirstOrDefault();
+            var job = JobRepo.Get().Where(j => j.ID == jobId).FirstOrDefault();
             if(job==null)
             {
                 response = new HttpResponseMessage(HttpStatusCode.NotFound);
@@ -279,19 +275,43 @@ namespace ProjectDONE.Controllers
             }
 
             var myCharge = new StripeChargeCreateOptions();
-
-            // always set these properties
             myCharge.Amount = (int)(job.AcceptedBid.Amount*100);
             myCharge.Currency = "usd";
-
-            // set this if you want to
             myCharge.Description = job.Title;
-
-            // set this property if using a token
             myCharge.TokenId = token.Id ;
+
             var chargeService = new StripeChargeService();
             StripeCharge stripeCharge = chargeService.Create(myCharge);
 
+            var raw_stripeTransaction = JsonConvert.SerializeObject(stripeCharge);
+            var raw_meta = JsonConvert.SerializeObject(stripeCharge.Metadata);
+
+            var transaction = new Models.AppModels.StripeTransaction {
+                Amount = stripeCharge.Amount,
+                Paid = stripeCharge.Paid,
+                ReciptEmail = stripeCharge.ReceiptEmail,
+                CustomerId = stripeCharge.CustomerId,
+                FailureCode = stripeCharge.FailureCode,
+                FailureMessage = stripeCharge.FailureMessage,
+                RawStripeTransaction = raw_stripeTransaction,
+                MetaData = raw_meta,
+                Customer_ID = job.Owner.ID,
+                CreatedByUserId = AppUser.Owner.CreatedByUserId
+                
+            };
+            
+                StripeTransactionRepo.Add(transaction);
+                StripeTransactionRepo.Save();
+
+            
+           
+
+
+            job.Status = Jobstatus.Satisfied;
+            job.AcceptedBid.Stripe_Transaction_ID = transaction.ID;
+            JobRepo.Save();
+
+            
 
             response = new HttpResponseMessage(HttpStatusCode.OK);
             //TODO: Should respond with what the total was of the payment
@@ -306,7 +326,7 @@ namespace ProjectDONE.Controllers
         public IQueryable<BidViewModel> GetBidsByOwner(long id, int? skip, int? take)
         {
 
-            var query = from bid in _IBidRepo.Get()
+            var query = from bid in BidRepo.Get()
                         where bid.Owner.ID == id
                         select new BidViewModel
                         {
@@ -347,7 +367,7 @@ namespace ProjectDONE.Controllers
         [Route("Bid/{bidId}/Withdrawl")]
         public HttpResponseMessage WithdrawlBid(long bidId)
         {
-            var  bid = _IBidRepo.Get().Where(b => b.ID == bidId).FirstOrDefault();
+            var  bid = BidRepo.Get().Where(b => b.ID == bidId).FirstOrDefault();
             HttpResponseMessage response;
             if(bid==null)
             {
@@ -362,8 +382,8 @@ namespace ProjectDONE.Controllers
                 return response;
             }
             
-            _IBidRepo.Remove(bid);
-            _IBidRepo.Save();
+            BidRepo.Remove(bid);
+            BidRepo.Save();
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StringContent("Bid successfully withdrawn.");
             return response;
@@ -373,7 +393,7 @@ namespace ProjectDONE.Controllers
         [Route("Job/{id}/Bids/")]
         public IQueryable<Bid> GetBidsByJob(long id, int? skip, int? take)
         {
-            var query = from bid in _IBidRepo.Get()
+            var query = from bid in BidRepo.Get()
                         where bid.ID == id
                         select bid;
 
@@ -386,7 +406,7 @@ namespace ProjectDONE.Controllers
         {
             HttpResponseMessage response;
             //Get the job
-            var job = _IJobRepo.Get().Where(j => j.ID == id).FirstOrDefault();
+            var job = JobRepo.Get().Where(j => j.ID == id).FirstOrDefault();
             if(job== null)
             {
                 response = new HttpResponseMessage(HttpStatusCode.NotFound);
@@ -405,7 +425,7 @@ namespace ProjectDONE.Controllers
             }
 
             job.Status = Jobstatus.Finished;
-            _IJobRepo.Save();
+            JobRepo.Save();
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StringContent("Job is now marked as finished.");
             return response;
@@ -416,9 +436,9 @@ namespace ProjectDONE.Controllers
         [Route("Bid/{BidId}/Accept")]
         public HttpResponseMessage AcceptBid(long BidId)
         {
-            var bid = _IBidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
-            var bids = _IBidRepo.Get().Where(b => b.Job.ID == bid.Job.ID && b.ID!= BidId);
-            var job = _IJobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
+            var bid = BidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
+            var bids = BidRepo.Get().Where(b => b.Job.ID == bid.Job.ID && b.ID!= BidId);
+            var job = JobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
             HttpResponseMessage response;
             if (job == null)
             {
@@ -437,16 +457,16 @@ namespace ProjectDONE.Controllers
             job.AcceptedBid_ID = bid.ID;
             bid.Status = BidStatus.Accepted;
 
-            _IBidRepo.Update(bid);
-            _IJobRepo.Update(job);
+            BidRepo.Update(bid);
+            JobRepo.Update(job);
 
             foreach (var b in bids.Where(b => b.ID != bid.ID))
             {
                 b.Status = BidStatus.Declined;
-                _IBidRepo.Update(b);
+                BidRepo.Update(b);
             }
-            _IBidRepo.Save();
-            _IJobRepo.Save();
+            BidRepo.Save();
+            JobRepo.Save();
 
             var result = new BidViewModel
             {
@@ -477,12 +497,12 @@ namespace ProjectDONE.Controllers
         [Route("Bid/{BidId}/Confirm")]
         public HttpResponseMessage ConfirmBid(long BidId)
         {
-            var bid = _IBidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
-            var job = _IJobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
+            var bid = BidRepo.Get().Where(b => b.ID == BidId).FirstOrDefault();
+            var job = JobRepo.Get().Where(j => j.ID == bid.Job.ID).FirstOrDefault();
 
             job.Status = Jobstatus.Confirmed;
-            _IJobRepo.Update(job);
-            _IJobRepo.Save();
+            JobRepo.Update(job);
+            JobRepo.Save();
             var result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new StringContent("The job and bid have been confirmed.");
             return result;
