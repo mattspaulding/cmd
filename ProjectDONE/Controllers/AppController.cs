@@ -264,7 +264,6 @@ namespace ProjectDONE.Controllers
         [Route("Job/{jobId}/MakePayment")]
         public HttpResponseMessage MakePayment([FromBody]StripeToken token,long jobId)
         {
-       
             HttpResponseMessage response;
             var job = JobRepo.Get().Where(j => j.ID == jobId).FirstOrDefault();
             if(job==null)
@@ -278,7 +277,7 @@ namespace ProjectDONE.Controllers
             myCharge.Amount = (int)(job.AcceptedBid.Amount*100);
             myCharge.Currency = "usd";
             myCharge.Description = job.Title;
-            myCharge.TokenId = token.Id ;
+            myCharge.TokenId = token.Id;
 
             var chargeService = new StripeChargeService();
             StripeCharge stripeCharge = chargeService.Create(myCharge);
@@ -295,8 +294,8 @@ namespace ProjectDONE.Controllers
                 FailureMessage = stripeCharge.FailureMessage,
                 RawStripeTransaction = raw_stripeTransaction,
                 MetaData = raw_meta,
-                Customer_ID = job.Owner.ID,
-                CreatedByUserId = AppUser.Owner.CreatedByUserId
+                CreatedByUserId = AppUser.Owner.CreatedByUserId,
+                ID = job.AcceptedBid.ID
                 
             };
             
@@ -308,7 +307,6 @@ namespace ProjectDONE.Controllers
 
 
             job.Status = Jobstatus.Satisfied;
-            job.AcceptedBid.Stripe_Transaction_ID = transaction.ID;
             JobRepo.Save();
 
             

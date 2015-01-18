@@ -175,6 +175,7 @@ ons.ready(function () {
         $scope.job = undefined;
         $scope.bid = new Bid();
         $scope.isJobOwner = null;
+        $scope.canPay = true;
 
         $scope.loadJob = function () {
             $projectDone.GetJob($projectDone.SelectedJob.ID)
@@ -214,7 +215,16 @@ ons.ready(function () {
         };
 
         $scope.PayJob = function () {
-            $projectDone.TakePayment($scope.job);
+            $projectDone.StripePayment($scope.job,
+                function (token) {
+                    $scope.canPay = false;
+                    root_navigator.pushPage('Processing', { animation: "fade" });
+                    $projectDone.TakePayment($scope.job,token)
+                    .then(function (results) {
+                        root_navigator.popPage();
+                        $scope.job.Status = 3;
+                    });
+                });
         }
 
         $scope.loadJob();
@@ -337,26 +347,7 @@ ons.ready(function () {
 
     app.service('$projectDone', function ($http, Job, Bid, $q) {
         var self = this;
-        self.handler = StripeCheckout.configure({
-            image: 'App/images/icon-logo.png',
-            key: 'pk_test_6UITNydd2WGnJ9LVxEx7RZNR',
-            token: function (token) {
-                //TODO: wrap the token in another object
-                //that contains the Tip and other ancllery information as it
-                //comes up.
-                root_navigator.pushPage('Processing', { animation: "fade" });
-                $http.post(
-                    '/api/app/Job/' + self._currentJob.ID + '/MakePayment',
-                    JSON.stringify(token))
-                .then(function () {
-                    //TODO: Loading goes here.
-                    root_navigator.popPage();
-                    self._currentJob = null;
-                });
-
-                
-            }
-        });
+        
         //User 
         self.LoggedInUser = {};
         self.SelectedJob = {};
@@ -414,7 +405,6 @@ ons.ready(function () {
         self.GetOwner = function () {
             return $http.get("/api/app/Owner");
         };
-
         self.getLoggedInUser = function(){
             return self.LoggedInUser;
         }
@@ -437,6 +427,7 @@ ons.ready(function () {
         self.FinishJob = function (jobId) {
             return $http.post('/api/app/Job/'+ jobId +'/Finish/')
         };
+
         //Bid
         self.PlaceBid = function (jobId, bid) {
             return $http.post('/api/app/Job/' + jobId + '/Bid', bid);
@@ -455,15 +446,26 @@ ons.ready(function () {
         };
 
         //Stripe
-        self.TakePayment = function(job)
+        self.StripePayment = function(job,stripeCallback)
         {
-            self._currentJob = job;
-            self.handler.open({
+            StripeCheckout.configure({
+                image: 'App/images/icon-logo.png',
+                key: 'pk_test_6UITNydd2WGnJ9LVxEx7RZNR',
+                token: stripeCallback
+
+                
+            }).open({
                 name: 'Project: Done!',
                 description: job.Title,
                 amount: job.AcceptedBid.Amount * 100,
                 email: job.Owner.Name
             });
+        }
+        self.TakePayment = function(job,stripeToken)
+        {
+           return $http.post(
+                        '/api/app/Job/' + job.ID + '/MakePayment',
+                        JSON.stringify(stripeToken))
         }
 
         //Media

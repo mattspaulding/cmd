@@ -102,8 +102,6 @@ namespace ProjectDONE.Models.AppModels
         public virtual IList<Media> Media { get; set; }
         public virtual IList<Job> Jobs { get; set; }
         public virtual IList<Bid> Bids { get; set; }
-        
-        //public virtual StripeCustomer StripeCustomer { get; set; }
     }
 
     public class Bid : BaseAppModel
@@ -123,9 +121,7 @@ namespace ProjectDONE.Models.AppModels
 
         public virtual IList<Dialog> Dialog { get; set; }
 
-        [ForeignKey("Stripe_Transaction_ID")]
         public virtual StripeTransaction Stripe_Transaction { get; set; }
-        public long? Stripe_Transaction_ID { get; set; }
     }
 
     public class StripeTransaction : BaseAppModel
@@ -138,25 +134,14 @@ namespace ProjectDONE.Models.AppModels
         public string FailureMessage { get; set; }
         public string RawStripeTransaction { get; set; }
         public string MetaData { get; set; }
-        
-        [ForeignKey("Customer_ID")]
-        public virtual Owner Customer { get; set; }
-        [Required]
-        public long Customer_ID { get; set;}
+
+        public virtual Bid bid { get; set; }
+        [Key, ForeignKey("bid")]
+        public new long ID { get; set; }
+
         
     }
 
-    //public class StripeCustomer : BaseAppModel
-    //{
-    //    [Required]
-    //    [InverseProperty("StripeCustomer")]
-    //    public virtual Owner Owner { get; set; }
 
-    //    public string MetaData { get; set; }
-    //    public int? AccountBalance { get; set; }
-    //    public string Emailddress { get; set; }
-    //    public bool? LiveMode { get; set; }
-    //    public string RawCustomerObject { get; set; }
-    //}
     
 }

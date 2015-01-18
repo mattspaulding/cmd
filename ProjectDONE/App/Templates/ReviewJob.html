@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="amount">
-                            <ons-button ng-click="PayJob()">Pay Job</ons-button>
+                            <ons-button ng-click="PayJob()" ng-show="canPay">Pay Job</ons-button>
                         </div>
 
 
@@ -133,10 +133,11 @@
                 
                  <!-- as the non-owner of the bid or job, I want to see the winning bid -->
             </div>
-            <div class="satisfied">
+            <div class="satisfied" ng-show="job.Status === 3">
                 <!-- as the job owner, I want to see that this job was marked finished and payment was made.-->
                 <!-- As the owner of the winning bid, i want to see that the job was marked finished and payment was made.-->
                 <!-- As the non-owner of the bid or job, i want to see that the job was finished and paid.-->
+                Paid!
             </div>
         </div>
     </div>
