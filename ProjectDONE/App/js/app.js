@@ -36,6 +36,7 @@ ons.ready(function () {
             }
         }
         $timeout($scope.CheckLogin, 500)
+        $scope.LoggedInUser = $projectDone.getLoggedInUser();
     });
 
     app.controller('registerController', function ($scope, User, $projectDone, $http) {
@@ -100,16 +101,25 @@ ons.ready(function () {
     });
 
     app.controller('dashboardController', function ($scope, $projectDone) {
+        $scope.LoggedInUser = $projectDone.getLoggedInUser();
+
+        $scope.CreateJob = function () {
+            root_navigator.pushPage('CreateJob');
+        };
+
+        $scope.SearchJobs = function () {
+            root_navigator.pushPage('SearchJobs');
+        };
+
+    });
+
+    app.controller('jobSearchController', function ($scope, $projectDone) {
         root_navigator.on("prepop", function () {
             $scope.ListJobs();
         });
 
-
         $scope.jobs = []
         $scope.loadingJobs = false;
-        $scope.CreateJob = function () {
-            root_navigator.pushPage('CreateJob');
-        };
 
         $scope.ListJobs = function () {
             $scope.loadingJobs = true;
@@ -134,7 +144,7 @@ ons.ready(function () {
         $scope.Job.Address = new Address();
         $scope.uploadingImage = false;
         $scope.imageData = null;
-        $scope.image = null;
+        $scope.image = '';
 
         $scope.$watch('imageData', function () {
             if ($scope.imageData) {
@@ -248,7 +258,7 @@ ons.ready(function () {
             Demographics: "",
             PrivateDescription: "",
             AcceptedBid_id: "",
-            Media: {},
+            Media: {URL:''},
             Dialog: [],
             Bids: [],
             Address: {},
@@ -404,6 +414,10 @@ ons.ready(function () {
         self.GetOwner = function () {
             return $http.get("/api/app/Owner");
         };
+
+        self.getLoggedInUser = function(){
+            return self.LoggedInUser;
+        }
 
         //Job
         self.CreateJob = function (job) {

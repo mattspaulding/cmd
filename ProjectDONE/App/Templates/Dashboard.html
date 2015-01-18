@@ -1,33 +1,94 @@
 ﻿<ons-page ng-controller="dashboardController" class="dashboard">
-    <ons-toolbar>
-        <div class="center">Jobs</div>
+    <ons-toolbar class="menuBanner">
+        <div class="right">
+            <i class="ion-settings"></i>
+        </div>
     </ons-toolbar>
-    <ons-scroller class="jobs">
-            <ons-list>
-                <ons-list-item 
-                    class="list__item--tappable list__item__line-height job" 
-                    modifier="chevron" 
-                    ng-repeat="job in jobs"
-                    ng-click="SelectJob(job)">
-                    <ons-row>
-                        <ons-col width="95px">
-                            <div class="thumb" style="background-image:url('{{job.Media.URL}}'); background-size:contain; background-repeat:no-repeat; background-position-x:center; background-position-y:center"></div>
-                        </ons-col>
-                        <ons-col>
-                            <div class="job">
-                                <div class="title" ng-bind="job.Title"></div>
-                                <div class="description" ng-bind="job.PublicDescription"></div>
-                                <div class="overlay"></div>
-                            </div>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-            </ons-list>
-    </ons-scroller>
-    
+    <!--<div class="menuBanner">
+       
+    </div>-->
+    <div class="userBanner">
 
-
-    <div class="bottom">
-        <ons-button ng-click="CreateJob()">Create Job</ons-button>
+        <div class="userPicture" 
+             style="
+                background-size:contain; 
+                background-image: url('app/images/icon-logo.png');
+                background-repeat: no-repeat;
+                background-attachment:scroll;
+                background-position:center center;"></div>
+        <span ng-bind="LoggedInUser.owner.Name"></span>
+        <div class="bling">
+            <i class="ion-hammer"></i>
+            <span class="alerts"></span>
+        </div>
     </div>
+
+    <div class="content">
+        <ul>
+            <li class="option searchJobs" ng-click="SearchJobs()">
+                <i class="fa fa-search type">
+                    <i class="fa fa-wrench" style="
+                        position : absolute;
+                        top: 29px;
+                        font-size: 16px;
+                        left: 27px;"></i>
+                </i>
+                <i class="fa fa-angle-right"></i>
+                 <p class="text">
+                   <span class="label">Search for a job!</span>
+                   <span class="description">Find and bid on jobs near you!</span>
+                </p>
+            </li>
+            <li class="option createJob" ng-click="CreateJob()">
+                <i class="fa fa-plus-circle type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="text">
+                    <span class="label">Create a job</span>
+                    <span class="description">Get your project done!</span>
+                </p>
+            </li>
+            <!--Putting this here as a place holder for what 
+            i imagined the "Alerts" could look like-->
+            <!--<li class="alert acceptedBid">
+                <i class="fa fa-check-circle-o type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="alertText">
+                    <span class="label">Your bid was accepted!</span>
+                    <span class="description">$300 on "Move my rocks!"</span>
+                </p>
+            </li>
+
+            <li class="alert confirmBid">
+                <i class="ion-briefcase type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="alertText">
+                    <span class="label">Your Job is Confirmed!</span>
+                    <span class="description">"Move my rocks!"</span>
+                </p>
+            </li>
+
+            <li class="alert jobFinished">
+                <i class="fa fa-flag-checkered type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="alertText">
+                    <span class="label">Your job has been Finished!</span>
+                    <span class="description">"Move my rocks!"</span>
+                </p>
+            </li>
+
+            <li class="alert jobPaid">
+                <i class="fa fa-usd type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="alertText">
+                    <span class="label">You've been paid!</span>
+                    <span class="description">$300 on "Move my rocks!"</span>
+                </p>
+            </li>-->
+        </ul>
+        
+      
+
+    </div>
+
+
 </ons-page>

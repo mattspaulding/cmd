@@ -1,7 +1,8 @@
-body, html{
-    height:100%;
-    width:100%;
+body, html {
+    height: 100%;
+    width: 100%;
 }
+
 .validation-error {
     color: #ff0000;
 }
@@ -10,14 +11,151 @@ body, html{
     text-align: left;
 }
 
-.stripe_checkout_app{
-  overflow-y: hidden !important;
+.stripe_checkout_app {
+    overflow-y: hidden !important;
 }
 
-.dashboard {
+
+
+.dashboard .userBanner {
+    width: 100vw;
+    height: 25%;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 15px;
+    margin: 0px 0px 0px 0px;
+    position: absolute;
+    box-shadow: 0px 2px 5px 1px rgba(0,0,0,.25);
+    background-color: #FFEB3B;
 }
 
-    .dashboard ons-button {
+ .menuBanner {
+    background-color: #FFC107 !important;
+    text-align: right;
+    
+}
+
+    .dashboard .menuBanner i {
+        font-size: 2em;
+        color: #212121;
+        margin-right: 20px;
+    }
+
+.dashboard .content {
+    width: 100vw;
+    height: 74%;
+    overflow-y: scroll;
+    position: absolute;
+    top: 26%;
+    
+}
+
+    .dashboard .content ul {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .dashboard .content li {
+        height: 48px;
+        border-bottom: 1px solid #B6B6B6;
+        color: #212121;
+        list-style-type: none;
+        line-height: 20px;
+        padding: 16px 0px 16px 0px;
+        overflow: hidden;
+    }
+
+
+
+    .dashboard .content .option .type {
+        font-size: 48px;
+        float: left;
+        color: #8bc34a;
+        margin-left: 16px;
+        margin-right: 16px;
+        clear: none;
+        width: 42px;
+    }
+
+    .dashboard .content .option .fa-angle-right {
+        float: right;
+        font-size: 48px;
+        color: #B6B6B6;
+    }
+
+    .dashboard .content .option .text {
+        font-size: 24px;
+        margin: 0px;
+    }
+
+        .dashboard .content .option .text span {
+            display: block;
+        }
+
+        .dashboard .content .option .text .label {
+            font-size: 24px;
+            margin: 0px;
+        }
+
+        .dashboard .content .option .text .description {
+            font-size: 16px;
+            margin: 10px 0px 0px 0px;
+            color: #B6B6B6;
+        }
+
+.dashboard .userBanner .userPicture {
+    width: 14vh;
+    height: 14vh;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    box-shadow: 0px 2px 3px 1px rgba(0,0,0,.25);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 3px solid white;
+    
+   
+}
+
+.dashboard .userBanner .bling {
+    position: absolute;
+    height: 14vw;
+    width: 14vw;
+    right: 4vw;
+    bottom: -2vh;
+    border-radius: 28px;
+    box-shadow: 0px 2px 5px 2px rgba(0,0,0,.25);
+    background-color: #FBC02D;
+    z-index: 3;
+}
+
+    .dashboard .userBanner .bling i {
+        position: absolute;
+        top: 19%;
+        left: 28%;
+        font-size: 2em;
+        color: white;
+    }
+
+    .dashboard .userBanner .bling span {
+        color: #212121;
+        position: absolute;
+        top: 35%;
+        left: 33%;
+    }
+
+.dashboard .userBanner span {
+    color: #212121;
+    font-weight: bold;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.jobSearch {
+}
+
+    .jobSearch ons-button {
         margin-top: 2%;
         margin-left: 5%;
         width: 90%;
@@ -26,53 +164,40 @@ body, html{
         margin-bottom: 2%;
     }
 
-    .dashboard .jobs {
+    .jobSearch .jobs {
         height: 83vh;
     }
 
-    .dashboard .jobs ons-list {
-        padding-bottom: 100px;
-    }
+        .jobSearch .jobs ons-list {
+            padding-bottom: 100px;
+        }
 
-    .dashboard .bottom-bar {
-        box-shadow: darkgray 0px -1px 5px;
-        height: 9vh !important;
-    }
-
-    .dashboard .bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: lightgray !important;
-    }
-
-    .dashboard .job {
+    .jobSearch .job {
         height: 90px;
     }
 
-        .dashboard .job .title {
+        .jobSearch .job .title {
             font-weight: bold;
             font-size: larger;
             line-height: 1em;
             max-height: 90px;
         }
 
-        .dashboard .job .description {
+        .jobSearch .job .description {
             margin-top: 3px;
             line-height: 1em;
             padding-right: 20px;
             overflow: hidden;
         }
 
-        .dashboard .job .thumb {
+        .jobSearch .job .thumb {
             width: 90px;
             height: 90px;
             background-color: white;
             margin: 2px;
         }
 
-        .dashboard .job .overlay {
+        .jobSearch .job .overlay {
             position: absolute;
             bottom: 0px;
             width: 68%;
@@ -81,8 +206,8 @@ body, html{
         }
 
 .createJob {
-        margin-left: 5px;
-        margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
     .createJob .createJobForm {
@@ -102,11 +227,12 @@ body, html{
             font-weight: bold;
             font-size: x-large;
         }
-        .createJob .createJobForm label .description {
-            font-weight: normal;
-            font-size: medium;
-            color: #808080;
-        }
+
+            .createJob .createJobForm label .description {
+                font-weight: normal;
+                font-size: medium;
+                color: #808080;
+            }
 
 
         .createJob .createJobForm input, textarea {
@@ -202,12 +328,11 @@ body, html{
         left: -4vw;
     }
 
-    .reviewJob .jobState .acceptedBid ons-icon{
+    .reviewJob .jobState .acceptedBid ons-icon {
         color: rgba(28, 216, 13, 0.21) !important;
-        font-size:5em;
-        right:0vw;
-        left:auto !important;
-       
+        font-size: 5em;
+        right: 0vw;
+        left: auto !important;
     }
 
     .reviewJob .jobState .bid input {
