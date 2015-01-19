@@ -280,42 +280,92 @@ namespace ProjectDONE.Controllers
             myCharge.TokenId = token.Id;
 
             var chargeService = new StripeChargeService();
-            StripeCharge stripeCharge = chargeService.Create(myCharge);
 
-            var raw_stripeTransaction = JsonConvert.SerializeObject(stripeCharge);
-            var raw_meta = JsonConvert.SerializeObject(stripeCharge.Metadata);
+            var transaction =
+                    StripeTransactionRepo.Get().Where(t => t.ID == job.AcceptedBid.ID)
+                    .FirstOrDefault() ?? new Models.AppModels.StripeTransaction();
 
-            var transaction = new Models.AppModels.StripeTransaction {
-                Amount = stripeCharge.Amount,
-                Paid = stripeCharge.Paid,
-                ReciptEmail = stripeCharge.ReceiptEmail,
-                CustomerId = stripeCharge.CustomerId,
-                FailureCode = stripeCharge.FailureCode,
-                FailureMessage = stripeCharge.FailureMessage,
-                RawStripeTransaction = raw_stripeTransaction,
-                MetaData = raw_meta,
-                CreatedByUserId = AppUser.Owner.CreatedByUserId,
-                ID = job.AcceptedBid.ID
+            //Log this "externally" as well
+            try
+            {
                 
-            };
-            
-                StripeTransactionRepo.Add(transaction);
+                StripeCharge stripeCharge = chargeService.Create(myCharge);
+                var raw_stripeTransaction = JsonConvert.SerializeObject(stripeCharge);
+                var raw_meta = JsonConvert.SerializeObject(stripeCharge.Metadata);
+
+                
+
+                transaction.Amount = stripeCharge.Amount;
+                transaction.Paid = stripeCharge.Paid;
+                transaction.ReciptEmail = stripeCharge.ReceiptEmail;
+                transaction.CustomerId = stripeCharge.CustomerId;
+                transaction.FailureCode = stripeCharge.FailureCode;
+                transaction.FailureMessage = stripeCharge.FailureMessage;
+                transaction.RawStripeTransaction = raw_stripeTransaction;
+                transaction.MetaData = raw_meta;
+                transaction.CreatedByUserId = AppUser.Owner.CreatedByUserId;
+                
+                
+
+                job.Status = Jobstatus.Satisfied;
+                JobRepo.Save();
+
+                if(transaction.ID != job.AcceptedBid.ID)
+                {
+                    transaction.ID = job.AcceptedBid.ID;
+                    StripeTransactionRepo.Add(transaction);
+                }
+                
                 StripeTransactionRepo.Save();
+
+                response = new HttpResponseMessage(HttpStatusCode.OK);
+                //TODO: Should respond with what the total was of the payment
+                //sort of like a recipt
+                response.Content = new StringContent("Payment successfully made. Quack Quack.");
+                return response;
+
+            }
+            catch (StripeException exception)
+            {
+                var rawException = JsonConvert.SerializeObject(exception.StripeError);
+                
+                transaction.Amount = myCharge.Amount;
+                transaction.Paid = false;
+                transaction.ReciptEmail = myCharge.ReceiptEmail;
+                transaction.CustomerId = null;
+                transaction.FailureCode = exception.StripeError.Error;
+                transaction.FailureMessage = exception.StripeError.Message;
+                transaction.RawStripeTransaction = rawException;
+                transaction.CreatedByUserId = AppUser.Owner.CreatedByUserId;
+
+                if (transaction.ID != job.AcceptedBid.ID)
+                {
+                    transaction.ID = job.AcceptedBid.ID;
+                    StripeTransactionRepo.Add(transaction);
+                }
+
+                StripeTransactionRepo.Save();
+
+                response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+               
+                response.Content = new StringContent(rawException);
+                return response;
+
+            }
+
+           
+            
+               
 
             
            
 
 
-            job.Status = Jobstatus.Satisfied;
-            JobRepo.Save();
+            
 
             
 
-            response = new HttpResponseMessage(HttpStatusCode.OK);
-            //TODO: Should respond with what the total was of the payment
-            //sort of like a recipt
-            response.Content = new StringContent("Payment successfully made. Quack Quack.");
-            return response;
+           
         }
 
         [HttpGet]

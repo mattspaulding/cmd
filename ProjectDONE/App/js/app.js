@@ -217,13 +217,18 @@ ons.ready(function () {
         $scope.PayJob = function () {
             $projectDone.StripePayment($scope.job,
                 function (token) {
-                    $scope.canPay = false;
+                    
                     root_navigator.pushPage('Processing', { animation: "fade" });
                     $projectDone.TakePayment($scope.job,token)
                     .then(function (results) {
                         root_navigator.popPage();
                         $scope.job.Status = 3;
-                    });
+                        $scope.canPay = false;
+                    })
+                     .catch(function (error) {
+                         root_navigator.popPage();
+                         ons.notification.alert({ message: 'An error has occurred!' });
+                     });
                 });
         }
 

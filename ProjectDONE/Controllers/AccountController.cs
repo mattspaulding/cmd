@@ -19,6 +19,7 @@ using ProjectDONE.Results;
 using ProjectDONE.Data.Repos;
 using ProjectDONE.Models.AppModels;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ProjectDONE.Controllers
 {
@@ -324,12 +325,12 @@ namespace ProjectDONE.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<HttpResponseMessage> Register(RegisterBindingModel model)
         {
             //TODO: Add claims with the owner information to the user object
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
             }
 
             //Right now there is a 1:1 relationship between owners and users
@@ -352,9 +353,18 @@ namespace ProjectDONE.Controllers
 
             if (!result.Succeeded)
             {
-                ownerRepo.Remove(newOwner);
-                ownerRepo.Save();
-                return GetErrorResult(result);
+                ///Need to add logging in here
+                //ownerRepo.Remove(newOwner);
+                //ownerRepo.Save();
+                
+                var retval = new HttpResponseMessage
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(result.Errors)),
+                    StatusCode = (System.Net.HttpStatusCode)422
+                    //TODO:Add more specific responses based on error returned rather
+                    //than this generic 422
+                };
+                return retval;
             }
 
             newOwner = ownerRepo.Get().Where(o => o.ID == newOwner.ID).FirstOrDefault();
@@ -362,7 +372,7 @@ namespace ProjectDONE.Controllers
             newOwner.Name = user.UserName;
             ownerRepo.Save();
 
-            return Ok();
+            return new HttpResponseMessage {Content=new StringContent("User Successfully created"), StatusCode = System.Net.HttpStatusCode.OK };
         }
 
         // POST api/Account/RegisterExternal
