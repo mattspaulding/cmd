@@ -15,6 +15,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Http.OData;
 using System.Net.Http.Formatting;
 using Stripe;
+using System.Threading.Tasks;
+using ProjectDONE.Services;
 
 //Services are defined by feature
 //Rather than functional area
@@ -31,12 +33,13 @@ namespace ProjectDONE.Controllers
         private JobRepo JobRepo;
         private BidRepo BidRepo;
         private OwnerRepo OwnerRepo;
+        private EmailService emailService;
         private StripeTransactionRepo StripeTransactionRepo;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
         protected ApplicationUser AppUser { get { return UserManager.FindById(User.Identity.GetUserId()); } }
-        public AppController() : this(new JobRepo(), new BidRepo(), new OwnerRepo(), new StripeTransactionRepo()) { }
-        public AppController(JobRepo JobRepo, BidRepo BidRepo, OwnerRepo OwnerRepo, StripeTransactionRepo StripeTransactionRepo)
+        public AppController() : this(new JobRepo(), new BidRepo(), new OwnerRepo(), new StripeTransactionRepo(), new EmailService()) { }
+        public AppController(JobRepo JobRepo, BidRepo BidRepo, OwnerRepo OwnerRepo, StripeTransactionRepo StripeTransactionRepo, EmailService emailService)
         {
             this.JobRepo = JobRepo;
             this.BidRepo = BidRepo;
@@ -44,6 +47,7 @@ namespace ProjectDONE.Controllers
             this.StripeTransactionRepo = StripeTransactionRepo;
             this.ApplicationDbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
+            this.emailService = emailService;
         }
 
 
@@ -233,6 +237,10 @@ namespace ProjectDONE.Controllers
         [Route("Job/{JobId}/Bid")]
         public BidViewModel CreateBid(long JobId, Bid bid)
         {
+            //Should throw exception if sequence is empty.
+            //Hacky but gets the job done.
+            var job = JobRepo.Get().Where(j => j.ID == JobId).First();
+
             bid.Job = null;
             bid.CreatedOn = DateTime.Now;
             bid.CreatedByUserId = User.Identity.GetUserId();
@@ -241,7 +249,7 @@ namespace ProjectDONE.Controllers
             BidRepo.Add(bid);
             BidRepo.Save();
 
-            return new BidViewModel
+            var vm = new BidViewModel
             {
                 Amount = bid.Amount,
                 CreatedByUserId = bid.CreatedByUserId,
@@ -258,6 +266,11 @@ namespace ProjectDONE.Controllers
                     IsCorporateEntity = AppUser.Owner.IsCorporateEntity
                 }
             };
+            
+
+            
+            emailService.Send_JobReceiveBid(vm, new JobViewModel {Title=job.Title, Owner = new OwnerViewModel {CreatedByUserId = job.Owner.CreatedByUserId } });
+            return vm;
         }
 
         [HttpPost]
@@ -321,6 +334,11 @@ namespace ProjectDONE.Controllers
                 response = new HttpResponseMessage(HttpStatusCode.OK);
                 //TODO: Should respond with what the total was of the payment
                 //sort of like a recipt
+
+                emailService.Send_JobPaid(
+                    new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
+                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
+
                 response.Content = new StringContent("Payment successfully made. Quack Quack.");
                 return response;
 
@@ -474,6 +492,11 @@ namespace ProjectDONE.Controllers
 
             job.Status = Jobstatus.Finished;
             JobRepo.Save();
+
+            emailService.Send_JobFinished(
+                    new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
+                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
+
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StringContent("Job is now marked as finished.");
             return response;
@@ -533,6 +556,10 @@ namespace ProjectDONE.Controllers
                     IsCorporateEntity = bid.Owner.IsCorporateEntity
                 }
             };
+
+            emailService.Send_BidAccepted(
+                    new BidViewModel { Amount = bid.Amount, Owner = new OwnerViewModel { CreatedByUserId = bid.Owner.CreatedByUserId } },
+                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
 
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new ObjectContent<BidViewModel>(result, new JsonMediaTypeFormatter(), "application/json");
