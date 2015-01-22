@@ -87,14 +87,14 @@ namespace ProjectDONE.Services
         }
         private Task SendMessage(SendGridMessage message)
         {
-            ////Quick and dirty; i really should create a factory for this.
-            //if (System.Diagnostics.Debugger.IsAttached)
-            //{
-            //    return new Task(() => { Console.Write(message.ToString()); }); //Worst line of code EVER!
-            //}
+            //Quick and dirty; i really should create a factory for this.
+            if (!bool.Parse(ConfigurationManager.AppSettings["EmailEnabled"]))
+            {
+                return new Task(() => { Trace.Write("Email is turned off"); }); //Worst line of code EVER!
+            }
 
 
-                var credentials = new NetworkCredential(USERNAME, PASSWORD);
+            var credentials = new NetworkCredential(USERNAME, PASSWORD);
                 var transportWeb = new Web(credentials);
                 return transportWeb.DeliverAsync(message);
         }
