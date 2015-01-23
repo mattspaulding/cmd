@@ -11,14 +11,18 @@ namespace ProjectDONE.App_Start.Filters
 {
     public class UnhandledExceptionFilter : ExceptionFilterAttribute
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public override void OnException(HttpActionExecutedContext context)
         {
             //Add detailed ELMAH logging here to Azure table storage.
             //For now, Azure diagnostics logging will work.
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                System.Diagnostics.Debugger.Break();
-            }
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    System.Diagnostics.Debugger.Break();
+            //}
         }
 
     }
