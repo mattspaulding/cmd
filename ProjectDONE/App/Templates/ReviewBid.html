@@ -1,0 +1,31 @@
+﻿<ons-page ng-controller="ReviewBidController" class="reviewBid">
+    <ons-toolbar>
+        <div class="left"><ons-back-button ></ons-back-button></div>
+        <div class="center">Bid</div>
+    </ons-toolbar>
+    <div>
+        <div>
+            <hr style="margin:0px;" />
+            hello
+            <div>
+                 <div class="bid" ng-show="!isJobOwner">
+                     <ons-icon icon="ion-social-usd"></ons-icon>
+                    <input type="text" ng-keyup="CalculateTotal()"
+                           id="bid_amount" ng-model="bid.Amount" placeholder="0.00" />
+                </div>       
+                <div>
+                    <ons-icon icon="ion-social-usd"></ons-icon>
+                    <input type="text" disabled="disabled"
+                           id="bid_fee" ng-model="bid.Fee" placeholder="0.00" />
+                </div>
+                <div>
+                    <ons-icon icon="ion-social-usd"></ons-icon>
+                    <input type="text" ng-keyup="CalculateAmount()"
+                           id="bid_total" ng-model="bid.Total" placeholder="0.00" />
+                </div>
+                <ons-button ng-click="BidOnCurrentJob()">Place Bid</ons-button>
+
+    </div>
+        </div>
+    </div>
+</ons-page>

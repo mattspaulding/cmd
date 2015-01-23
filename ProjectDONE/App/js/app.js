@@ -65,7 +65,7 @@ ons.ready(function () {
                     })
                     .catch(function (error) {
                         root_navigator.popPage();
-                        ons.notification.alert({message: 'An error has occurred!'});
+                        ons.notification.alert({ message: 'An error has occurred!' });
                     });
                 }
             });
@@ -185,12 +185,8 @@ ons.ready(function () {
             });
         };
 
-        $scope.BidOnCurrentJob = function () {
-            $projectDone.PlaceBid($projectDone.SelectedJob.ID, $scope.bid)
-            .then(function (results) {
-                $scope.bid = new Bid();
-                ons.notification.alert({ title: 'Success', message: 'Your bid was submitted' });
-            });
+        $scope.ReviewBid = function () {
+            root_navigator.pushPage('ReviewBid');
         };
 
         $scope.AcceptBid = function (bid) {
@@ -217,9 +213,9 @@ ons.ready(function () {
         $scope.PayJob = function () {
             $projectDone.StripePayment($scope.job,
                 function (token) {
-                    
+
                     root_navigator.pushPage('Processing', { animation: "fade" });
-                    $projectDone.TakePayment($scope.job,token)
+                    $projectDone.TakePayment($scope.job, token)
                     .then(function (results) {
                         root_navigator.popPage();
                         $scope.job.Status = 3;
@@ -233,6 +229,31 @@ ons.ready(function () {
         }
 
         $scope.loadJob();
+    });
+
+    app.controller('ReviewBidController', function ($scope, $projectDone, Job, Bid) {
+        debugger;
+        var job = $scope.job;
+        var bid = $scope.bid;
+        $scope.BidOnCurrentJob = function () {
+            $projectDone.PlaceBid($projectDone.SelectedJob.ID, $scope.bid)
+            .then(function (results) {
+                $scope.bid = new Bid();
+                ons.notification.alert({ title: 'Success', message: 'Your bid was submitted' });
+            });
+        };
+
+        var feePercent = .13;
+        $scope.CalculateTotal = function () {
+            $scope.bid.Fee = $scope.bid.Amount * feePercent;
+            $scope.bid.Total = $scope.bid.Amount - $scope.bid.Fee;
+        };
+        $scope.CalculateAmount = function () {
+            $scope.bid.Amount = $scope.bid.Total / (1 - feePercent);
+            $scope.bid.Fee = $scope.bid.Amount * feePercent;
+        };
+
+
     });
 
     app.factory('User', function () {
@@ -273,7 +294,7 @@ ons.ready(function () {
             Demographics: "",
             PrivateDescription: "",
             AcceptedBid_id: "",
-            Media: {URL:''},
+            Media: { URL: '' },
             Dialog: [],
             Bids: [],
             Address: {},
@@ -352,7 +373,7 @@ ons.ready(function () {
 
     app.service('$projectDone', function ($http, Job, Bid, $q) {
         var self = this;
-        
+
         //User 
         self.LoggedInUser = {};
         self.SelectedJob = {};
@@ -410,7 +431,7 @@ ons.ready(function () {
         self.GetOwner = function () {
             return $http.get("/api/app/Owner");
         };
-        self.getLoggedInUser = function(){
+        self.getLoggedInUser = function () {
             return self.LoggedInUser;
         }
 
@@ -430,7 +451,7 @@ ons.ready(function () {
             return $http.get('/api/app/job');
         };
         self.FinishJob = function (jobId) {
-            return $http.post('/api/app/Job/'+ jobId +'/Finish/')
+            return $http.post('/api/app/Job/' + jobId + '/Finish/')
         };
 
         //Bid
@@ -451,14 +472,13 @@ ons.ready(function () {
         };
 
         //Stripe
-        self.StripePayment = function(job,stripeCallback)
-        {
+        self.StripePayment = function (job, stripeCallback) {
             StripeCheckout.configure({
                 image: 'App/images/icon-logo.png',
                 key: 'pk_test_6UITNydd2WGnJ9LVxEx7RZNR',
                 token: stripeCallback
 
-                
+
             }).open({
                 name: 'Project: Done!',
                 description: job.Title,
@@ -466,11 +486,10 @@ ons.ready(function () {
                 email: job.Owner.Name
             });
         }
-        self.TakePayment = function(job,stripeToken)
-        {
-           return $http.post(
-                        '/api/app/Job/' + job.ID + '/MakePayment',
-                        JSON.stringify(stripeToken))
+        self.TakePayment = function (job, stripeToken) {
+            return $http.post(
+                         '/api/app/Job/' + job.ID + '/MakePayment',
+                         JSON.stringify(stripeToken))
         }
 
         //Media
@@ -481,7 +500,7 @@ ons.ready(function () {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             })
-           
+
         }
     })
 

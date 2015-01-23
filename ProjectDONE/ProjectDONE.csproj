@@ -282,6 +282,7 @@
     <Content Include="App\Templates\Dashboard.html" />
     <Content Include="App\Templates\Login.html" />
     <Content Include="App\Templates\Register.html" />
+    <Content Include="App\Templates\ReviewBid.html" />
     <Content Include="App\Templates\ReviewJob.html" />
     <Content Include="App\Templates\SearchJobs.html" />
     <Content Include="App_Data\DefaultDatabase.mdf" />
