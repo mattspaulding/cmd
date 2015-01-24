@@ -245,18 +245,20 @@ ons.ready(function () {
         //TODO: Move feePercent to resource file
         var feePercent = .13;
         $scope.CalculateTotal = function () {
+            $(".serviceCharge").slideDown("slow");
             var num= ($scope.bid.Amount.split('.')[1] || []).length;
             if(num>2)
             $scope.bid.Amount = ($scope.bid.Amount * 1).toFixed(2);
-            $scope.bid.Fee = ($scope.bid.Amount * feePercent).toFixed(2);
-            $scope.bid.Total = ($scope.bid.Amount - $scope.bid.Fee).toFixed(2);
+            $scope.bid.ServiceCharge = ($scope.bid.Amount * feePercent).toFixed(2);
+            $scope.bid.Total = ($scope.bid.Amount - $scope.bid.ServiceCharge).toFixed(2);
         };
         $scope.CalculateAmount = function () {
+            $(".serviceCharge").slideDown("slow");
             var num = ($scope.bid.Total.split('.')[1] || []).length;
             if (num > 2)
                 $scope.bid.Total = ($scope.bid.Total * 1).toFixed(2);
             $scope.bid.Amount = ($scope.bid.Total / (1 - feePercent)).toFixed(2);
-            $scope.bid.Fee = ($scope.bid.Amount * feePercent).toFixed(2);
+            $scope.bid.ServiceCharge = ($scope.bid.Amount * feePercent).toFixed(2);
         };
 
 

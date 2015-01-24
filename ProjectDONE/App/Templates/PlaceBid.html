@@ -10,17 +10,21 @@
                 <div class="bid">
                     <ons-icon icon="ion-social-usd"></ons-icon>
                     <input type="text" ng-keyup="CalculateTotal()"
-                           id="bid_amount" ng-model="bid.Amount" placeholder="0.00" />
+                           id="bid_amount" ng-model="bid.Amount" placeholder="Bid" />
                     <div class="inputTitle">Customer Pays</div>
-                     <ons-icon icon="ion-social-usd"></ons-icon>
-                    <input type="text" disabled="disabled"
-                           id="bid_fee" ng-model="bid.Fee" placeholder="0.00" />
+                </div>
+                <div class="serviceCharge" hidden="hidden">
+                    <ons-icon icon="ion-social-usd"></ons-icon>
+    <div class="serviceChargeLabel">{{bid.ServiceCharge}}</div>
                     <div class="inputTitle">Service Charge</div>
-                     <ons-icon icon="ion-social-usd"></ons-icon>
+                </div>
+                <div class="bid">
+        <ons-icon icon="ion-social-usd"></ons-icon>
                     <input type="text" ng-keyup="CalculateAmount()"
-                           id="bid_total" ng-model="bid.Total" placeholder="0.00" />
+                           id="bid_total" ng-model="bid.Total" placeholder="Bid" />
                     <div class="inputTitle">You Keep</div>
-                <ons-button ng-click="BidOnCurrentJob()">Place Bid</ons-button>
+                    <ons-button ng-click="BidOnCurrentJob()">Place Bid</ons-button>
+                </div>
 
             </div>
         </div>
