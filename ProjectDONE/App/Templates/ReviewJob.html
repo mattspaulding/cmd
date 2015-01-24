@@ -1,11 +1,13 @@
 ﻿<ons-page ng-controller="ReviewJobController" class="reviewJob">
     <ons-toolbar>
-        <div class="left"><ons-back-button ></ons-back-button></div>
+        <div class="left"><ons-back-button></ons-back-button></div>
         <div class="center">{{job.Title}}</div>
     </ons-toolbar>
     <div ng-show="job">
         <div class="jobDescription">
-            <img ng-src="{{job.Media.URL}}" />
+            <div class="imgContainer">
+                <img ng-src="{{job.Media.URL}}" />
+            </div>
             <div class="description">
                 {{job.PublicDescription}}
             </div>
@@ -15,7 +17,7 @@
         </div>
         <div class="jobState">
             <hr style="margin:0px;" />
-            
+
             <div class="pending" ng-show="!job.AcceptedBid && job.Status ===0">
                 <!-- As the job Owner, i want to see a list of bids here and be able to accept a bid-->
                 <!-- for now, as the non owner, i want to have the option to bid on this job (Perhaps to also see all other bids as well) -->
@@ -42,9 +44,9 @@
 
                 </div>
             </div>
-            
+
             <div class="accepted" ng-show="job.AcceptedBid && job.Status ===0">
-               
+
                 <!-- As the owner of the winning bid, i want to see the option to 'Finish' the job-->
                 <div class="acceptedBid bid" ng-show="!isJobOwner">
                     <ons-button ng-click="ConfirmBid(job.AcceptedBid)">Confirm Bid</ons-button>
@@ -64,14 +66,14 @@
                         <div class="amount">
                             <span style="font-size:.8em; font-style:italic">Accepted!</span>
                             <span> {{job.AcceptedBid.Amount | currency}}</span>
-                            
+
                         </div>
 
 
                     </div>
 
                 </div>
-                
+
                 <!-- As the non-owner of the job or the winning bid, I want to see the winning bid -->
             </div>
             <div class="confirmed" ng-show="job.Status === 1">
@@ -126,8 +128,8 @@
                     </div>
 
                 </div>
-                
-                 <!-- as the non-owner of the bid or job, I want to see the winning bid -->
+
+                <!-- as the non-owner of the bid or job, I want to see the winning bid -->
             </div>
             <div class="satisfied" ng-show="job.Status === 3">
                 <!-- as the job owner, I want to see that this job was marked finished and payment was made.-->

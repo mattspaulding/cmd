@@ -288,9 +288,13 @@ body, html {
     .reviewJob .jobDescription {
     }
 
+        .reviewJob .jobDescription .imgContainer {
+            text-align: center;
+        }
+
         .reviewJob .jobDescription img {
             height: 45vh;
-            width: 100%;
+            // width: 100%;
             background-color: black;
         }
 
@@ -353,7 +357,7 @@ body, html {
     .reviewJob .jobState .bid > ons-button {
         text-align: center;
         width: 100%;
-       // position: absolute;
+        // position: absolute;
         bottom: 0px;
         right: 0px;
         height: 26vw;
@@ -365,7 +369,7 @@ body, html {
     .reviewJob .jobState .acceptedBid > ons-button {
         text-align: center;
         width: 80vw;
-       // position: absolute;
+        // position: absolute;
         bottom: 0px;
         right: 9vw;
         height: 23vw;
@@ -441,7 +445,7 @@ body, html {
         position: relative;
         left: 40vw;
         bottom: 25px;
-        color:lightgray;
+        color: lightgray;
     }
 
     .placeBid .jobState .bid input {
@@ -463,7 +467,7 @@ body, html {
     .placeBid .jobState .bid > ons-button {
         text-align: center;
         width: 100%;
-       // position: absolute;
+        // position: absolute;
         bottom: 0px;
         right: 0px;
         height: 26vw;
