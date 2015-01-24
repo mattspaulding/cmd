@@ -20,11 +20,7 @@
                 <!-- As the job Owner, i want to see a list of bids here and be able to accept a bid-->
                 <!-- for now, as the non owner, i want to have the option to bid on this job (Perhaps to also see all other bids as well) -->
                 <div class="bid" ng-show="!isJobOwner">
-                    <!-- TODO: If this user has already bid, we should'nt allow them to bid via the UI again, also prevent this on the server-->
-                    <ons-icon icon="ion-social-usd"></ons-icon>
-                    <input type="text"
-                           id="bid_amount" ng-model="bid.Amount" placeholder="0.00" />
-                    <ons-button ng-click="ReviewBid()">Review Bid</ons-button>
+                    <ons-button ng-click="PlaceBid()">Bid on this job</ons-button>
                 </div>
                 <div class="bids" ng-show="!!isJobOwner">
 

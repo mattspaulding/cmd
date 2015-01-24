@@ -185,8 +185,8 @@ ons.ready(function () {
             });
         };
 
-        $scope.ReviewBid = function () {
-            root_navigator.pushPage('ReviewBid');
+        $scope.PlaceBid = function () {
+            root_navigator.pushPage('PlaceBid');
         };
 
         $scope.AcceptBid = function (bid) {
@@ -231,8 +231,7 @@ ons.ready(function () {
         $scope.loadJob();
     });
 
-    app.controller('ReviewBidController', function ($scope, $projectDone, Job, Bid) {
-        debugger;
+    app.controller('PlaceBidController', function ($scope, $projectDone, Job, Bid) {
         var job = $scope.job;
         var bid = $scope.bid;
         $scope.BidOnCurrentJob = function () {
@@ -243,14 +242,21 @@ ons.ready(function () {
             });
         };
 
+        //TODO: Move feePercent to resource file
         var feePercent = .13;
         $scope.CalculateTotal = function () {
-            $scope.bid.Fee = $scope.bid.Amount * feePercent;
-            $scope.bid.Total = $scope.bid.Amount - $scope.bid.Fee;
+            var num= ($scope.bid.Amount.split('.')[1] || []).length;
+            if(num>2)
+            $scope.bid.Amount = ($scope.bid.Amount * 1).toFixed(2);
+            $scope.bid.Fee = ($scope.bid.Amount * feePercent).toFixed(2);
+            $scope.bid.Total = ($scope.bid.Amount - $scope.bid.Fee).toFixed(2);
         };
         $scope.CalculateAmount = function () {
-            $scope.bid.Amount = $scope.bid.Total / (1 - feePercent);
-            $scope.bid.Fee = $scope.bid.Amount * feePercent;
+            var num = ($scope.bid.Total.split('.')[1] || []).length;
+            if (num > 2)
+                $scope.bid.Total = ($scope.bid.Total * 1).toFixed(2);
+            $scope.bid.Amount = ($scope.bid.Total / (1 - feePercent)).toFixed(2);
+            $scope.bid.Fee = ($scope.bid.Amount * feePercent).toFixed(2);
         };
 
 
