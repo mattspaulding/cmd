@@ -281,6 +281,7 @@
     <Content Include="App\Templates\CreateJob.html" />
     <Content Include="App\Templates\Dashboard.html" />
     <Content Include="App\Templates\Login.html" />
+    <Content Include="App\Templates\TermsOfService.html" />
     <Content Include="App\Templates\Register.html" />
     <Content Include="App\Templates\PlaceBid.html" />
     <Content Include="App\Templates\ReviewJob.html" />

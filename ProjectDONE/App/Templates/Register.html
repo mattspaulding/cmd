@@ -22,6 +22,14 @@
                 <div ng-message="required">Required</div>
             </div>
 
+            <div modifier="tappable">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="register.termsOfService" />
+                    <div class="checkbox__checkmark"></div>
+                    I agree to the <a href="#" ng-click="register.GoToTermsOfService()">Terms of Service</a>          
+                </label>
+            </div>
+
             <ons-button modifier="large" ng-click="register.RegisterClick()" style="width:100%; margin-top: 10px;">Sign Up</ons-button>
             <input type="submit" value="Sign Up" class="ng-hide" />
         </form>

@@ -42,10 +42,21 @@ ons.ready(function () {
     app.controller('registerController', function ($scope, User, $projectDone, $http) {
         $scope.register = {};
 
-        $scope.register.RegisterClick = function () {
-            $scope.register.form.$setSubmitted();
-            $scope.register.Submit();
+        $scope.register.GoToTermsOfService = function () {
+            root_navigator.pushPage('TermsOfService');
         };
+        $scope.register.RegisterClick = function () {
+            debugger;
+            if ($scope.register.termsOfService === false || $scope.register.termsOfService === undefined) {
+                alert("You must agree to the terms of service.");
+            }
+            else {
+                $scope.register.form.$setSubmitted();
+                $scope.register.Submit();
+            }
+        };
+
+
 
         $scope.register.Submit = function () {
             if (!$scope.register.form.$valid) return;
@@ -70,6 +81,10 @@ ons.ready(function () {
                 }
             });
         }
+    });
+
+    app.controller('termsOfServiceController', function ($scope, User, $projectDone, $http) {
+  // Intentionally left empty
     });
 
     app.controller('loginController', function ($scope, User, $projectDone, $http) {
