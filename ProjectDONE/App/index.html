@@ -23,76 +23,77 @@
 </head>
 
 <body ng-controller="AppController">
-    <ons-navigator var="root_navigator">
-        <ons-page>
-            <div>
-                <ons-navigator var="top_navigator">
-                    <div style="text-align:center;">
-                        <img src="App/images/icon-logo-with-text.png" style="width: 200px; margin-top: 20px;" />
-                    </div>
-                </ons-navigator>
-            </div>
-            <div style="width:100%; margin:0px; padding:0px; height:25%; position:absolute; bottom:0px;">
-                <ons-navigator var="bottom_navigator">
-                    <ons-page>
+    <div class="main-container">
+        <ons-navigator var="root_navigator">
+            <ons-page>
+                <div>
+                    <ons-navigator var="top_navigator">
                         <div style="text-align:center;">
-                            <i class="fa fa-spinner fa-5x fa-spin"></i>
+                            <img src="App/images/icon-logo-with-text.png" style="width: 200px; margin-top: 20px;" />
                         </div>
-                    </ons-page>
-                </ons-navigator>
-            </div>
-        </ons-page>
-
-    </ons-navigator>
-    <ons-template id="loginLoading">
-        <div style="width:100%; text-align:center; padding-top:5em; box-sizing:border-box"><p>...Loading</p></div>
-    </ons-template>
-    <ons-template id="Processing">
-        <div class="processing">
-            <div class='peeek-loading' style="margin-bottom: 30px; margin-left: auto; margin-right: auto;">
-                <div class="peeek-loading-wrap">
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                    </ons-navigator>
                 </div>
+                <div style="width:100%; margin:0px; padding:0px; height:25%; position:absolute; bottom:0px;">
+                    <ons-navigator var="bottom_navigator">
+                        <ons-page>
+                            <div style="text-align:center;">
+                                <i class="fa fa-spinner fa-5x fa-spin"></i>
+                            </div>
+                        </ons-page>
+                    </ons-navigator>
+                </div>
+            </ons-page>
+
+        </ons-navigator>
+        <ons-template id="loginLoading">
+            <div style="width:100%; text-align:center; padding-top:5em; box-sizing:border-box"><p>...Loading</p></div>
+        </ons-template>
+        <ons-template id="Processing">
+            <div class="processing">
+                <div class='peeek-loading' style="margin-bottom: 30px; margin-left: auto; margin-right: auto;">
+                    <div class="peeek-loading-wrap">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+                Processing
             </div>
-            Processing
-        </div>
-    </ons-template>
-    <ons-template id="Register">
-        <div ng-include="'App/Templates/Register.html'"></div>
-    </ons-template>
-    <ons-template id="TermsOfService">
-        <div ng-include="'App/Templates/TermsOfService.html'"></div>
-    </ons-template>
-  <ons-template id="Login">
-        <div ng-include="'App/Templates/Login.html'"></div>
-    </ons-template>
-    <ons-template id="Dashboard">
-        <div ng-include="'App/Templates/Dashboard.html'"></div>
-    </ons-template>
-    <ons-template id="SearchJobs">
-        <div ng-include="'App/Templates/SearchJobs.html'"></div>
-    </ons-template>
+        </ons-template>
+        <ons-template id="Register">
+            <div ng-include="'App/Templates/Register.html'"></div>
+        </ons-template>
+        <ons-template id="TermsOfService">
+            <div ng-include="'App/Templates/TermsOfService.html'"></div>
+        </ons-template>
+        <ons-template id="Login">
+            <div ng-include="'App/Templates/Login.html'"></div>
+        </ons-template>
+        <ons-template id="Dashboard">
+            <div ng-include="'App/Templates/Dashboard.html'"></div>
+        </ons-template>
+        <ons-template id="SearchJobs">
+            <div ng-include="'App/Templates/SearchJobs.html'"></div>
+        </ons-template>
 
-    <ons-template id="CreateJob">
-        <div ng-include="'App/Templates/CreateJob.html'"></div>
-    </ons-template>
-    <ons-template id="ReviewJob">
-        <div ng-include="'App/Templates/ReviewJob.html'"></div>
-    </ons-template>
-    <ons-template id="PlaceBid">
-        <div ng-include="'App/Templates/PlaceBid.html'"></div>
-    </ons-template>
-
+        <ons-template id="CreateJob">
+            <div ng-include="'App/Templates/CreateJob.html'"></div>
+        </ons-template>
+        <ons-template id="ReviewJob">
+            <div ng-include="'App/Templates/ReviewJob.html'"></div>
+        </ons-template>
+        <ons-template id="PlaceBid">
+            <div ng-include="'App/Templates/PlaceBid.html'"></div>
+        </ons-template>
+    </div>
 </body>
 </html>
