@@ -43,7 +43,7 @@ appControllers.controller('registerController', function ($scope, User, $project
     };
     $scope.register.RegisterClick = function () {
         if ($scope.register.termsOfService === false || $scope.register.termsOfService === undefined) {
-            alert("You must agree to the terms of service.");
+            ons.notification.alert({ message: 'An error has occurred!' });
         }
         else {
             $scope.register.form.$setSubmitted();
@@ -55,9 +55,9 @@ appControllers.controller('registerController', function ($scope, User, $project
 
     $scope.register.Submit = function () {
         if (!$scope.register.form.$valid) return;
-        $location.path('loginLoading', {
-            onTransitionEnd: function () {
-
+        //$location.path('loginLoading', {
+        //onTransitionEnd: function () {
+                $location.path('Processing', { animation: "fade" });
                 $projectDone.Register($scope.register.email, $scope.register.password)
                 .then(function (result) {
                     $projectDone.Login($scope.register.email, $scope.register.password)
@@ -73,8 +73,8 @@ appControllers.controller('registerController', function ($scope, User, $project
                     root_navigator.popPage();
                     ons.notification.alert({ message: 'An error has occurred!' });
                 });
-            }
-        });
+            //}
+        //});
     }
 });
 
@@ -228,7 +228,6 @@ appControllers.controller('reviewJobController', function ($scope,$http, $projec
     $scope.PayJob = function () {
         $projectDone.StripePayment($scope.job,
             function (token) {
-
                 $location.path('Processing', { animation: "fade" });
                 $projectDone.TakePayment($scope.job, token)
                 .then(function (results) {
