@@ -244,6 +244,9 @@
     <Content Include="App\images\icon-logo-with-text.png" />
     <Content Include="App\images\icon-logo.png" />
     <Content Include="App\index.html" />
+    <Content Include="App\js\controllers.js" />
+    <Content Include="App\js\services.js" />
+    <Content Include="App\js\directives.js" />
     <Content Include="App\js\app.js" />
     <Content Include="App\lib\onsen\css\font_awesome\css\font-awesome.css" />
     <Content Include="App\lib\onsen\css\font_awesome\css\font-awesome.min.css" />
@@ -260,6 +263,8 @@
     <Content Include="App\lib\onsen\js\angular\angular-animate.js" />
     <Content Include="App\lib\onsen\js\angular\angular-csp.css" />
     <Content Include="App\lib\onsen\js\angular\angular-messages.min.js" />
+    <Content Include="App\lib\onsen\js\angular\angular-route.js" />
+    <Content Include="App\lib\onsen\js\angular\angular-route.min.js" />
     <Content Include="App\lib\onsen\js\angular\angular-touch.js" />
     <Content Include="App\lib\onsen\js\angular\angular.js" />
     <Content Include="App\lib\onsen\js\angular\angular.min.js" />
@@ -278,6 +283,8 @@
     <Content Include="App\styles\onsen-css-components-sunshine-theme.css" />
     <Content Include="App\styles\onsen-css-components.css" />
     <Content Include="App\styles\onsenui.css" />
+    <Content Include="App\Templates\App.html" />
+    <Content Include="App\Templates\LoginLoading.html" />
     <Content Include="App\Templates\CreateJob.html" />
     <Content Include="App\Templates\Dashboard.html" />
     <Content Include="App\Templates\Login.html" />
@@ -1055,6 +1062,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="App\lib\onsen\js\angular\angular-route.min.js.map" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

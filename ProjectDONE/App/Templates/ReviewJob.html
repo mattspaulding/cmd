@@ -1,8 +1,5 @@
-﻿<ons-page ng-controller="ReviewJobController" class="reviewJob">
-    <ons-toolbar>
-        <div class="left"><ons-back-button></ons-back-button></div>
-        <div class="center">{{job.Title}}</div>
-    </ons-toolbar>
+﻿<ons-page ng-controller="reviewJobController" class="reviewJob">
+    <toolbar back="Back" title="{{job.Title}}"></toolbar>
     <div ng-show="job">
         <div class="jobDescription">
             <div class="imgContainer">
