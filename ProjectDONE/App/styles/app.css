@@ -48,18 +48,16 @@ body, html {
 .menuBanner {
     background-color: #FFC107 !important;
     border-bottom: 1px solid #FFC107 !important;
+    text-align:left;
+      font-size: 2em;
+    color: #212121;
 }
 
 .menuBanner .title {
-   position:absolute;
-   right:0px;
-   padding:10px 15px 0 0;
    font-size:x-large;
 }
 
-.dashboard .menuBanner i {
-    font-size: 2em;
-    color: #212121;
+ .menuBanner i {
     margin-right: 20px;
 }
 

@@ -23,13 +23,13 @@ appDirectives.directive('fileModel', ['$parse', function ($parse) {
 appDirectives.directive('toolbar', function () {
     return {
         restrict: 'E',
-        template: '<div class="menuBanner"><span class="left"><i class="fa fa-chevron-left fa-2x back-button"> {{back}}</i></span><span class="title">{{title}}</span></div>',
+        template: '<div class="menuBanner"><span class="left"><i class="fa fa-chevron-left back-button"> {{back}}</i></span><span class="title">{{title}}</span></div>',
         scope: {
             back: '@back',
             title:'@title'
         },
         link: function (scope, element, attrs) {
-            $(element[0]).on('click', function () {
+            $(element[0].firstChild.firstChild).on('click', function () {
                 history.back();
                 scope.$apply();
             });
