@@ -121,7 +121,7 @@ appControllers.controller('dashboardController', function ($scope, $projectDone,
 
 });
 
-appControllers.controller('searchJobsController', function ($scope, $projectDone, $location) {
+appControllers.controller('searchJobsController', function ($scope,$http, $projectDone, $location) {
     // root_navigator.on("prepop", function () {
     //     $scope.ListJobs();
     //});
@@ -130,12 +130,19 @@ appControllers.controller('searchJobsController', function ($scope, $projectDone
     $scope.loadingJobs = false;
 
     $scope.ListJobs = function () {
-        $scope.loadingJobs = true;
-        $projectDone.GetJobs()
-            .then(function (results) {
-                $scope.loadingJobs = false;
-                $scope.jobs = results.data;
-            });
+        var authKey = window.localStorage['authKey'];
+        if (authKey) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + authKey;
+            $scope.loadingJobs = true;
+            $projectDone.GetJobs()
+                .then(function (results) {
+                    $scope.loadingJobs = false;
+                    $scope.jobs = results.data;
+                });
+        }
+        else {
+            $location.path('Login');
+        }
     };
 
     $scope.SelectJob = function (job) {
