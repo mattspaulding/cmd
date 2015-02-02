@@ -48,6 +48,7 @@ body, html {
 .menuBanner {
     background-color: #FFC107 !important;
     border-bottom: 1px solid #FFC107 !important;
+    text-align:left;
 }
 
 .menuBanner .title {
