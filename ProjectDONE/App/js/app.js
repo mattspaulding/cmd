@@ -2,6 +2,7 @@ var onsReady = false;
 ons.ready(function () {
     //Put some loading screen here, you know we'll need it
     onsReady = true;
+   
 });
 
 'use strict';
@@ -53,6 +54,10 @@ when('/ReviewJob/:jobID', {
 when('/PlaceBid', {
     templateUrl: 'App/Templates/PlaceBid.html',
     controller: 'placeBidController'
+}).
+when('/User', {
+    templateUrl: 'App/Templates/UserSettings.html',
+    controller: 'userSettingsController'
 }).
       otherwise({
           redirectTo: '/App'

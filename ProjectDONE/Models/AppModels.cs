@@ -102,11 +102,21 @@ namespace ProjectDONE.Models.AppModels
         public virtual IList<Media> Media { get; set; }
         public virtual IList<Job> Jobs { get; set; }
         public virtual IList<Bid> Bids { get; set; }
+        public string stripe_id { get; set; }
+        public bool stripe_livemode { get; set; }
+        public string stripe_email { get; set; }
+        public string stripe_meta { get; set; }
+        public string card_id { get; set; }
+        public int card_last_four { get; set; }
+        public int card_exp_month { get; set; }
+        public int card_exp_year { get; set; }
+        public int balance { get; set; }
+
     }
 
     public class Bid : BaseAppModel
     {
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         public long Owner_ID { get; set; }
         [ForeignKey("Owner_ID")]

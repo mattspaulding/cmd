@@ -278,4 +278,18 @@ appControllers.controller('placeBidController', function ($scope, $projectDone, 
 
 });
 
+appControllers.controller('userSettingsController', function ($scope) {
+
+    $scope.createStripeCustomer = function () {
+        Stripe.createToken({
+            number: '4242424242424242',
+            cvc: '100',
+            exp_month: '12',
+            exp_year: '2017'
+        }, function (status, response) {
+            console.log(response);
+        });
+    };
+});
+
 
