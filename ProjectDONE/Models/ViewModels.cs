@@ -48,7 +48,7 @@ namespace ProjectDONE.Models
 
         }
 
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
 
         public JobViewModel Job { get; set; }

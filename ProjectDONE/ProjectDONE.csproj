@@ -223,9 +223,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502030204337_Create.cs" />
-    <Compile Include="Migrations\201502030204337_Create.Designer.cs">
-      <DependentUpon>201502030204337_Create.cs</DependentUpon>
+    <Compile Include="Migrations\201501180659178_Create.cs" />
+    <Compile Include="Migrations\201501180659178_Create.Designer.cs">
+      <DependentUpon>201501180659178_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -293,7 +293,6 @@
     <Content Include="App\Templates\PlaceBid.html" />
     <Content Include="App\Templates\ReviewJob.html" />
     <Content Include="App\Templates\SearchJobs.html" />
-    <Content Include="App\Templates\UserSettings.html" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1147,8 +1146,8 @@
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502030204337_Create.resx">
-      <DependentUpon>201502030204337_Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501180659178_Create.resx">
+      <DependentUpon>201501180659178_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

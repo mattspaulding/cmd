@@ -225,6 +225,8 @@ C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
 C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.dll.config
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.dll
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.pdb
@@ -341,8 +343,3 @@ C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.cspr
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.pdb
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
-C:\code\ProjectDONE\ProjectDONE\bin\Elmah.dll
-C:\code\ProjectDONE\ProjectDONE\bin\SendGrid.SmtpApi.dll
-C:\code\ProjectDONE\ProjectDONE\bin\SendGridMail.dll
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
-C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
