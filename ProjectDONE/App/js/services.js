@@ -223,7 +223,7 @@ appServices.service('$projectDone', function ($http, Job, Bid, $q) {
     self.StripePayment = function (job, stripeCallback) {
         StripeCheckout.configure({
             image: 'App/images/icon-logo.png',
-            key: 'pk_test_6UITNydd2WGnJ9LVxEx7RZNR',
+            key: 'pk_live_GA4RtHxYfWNGeViXdBaWlnV2',
             token: stripeCallback
 
 
