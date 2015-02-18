@@ -1,0 +1,42 @@
+﻿<ons-page ng-controller="dashboardController" class="dashboard">
+    <ons-toolbar class="menuBanner">
+        <div class="right">
+            <i class="ion-settings"></i>
+        </div>
+    </ons-toolbar>
+    <div class="userBanner">
+
+        <div class="userPicture"
+             style="
+                background-size:contain;
+                background-image: url('app/images/icon-logo.png');
+                background-repeat: no-repeat;
+                background-attachment:scroll;
+                background-position:center center;"></div>
+        <span ng-bind="LoggedInUser.owner.Name"></span>
+        <div class="bling">
+            <i class="ion-hammer"></i>
+            <span class="alerts"></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <ul>
+            <li class="option" ng-click="">
+                <i class="fa fa-search type"></i>
+                <i class="fa fa-angle-right"></i>
+                <p class="text">
+                    <span class="label">Add a Credit Card</span>
+                    <span class="description">save your CC Information so you can pay and get paid!</span>
+                </p>
+            </li>
+            
+
+        </ul>
+
+
+
+    </div>
+
+
+</ons-page>

@@ -1,9 +1,7 @@
 'use strict';
 
-/* Controllers */
-
 var appControllers = angular.module('appControllers', []);
-//TODO: put user's auth token in local storage
+
 appControllers.controller('appController', function ($scope, $projectDone, $http, $timeout, $location) {
 
     $scope.CheckLogin = function () {
@@ -81,6 +79,7 @@ appControllers.controller('registerController', function ($scope, User, $project
 appControllers.controller('termsOfServiceController', function ($scope, User, $projectDone, $http, $location) {
     // Intentionally left empty
 });
+
 appControllers.controller('loginLoadingController', function ($scope, User, $projectDone, $http, $location) {
     // Intentionally left empty
 });
@@ -278,4 +277,6 @@ appControllers.controller('placeBidController', function ($scope, $projectDone, 
 
 });
 
+appControllers.controller('userAccountController', function ($scope, $projectDone) {
 
+});

@@ -17,41 +17,20 @@ namespace ProjectDONE.Controllers
     [RoutePrefix("api/media")]
     public class MediaController : ApiController
     {
+        private string container_name =ConfigurationManager.AppSettings["ImageContainerName"];
+        private string StorageAccountUrl = ConfigurationManager.AppSettings["StorageAccountUrl"];
         private MediaRepo _MediaRepo;
         public MediaController()
         {
             _MediaRepo = new MediaRepo();
         }
 
-        [HttpGet]
-        [Route("{*path}")]
-        public async Task<HttpResponseMessage> Image(string path)
-        {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            var constring = ConfigurationManager.AppSettings["StorageConnectionString"];
-            var acct = CloudStorageAccount.Parse(constring);
-            var client = acct.CreateCloudBlobClient();
-            var container = client.GetContainerReference("job-images");
-            var blob = container.GetBlockBlobReference(path);
-            if(!blob.Exists())
-            {
-                //TODO: Return a default image indicating that this image could not be found
-                response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                response.Content = new ByteArrayContent(new byte[0]);
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/" + Path.GetExtension(path).Replace(".",""));
-                return response;
-            }
-            var stream = new MemoryStream();
-            await blob.DownloadToStreamAsync(stream);
-            response.Content = new ByteArrayContent(stream.ToArray());
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue(blob.Properties.ContentType);
-            return response;
-        }
+
 
 
         [Authorize]
         [HttpPost]
-       [Route("Upload")]
+        [Route("Upload")]
         public async Task<HttpResponseMessage> Upload()
         {
             HttpRequestMessage request = this.Request;
@@ -68,7 +47,7 @@ namespace ProjectDONE.Controllers
             var constring = ConfigurationManager.AppSettings["StorageConnectionString"];
             var acct = CloudStorageAccount.Parse(constring);
             var client = acct.CreateCloudBlobClient();
-            var container = client.GetContainerReference("job-images");
+            var container = client.GetContainerReference(container_name);
             var guid_file_name = Guid.NewGuid().ToString() + Path.GetExtension(filename);
             var blob = container.GetBlockBlobReference(guid_file_name);
             blob.Properties.ContentType = provider.FileData[0].Headers.ContentType.MediaType;
@@ -79,10 +58,9 @@ namespace ProjectDONE.Controllers
                 CreatedOn = DateTime.Now,
                 MIME_TYPE = blob.Properties.ContentType,
                 Title = Path.GetFileName(filename),
-                URL = "/api/media/" + guid_file_name
+                URL = string.Format("{0}/{1}/{2}",StorageAccountUrl ,container_name , guid_file_name)
             };
 
-           
            
       
             _MediaRepo.Add(model);
