@@ -54,6 +54,9 @@ when('/PlaceBid', {
     templateUrl: 'App/Templates/PlaceBid.html',
     controller: 'placeBidController'
 }).
+when('/User', {
+    templateUrl: 'App/Templates/'
+}).
       otherwise({
           redirectTo: '/App'
       });

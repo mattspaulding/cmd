@@ -26,8 +26,6 @@ namespace ProjectDONE.Controllers
         }
 
 
-
-
         [Authorize]
         [HttpPost]
         [Route("Upload")]
