@@ -1,0 +1,345 @@
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.SqlServer.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Data.Edm.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Data.OData.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Google.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Web.Infrastructure.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Newtonsoft.Json.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Owin.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Net.Http.Formatting.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Spatial.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Helpers.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.OData.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.Owin.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.WebHost.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Mvc.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Optimization.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Razor.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.Deployment.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.Razor.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\WebGrease.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Data.Edm.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Data.OData.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Spatial.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.OData.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Newtonsoft.Json.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Net.Http.Formatting.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Helpers.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.WebHost.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Mvc.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Optimization.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Razor.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.Deployment.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.WebPages.Razor.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Antlr3.Runtime.pdb
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\EntityFramework.SqlServer.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Google.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Http.Owin.xml
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\de\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\es\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\fr\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\it\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ja\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ko\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ru\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\de\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\es\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\fr\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\it\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ja\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ko\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ru\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\de\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\es\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\fr\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\it\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ja\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ko\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\ru\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UniversalDelete.resources
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.UpdateJob.resources
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.RemoveDemographics_Email.resources
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.CreatedOnNullable.resources
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\obj\Debug\ProjectDONE.pdb
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\Microsoft.CSharp.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.ComponentModel.DataAnnotations.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Configuration.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Data.DataSetExtensions.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Data.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Drawing.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Net.Http.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Net.Http.WebRequest.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Runtime.Serialization.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Abstractions.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.ApplicationServices.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Entity.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Web.Routing.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Xml.dll
+\\psf\Home\Documents\Visual Studio 2015\Projects\cmd\ProjectDONE\bin\System.Xml.Linq.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.dll.config
+C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ProjectDONE.pdb
+C:\code\ProjectDONE\ProjectDONE\bin\Antlr3.Runtime.dll
+C:\code\ProjectDONE\ProjectDONE\bin\EntityFramework.dll
+C:\code\ProjectDONE\ProjectDONE\bin\EntityFramework.SqlServer.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Services.Client.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Google.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Web.Infrastructure.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Owin.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Stripe.net.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Net.Http.Formatting.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Helpers.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.Owin.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.WebHost.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Mvc.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Optimization.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Razor.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Deployment.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.dll
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Razor.dll
+C:\code\ProjectDONE\ProjectDONE\bin\WebGrease.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Antlr3.Runtime.pdb
+C:\code\ProjectDONE\ProjectDONE\bin\EntityFramework.xml
+C:\code\ProjectDONE\ProjectDONE\bin\EntityFramework.SqlServer.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Edm.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.OData.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Data.Services.Client.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Spatial.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.OData.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Net.Http.Formatting.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Helpers.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.WebHost.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Mvc.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Optimization.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Razor.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Deployment.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.WebPages.Razor.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Google.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.xml
+C:\code\ProjectDONE\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\code\ProjectDONE\ProjectDONE\bin\System.Web.Http.Owin.xml
+C:\code\ProjectDONE\ProjectDONE\bin\de\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\es\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\it\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\de\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\es\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\fr\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\it\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ja\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ko\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ru\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\de\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\es\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\fr\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\it\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ja\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ko\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\ru\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.dll
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.pdb
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
+C:\code\ProjectDONE\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.dll.config
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ProjectDONE.pdb
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Antlr3.Runtime.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Elmah.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\EntityFramework.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\EntityFramework.SqlServer.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.Edm.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.OData.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.Services.Client.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Owin.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\SendGrid.SmtpApi.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\SendGridMail.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Stripe.net.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Net.Http.Formatting.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Spatial.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Helpers.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.OData.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.Owin.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.WebHost.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Mvc.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Optimization.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Razor.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.Deployment.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.Razor.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\WebGrease.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Antlr3.Runtime.pdb
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\EntityFramework.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\EntityFramework.SqlServer.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.Edm.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.OData.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Data.Services.Client.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.WindowsAzure.Storage.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Spatial.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.OData.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Net.Http.Formatting.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Helpers.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.WebHost.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Mvc.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Optimization.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Razor.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.Deployment.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.WebPages.Razor.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\System.Web.Http.Owin.xml
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\de\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\es\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\it\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\de\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\es\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\fr\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\it\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ja\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ko\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\ru\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.Migrations.Create.resources
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.csproj.GenerateResource.Cache
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.dll
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.pdb
+C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
