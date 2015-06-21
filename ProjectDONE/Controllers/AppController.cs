@@ -33,7 +33,7 @@ namespace ProjectDONE.Controllers
         private JobRepo JobRepo;
         private BidRepo BidRepo;
         private OwnerRepo OwnerRepo;
-        private EmailService emailService;
+        //private EmailService emailService;
         private StripeTransactionRepo StripeTransactionRepo;
         protected ApplicationDbContext ApplicationDbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
@@ -47,7 +47,7 @@ namespace ProjectDONE.Controllers
             this.StripeTransactionRepo = StripeTransactionRepo;
             this.ApplicationDbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
-            this.emailService = emailService;
+            //this.emailService = emailService;
         }
 
 
@@ -269,7 +269,7 @@ namespace ProjectDONE.Controllers
             
 
             
-            emailService.Send_JobReceiveBid(vm, new JobViewModel {Title=job.Title, Owner = new OwnerViewModel {CreatedByUserId = job.Owner.CreatedByUserId } });
+            //emailService.Send_JobReceiveBid(vm, new JobViewModel {Title=job.Title, Owner = new OwnerViewModel {CreatedByUserId = job.Owner.CreatedByUserId } });
             return vm;
         }
 
@@ -335,9 +335,9 @@ namespace ProjectDONE.Controllers
                 //TODO: Should respond with what the total was of the payment
                 //sort of like a recipt
 
-                emailService.Send_JobPaid(
-                    new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
-                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
+                //emailService.Send_JobPaid(
+                //    new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
+                //    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
 
                 response.Content = new StringContent("Payment successfully made. Quack Quack.");
                 return response;
@@ -493,9 +493,9 @@ namespace ProjectDONE.Controllers
             job.Status = Jobstatus.Finished;
             JobRepo.Save();
 
-            emailService.Send_JobFinished(
-                    new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
-                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
+            //emailService.Send_JobFinished(
+            //        new BidViewModel { Amount = job.AcceptedBid.Amount, Owner = new OwnerViewModel { CreatedByUserId = job.AcceptedBid.Owner.CreatedByUserId } },
+            //        new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
 
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StringContent("Job is now marked as finished.");
@@ -557,9 +557,9 @@ namespace ProjectDONE.Controllers
                 }
             };
 
-            emailService.Send_BidAccepted(
-                    new BidViewModel { Amount = bid.Amount, Owner = new OwnerViewModel { CreatedByUserId = bid.Owner.CreatedByUserId } },
-                    new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
+            //emailService.Send_BidAccepted(
+            //        new BidViewModel { Amount = bid.Amount, Owner = new OwnerViewModel { CreatedByUserId = bid.Owner.CreatedByUserId } },
+            //        new JobViewModel { Title = job.Title, Owner = new OwnerViewModel { CreatedByUserId = job.Owner.CreatedByUserId } });
 
             response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new ObjectContent<BidViewModel>(result, new JsonMediaTypeFormatter(), "application/json");
