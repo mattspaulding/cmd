@@ -346,3 +346,5 @@ C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.cspr
 C:\code\ProjectDONE\ProjectDONE\bin\Elmah.dll
 C:\code\ProjectDONE\ProjectDONE\bin\SendGrid.SmtpApi.dll
 C:\code\ProjectDONE\ProjectDONE\bin\SendGridMail.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Newtonsoft.Json.dll
+C:\code\ProjectDONE\ProjectDONE\bin\Newtonsoft.Json.xml
