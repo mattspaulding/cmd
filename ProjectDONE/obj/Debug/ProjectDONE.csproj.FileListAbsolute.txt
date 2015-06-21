@@ -343,3 +343,6 @@ C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.cspr
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.dll
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.pdb
 C:\Users\mattspaulding\Documents\repo\cmd\ProjectDONE\obj\Debug\ProjectDONE.csprojResolveAssemblyReference.cache
+C:\code\ProjectDONE\ProjectDONE\bin\Elmah.dll
+C:\code\ProjectDONE\ProjectDONE\bin\SendGrid.SmtpApi.dll
+C:\code\ProjectDONE\ProjectDONE\bin\SendGridMail.dll
